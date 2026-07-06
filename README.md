@@ -1,5 +1,7 @@
 # Bolum Pusulasi
 
+Odev dosyasi: [ODEV.md](/home/drvoid/Desktop/HelloAI/ODEV.md)
+
 Bolum Pusulasi, universite tercihi yaparken **yazilim, siber guvenlik, donanim/gomulu sistemler ve elektronik** alanlari arasinda daha bilincli karar vermeyi kolaylastiran modern bir web uygulamasidir.
 
 Proje; tek bir test sonucuna dayanmak yerine kullaniciyi alanlari tanimaya, mini denemeler yapmaya, universiteleri karsilastirmaya ve kendi karar surecini yazili hale getirmeye yonlendirir.
