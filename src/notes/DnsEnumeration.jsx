@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { AtSign, FileText, Globe2, Mail, Network, Route, ShieldCheck } from "lucide-react";
 import { Mermaid, NoteCallout, NoteList, NoteSection, NoteTable, TerminalBlock } from "../components/NoteKit.jsx";
 
 const resolutionDiagram = (tr) => `sequenceDiagram
@@ -18,9 +20,98 @@ const resolutionDiagram = (tr) => `sequenceDiagram
 
 export function DnsEnumerationNote({ lang, theme }) {
   const tr = lang === "tr";
+  const [activeRecord, setActiveRecord] = useState("A");
+  const records = {
+    A: {
+      icon: Globe2,
+      purpose: tr ? "Domain'i IPv4 adresine baglar." : "Points a domain to an IPv4 address.",
+      reveals: tr ? "Web veya servis altyapisinin nereye gittigini gosterir." : "Shows where web or service infrastructure points.",
+      defense: tr ? "Eski veya dogrudan origin IP gosteren kayitlari temizle." : "Clean stale records or records exposing origin IPs.",
+    },
+    CNAME: {
+      icon: Route,
+      purpose: tr ? "Bir adi baska bir ada alias yapar." : "Aliases one name to another name.",
+      reveals: tr ? "Ucuncu taraf servis baglantilarini ve takeover riskini gosterir." : "Shows third-party service links and takeover risk.",
+      defense: tr ? "Terk edilmis servis hedeflerini periyodik kontrol et." : "Periodically check abandoned service targets.",
+    },
+    MX: {
+      icon: Mail,
+      purpose: tr ? "Mail sunucularini belirtir." : "Specifies mail servers.",
+      reveals: tr ? "E-posta altyapisi ve tedarikci bilgisi verir." : "Reveals email infrastructure and providers.",
+      defense: tr ? "SPF/DKIM/DMARC ile mail guvenligini tamamla." : "Complete mail security with SPF/DKIM/DMARC.",
+    },
+    TXT: {
+      icon: FileText,
+      purpose: tr ? "Dogrulama ve politika metinleri tasir." : "Carries verification and policy text.",
+      reveals: tr ? "Sahiplik, mail politikasi ve kullanilan servis izlerini gosterebilir." : "Can show ownership, mail policy, and service traces.",
+      defense: tr ? "Gereksiz dogrulama tokenlarini kaldir." : "Remove unnecessary verification tokens.",
+    },
+    NS: {
+      icon: Network,
+      purpose: tr ? "Yetkili isim sunucularini belirtir." : "Specifies authoritative name servers.",
+      reveals: tr ? "Domain'i kimin yonettigini ve DNS saglayicisini gosterir." : "Shows who manages the domain and DNS provider.",
+      defense: tr ? "Yetkili sunucu ve zone transfer ayarlarini denetle." : "Audit authoritative server and zone-transfer settings.",
+    },
+  };
+  const active = records[activeRecord];
+  const ActiveIcon = active.icon;
 
   return (
     <>
+      <NoteSection title={tr ? "DNS Kayit Kesif Paneli" : "DNS Record Discovery Panel"}>
+        <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5 lg:grid-cols-2">
+            {Object.entries(records).map(([id, record]) => {
+              const Icon = record.icon;
+              const selected = id === activeRecord;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActiveRecord(id)}
+                  className={[
+                    "flex min-h-24 flex-col justify-between rounded-lg border p-3 text-left transition",
+                    selected
+                      ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand)]"
+                      : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
+                  ].join(" ")}
+                >
+                  <Icon size={20} />
+                  <span className="font-mono text-sm font-bold">{id}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Kayit turu" : "Record type"}</p>
+                <h3 className="mt-2 font-mono text-xl font-bold">{activeRecord}</h3>
+              </div>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <ActiveIcon size={22} />
+              </span>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{active.purpose}</p>
+            <div className="mt-5 grid gap-3">
+              <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+                <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
+                  <AtSign size={14} />
+                  {tr ? "Ne aciga cikarir?" : "What it reveals"}
+                </div>
+                <p className="text-sm leading-6">{active.reveals}</p>
+              </div>
+              <div className="rounded-lg border border-[var(--border)] p-4">
+                <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
+                  <ShieldCheck size={14} />
+                  {tr ? "Savunma kontrolu" : "Defense check"}
+                </div>
+                <p className="text-sm font-semibold">{active.defense}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </NoteSection>
+
       <NoteSection title={tr ? "DNS Nedir?" : "What Is DNS?"}>
         <NoteList
           items={
