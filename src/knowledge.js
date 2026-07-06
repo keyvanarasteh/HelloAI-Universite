@@ -48,6 +48,7 @@ export class KnowledgeTopic {
 export const knowledgeTopics = [
   {
     id: "git-github",
+    day: 1,
     tone: "software",
     Component: GitGithubNote,
     title: { tr: "Github ve Git", en: "Github & Git" },
@@ -76,6 +77,7 @@ export const knowledgeTopics = [
   },
   {
     id: "frontend-backend-agentic",
+    day: 1,
     tone: "electronics",
     Component: FrontendBackendAgenticNote,
     title: { tr: "FrontEnd vs BackEnd, LLM Chat vs Agentic AI", en: "FrontEnd vs BackEnd, LLM Chat vs Agentic AI" },
@@ -104,6 +106,7 @@ export const knowledgeTopics = [
   },
   {
     id: "problem-solving",
+    day: 1,
     tone: "software",
     Component: ProblemSolvingNote,
     title: { tr: "Problem Cozme Sureci (0-100)", en: "Problem-Solving Process (0-100)" },
@@ -128,6 +131,7 @@ export const knowledgeTopics = [
   },
   {
     id: "open-source-contribution",
+    day: 1,
     tone: "security",
     Component: OpenSourceContributionNote,
     title: { tr: "Open Source'a Katki Sureci", en: "Contributing to Open Source" },
@@ -157,6 +161,7 @@ export const knowledgeTopics = [
   },
   {
     id: "agent-output-audit",
+    day: 1,
     tone: "hardware",
     Component: AgentOutputAuditNote,
     title: { tr: "Agent Ciktilarini Denetleme", en: "Auditing Agent Output" },
@@ -184,6 +189,7 @@ export const knowledgeTopics = [
   },
   {
     id: "documentation",
+    day: 1,
     tone: "electronics",
     Component: DocumentationNote,
     title: { tr: "Dokumantasyon", en: "Documentation" },
@@ -211,6 +217,7 @@ export const knowledgeTopics = [
   },
   {
     id: "agent-rules-tools",
+    day: 1,
     tone: "software",
     Component: AgentRulesToolsNote,
     title: { tr: "Agent Kurallari, Modeller ve Araclar", en: "Agent Rules, Models & Tools" },
@@ -240,6 +247,7 @@ export const knowledgeTopics = [
   },
   {
     id: "ide-setup",
+    day: 1,
     tone: "hardware",
     Component: IdeSetupNote,
     title: { tr: "IDE ve Kurulum", en: "IDE & Setup" },
@@ -268,6 +276,7 @@ export const knowledgeTopics = [
   },
   {
     id: "repo-basics",
+    day: 1,
     tone: "security",
     Component: RepoBasicsNote,
     title: { tr: "Git Repo Temelleri: README, Badge, Lisans", en: "Repo Basics: README, Badges, Licenses" },
@@ -296,6 +305,7 @@ export const knowledgeTopics = [
   },
   {
     id: "web-security-basics",
+    day: 1,
     tone: "electronics",
     Component: WebSecurityBasicsNote,
     title: { tr: "Web Temelleri ve Guvenlik", en: "Web Basics & Security" },
@@ -324,6 +334,7 @@ export const knowledgeTopics = [
   },
   {
     id: "llm-models-thinking-levels",
+    day: 1,
     tone: "software",
     Component: LlmModelsThinkingLevelsNote,
     title: { tr: "LLM Modelleri ve Dusunme Seviyeleri", en: "LLM Models & Thinking Levels" },
@@ -354,6 +365,7 @@ export const knowledgeTopics = [
   },
   {
     id: "os-windows-linux-opensource",
+    day: 1,
     tone: "hardware",
     Component: OsWindowsLinuxNote,
     title: { tr: "Isletim Sistemleri: Windows vs Linux ve Acik Kaynak", en: "Operating Systems: Windows vs Linux & Open Source" },
@@ -390,6 +402,7 @@ export const knowledgeTopics = [
   },
   {
     id: "wifi-security-risks",
+    day: 1,
     tone: "electronics",
     Component: WifiSecurityRisksNote,
     title: { tr: "Kablosuz Ag Guvenligi: Guest Wifi Riskleri ve KVKK", en: "Wireless Security: Guest Wifi Risks & KVKK" },
@@ -416,6 +429,7 @@ export const knowledgeTopics = [
   },
   {
     id: "zero-day",
+    day: 1,
     tone: "security",
     Component: ZeroDayNote,
     title: { tr: "0-Day Zafiyetler Nedir?", en: "What Is a 0-Day Vulnerability?" },
@@ -442,6 +456,7 @@ export const knowledgeTopics = [
   },
   {
     id: "patch-management",
+    day: 1,
     tone: "hardware",
     Component: PatchManagementNote,
     title: { tr: "Guncel Kalmanin Onemi: Yama Yonetimi", en: "Why Staying Updated Matters: Patch Management" },
@@ -468,6 +483,7 @@ export const knowledgeTopics = [
   },
   {
     id: "cloudflare-traffic-privacy",
+    day: 1,
     tone: "security",
     Component: CloudflareNote,
     title: { tr: "Cloudflare: Trafik, Icerik ve Gizlilik", en: "Cloudflare: Traffic, Content & Privacy" },
@@ -497,6 +513,7 @@ export const knowledgeTopics = [
   },
   {
     id: "cybersecurity-foundation",
+    day: 1,
     tone: "security",
     Component: CybersecurityFoundationNote,
     title: { tr: "Siber Guvenlik Icin Temel Bilgi", en: "The Foundation Cybersecurity Needs" },
