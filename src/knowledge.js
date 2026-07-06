@@ -4,6 +4,7 @@ import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { CybersecurityFoundationNote } from "./notes/CybersecurityFoundation.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { ZeroDayNote } from "./notes/ZeroDay.jsx";
 import { WifiSecurityRisksNote } from "./notes/WifiSecurityRisks.jsx";
 import { OsWindowsLinuxNote } from "./notes/OsWindowsLinux.jsx";
 import { LlmModelsThinkingLevelsNote } from "./notes/LlmModelsThinkingLevels.jsx";
@@ -407,6 +408,32 @@ export const knowledgeTopics = [
         items: [
           { tr: "Bu tur testler sadece yazili izinli pentest anlasmalari icinde, izole lab ortamlarinda yapilabilir; KVKK/TCK ihlali suctur.", en: "Such testing may only happen under a written pentest agreement in an isolated lab; unauthorized capture is a crime under Turkish law." },
           { tr: "Savunma: VLAN izolasyonu, zorunlu HTTPS, guclu kimlik dogrulama, ag izleme.", en: "Defense: VLAN isolation, enforced HTTPS, strong authentication, network monitoring." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "zero-day",
+    tone: "security",
+    Component: ZeroDayNote,
+    title: { tr: "0-Day Zafiyetler Nedir?", en: "What Is a 0-Day Vulnerability?" },
+    tagline: {
+      tr: "0-day tanimi, neden tehlikeli oldugu, sorumlu bildirim vs kara pazar.",
+      en: "What a 0-day is, why it's dangerous, and responsible disclosure vs the black market.",
+    },
+    sections: [
+      {
+        heading: { tr: "Tanim ve Tehlike", en: "Definition & Danger" },
+        items: [
+          { tr: "Ureticinin henuz haberdar olmadigi veya yama yayinlamadigi guvenlik acigidir.", en: "A flaw the vendor doesn't know about yet, or hasn't patched." },
+          { tr: "Henuz imza/yama olmadigi icin klasik savunma araclari tarafindan yakalanmasi zordur.", en: "With no signature/patch yet, classic defenses struggle to catch it." },
+        ],
+      },
+      {
+        heading: { tr: "Sorumlu Bildirim vs Kara Pazar", en: "Responsible Disclosure vs Black Market" },
+        items: [
+          { tr: "Bug bounty: arastirmaci ureticiye bildirir, odul alir — yasal ve tesvik edilen yol.", en: "Bug bounty: the researcher reports to the vendor and gets rewarded — the legal, encouraged path." },
+          { tr: "Kara/gri pazar: en yuksek teklife satilir; aliciilar arasinda siber suc gruplari olabilir.", en: "Black/gray market: sold to the highest bidder, sometimes including cybercriminal groups." },
         ],
       },
     ],
