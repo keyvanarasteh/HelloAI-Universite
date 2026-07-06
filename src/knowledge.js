@@ -1,5 +1,6 @@
 import { FrontendBackendAgenticNote } from "./notes/FrontendBackendAgentic.jsx";
 import { AgentOutputAuditNote } from "./notes/AgentOutputAudit.jsx";
+import { DocumentationNote } from "./notes/Documentation.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
 import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
 import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
@@ -173,6 +174,7 @@ export const knowledgeTopics = [
   {
     id: "documentation",
     tone: "electronics",
+    Component: DocumentationNote,
     title: { tr: "Dokumantasyon", en: "Documentation" },
     tagline: {
       tr: "Iyi yazilmis docs, 6 ay sonraki senin ve yeni katkida bulunanlar icin zaman kazandirir.",
