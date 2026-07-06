@@ -1,3 +1,4 @@
+import { FrontendBackendAgenticNote } from "./notes/FrontendBackendAgentic.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
 
 export const instructor = {
@@ -61,6 +62,7 @@ export const knowledgeTopics = [
   {
     id: "frontend-backend-agentic",
     tone: "electronics",
+    Component: FrontendBackendAgenticNote,
     title: { tr: "FrontEnd vs BackEnd, LLM Chat vs Agentic AI", en: "FrontEnd vs BackEnd, LLM Chat vs Agentic AI" },
     tagline: {
       tr: "Bir web uygulamasinin katmanlarini ve yapay zeka araclarinin turlerini ayirt et.",
