@@ -1,10 +1,90 @@
+import { useState } from "react";
+import { Apple, Building2, Monitor, Server, ShieldCheck, SlidersHorizontal } from "lucide-react";
 import { NoteCallout, NoteSection, NoteTable, TerminalBlock } from "../components/NoteKit.jsx";
 
 export function OsWindowsLinuxNote({ lang }) {
   const tr = lang === "tr";
+  const [activeUse, setActiveUse] = useState("server");
+  const uses = {
+    desktop: {
+      icon: Monitor,
+      title: tr ? "Genel masaustu" : "General desktop",
+      fit: "Windows",
+      why: tr ? "Donanim, oyun ve kurumsal yazilim destegi genistir." : "Broad hardware, gaming, and enterprise software support.",
+      tradeoff: tr ? "Kapali kaynak; sistemin icini degistirme ozgurlugu sinirlidir." : "Closed source; less freedom to change system internals.",
+    },
+    server: {
+      icon: Server,
+      title: tr ? "Sunucu / Docker" : "Server / Docker",
+      fit: "Ubuntu Server / Linux",
+      why: tr ? "Hafif, otomasyon dostu, paket yonetimi guclu ve sunucularda standarttir." : "Lightweight, automation-friendly, strong package management, standard on servers.",
+      tradeoff: tr ? "Terminal bilgisi ve sistem yonetimi disiplini ister." : "Requires terminal skill and system administration discipline.",
+    },
+    security: {
+      icon: ShieldCheck,
+      title: tr ? "Guvenlik lab'i" : "Security lab",
+      fit: "Kali Linux",
+      why: tr ? "Pentest araclari hazir gelir; egitim ve izinli test icin pratiktir." : "Pentest tools come ready; practical for training and authorized testing.",
+      tradeoff: tr ? "Gundelik ana isletim sistemi gibi kullanmak yerine lab amacli dusun." : "Think of it as a lab OS rather than a daily driver.",
+    },
+    apple: {
+      icon: Apple,
+      title: tr ? "Apple ekosistemi" : "Apple ecosystem",
+      fit: "macOS",
+      why: tr ? "GUI guclu, Unix tabanli terminal var, Apple donanim/yazilim akisi uyumludur." : "Strong GUI, Unix-based terminal, smooth Apple hardware/software workflow.",
+      tradeoff: tr ? "Kapali ekosistem ve donanim maliyeti yuksek olabilir." : "Closed ecosystem and hardware cost can be high.",
+    },
+  };
+  const active = uses[activeUse];
+  const ActiveIcon = active.icon;
 
   return (
     <>
+      <NoteSection title={tr ? "Isletim Sistemi Secim Paneli" : "Operating System Choice Panel"}>
+        <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(uses).map(([id, item]) => {
+              const Icon = item.icon;
+              const selected = id === activeUse;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActiveUse(id)}
+                  className={[
+                    "flex min-h-24 flex-col justify-between rounded-lg border p-3 text-left transition",
+                    selected
+                      ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand)]"
+                      : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
+                  ].join(" ")}
+                >
+                  <Icon size={20} />
+                  <span className="text-sm font-bold">{item.title}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "En uygun rota" : "Best-fit route"}</p>
+                <h3 className="mt-2 text-xl font-bold">{active.fit}</h3>
+              </div>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <ActiveIcon size={22} />
+              </span>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{active.why}</p>
+            <div className="mt-5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+              <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
+                <SlidersHorizontal size={14} />
+                {tr ? "Takas" : "Tradeoff"}
+              </div>
+              <p className="text-sm font-semibold">{active.tradeoff}</p>
+            </div>
+          </div>
+        </div>
+      </NoteSection>
+
       <NoteSection title={tr ? "Windows vs Linux vs macOS" : "Windows vs Linux vs macOS"}>
         <NoteTable
           headers={tr ? ["Sistem", "Lisans", "Tipik kullanim"] : ["System", "License", "Typical use"]}
