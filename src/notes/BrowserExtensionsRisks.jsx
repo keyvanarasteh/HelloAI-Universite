@@ -1,10 +1,92 @@
+import { useState } from "react";
+import { Clipboard, Cookie, Eye, History, ShieldCheck, SquareStack } from "lucide-react";
 import { NoteCallout, NoteList, NoteSection, NoteTable } from "../components/NoteKit.jsx";
 
 export function BrowserExtensionsRisksNote({ lang }) {
   const tr = lang === "tr";
+  const [activePermission, setActivePermission] = useState("all");
+  const permissions = {
+    all: {
+      icon: Eye,
+      title: tr ? "Tum site verileri" : "All site data",
+      canSee: tr ? "Ziyaret ettigin sayfalarin icerigini okuyup degistirebilir." : "Can read and change content on pages you visit.",
+      decision: tr ? "Sadece cok guvendigin ve gercekten gereken eklentiye ver." : "Grant only to extensions you truly trust and need.",
+    },
+    tabs: {
+      icon: SquareStack,
+      title: "tabs",
+      canSee: tr ? "Acik sekme URL ve basliklarini gorebilir." : "Can see open tab URLs and titles.",
+      decision: tr ? "Sekme yonetimi disinda gerekiyorsa sorgula." : "Question it unless tab management needs it.",
+    },
+    cookies: {
+      icon: Cookie,
+      title: "cookies",
+      canSee: tr ? "Oturum bilgilerine kadar uzanabilecek cookie verilerine erisebilir." : "Can access cookie data that may include session material.",
+      decision: tr ? "Yuksek riskli izin; hassas profilde kacın." : "High-risk permission; avoid in sensitive profiles.",
+    },
+    clipboard: {
+      icon: Clipboard,
+      title: "clipboard",
+      canSee: tr ? "Panoya kopyalanan veriyi okuyabilir veya degistirebilir." : "Can read or change copied clipboard data.",
+      decision: tr ? "Parola/OTP kopyaliyorsan ozellikle dikkat et." : "Be especially careful if copying passwords or OTPs.",
+    },
+    history: {
+      icon: History,
+      title: "history",
+      canSee: tr ? "Tarama gecmisinden ilgi, aliskanlik ve kurum bilgisi cikarabilir." : "Can infer interests, habits, and workplace info from browsing history.",
+      decision: tr ? "Gerekmiyorsa verme; kullanmadigin eklentiyi kaldir." : "Do not grant unless needed; remove unused extensions.",
+    },
+  };
+  const active = permissions[activePermission];
+  const ActiveIcon = active.icon;
 
   return (
     <>
+      <NoteSection title={tr ? "Izin Risk Denetleyicisi" : "Permission Risk Inspector"}>
+        <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5 lg:grid-cols-2">
+            {Object.entries(permissions).map(([id, permission]) => {
+              const Icon = permission.icon;
+              const selected = id === activePermission;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActivePermission(id)}
+                  className={[
+                    "flex min-h-24 flex-col justify-between rounded-lg border p-3 text-left transition",
+                    selected
+                      ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand)]"
+                      : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
+                  ].join(" ")}
+                >
+                  <Icon size={20} />
+                  <span className="text-sm font-bold">{permission.title}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Izin" : "Permission"}</p>
+                <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
+              </div>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <ActiveIcon size={22} />
+              </span>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{active.canSee}</p>
+            <div className="mt-5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+              <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
+                <ShieldCheck size={14} />
+                {tr ? "Kurulum karari" : "Install decision"}
+              </div>
+              <p className="text-sm font-semibold">{active.decision}</p>
+            </div>
+          </div>
+        </div>
+      </NoteSection>
+
       <NoteSection title={tr ? "Eklentiler Nasil Calisir?" : "How Extensions Work"}>
         <NoteList
           items={
