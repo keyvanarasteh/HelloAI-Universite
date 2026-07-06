@@ -1,3 +1,5 @@
+import { GitGithubNote } from "./notes/GitGithub.jsx";
+
 export const instructor = {
   name: "Keyvan Arasteh",
   affiliation: "Istinye Universitesi - Meslek Yuksekokulu",
@@ -31,6 +33,7 @@ export const knowledgeTopics = [
   {
     id: "git-github",
     tone: "software",
+    Component: GitGithubNote,
     title: { tr: "Github ve Git", en: "Github & Git" },
     tagline: {
       tr: "Kod ile calisirken duzenli, izlenebilir ve guvenilir bir gecmis birakmayi ogren.",
