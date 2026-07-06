@@ -1,10 +1,86 @@
+import { useState } from "react";
+import { Cookie, FileWarning, Fingerprint, ScrollText, ShieldCheck } from "lucide-react";
 import { NoteCallout, NoteList, NoteSection, NoteTable, TerminalBlock } from "../components/NoteKit.jsx";
 
 export function WafEnumerationNote({ lang }) {
   const tr = lang === "tr";
+  const [activeSignal, setActiveSignal] = useState("headers");
+  const signals = {
+    headers: {
+      icon: ScrollText,
+      title: tr ? "Header sinyali" : "Header signal",
+      clue: tr ? "cf-ray, server, via gibi izler vendor hakkinda ipucu verebilir." : "cf-ray, server, via, and similar traces can hint at a vendor.",
+      report: tr ? "Header adini ve ilgili cevabi kanit olarak not et." : "Record the header name and related response as evidence.",
+    },
+    cookies: {
+      icon: Cookie,
+      title: tr ? "Cookie sinyali" : "Cookie signal",
+      clue: tr ? "AWSALB gibi cookie'ler load balancer/WAF zincirini gosterebilir." : "Cookies like AWSALB can reveal load-balancer/WAF chains.",
+      report: tr ? "Cookie adini, domain/path degerini ve baglami yaz." : "Write the cookie name, domain/path values, and context.",
+    },
+    block: {
+      icon: FileWarning,
+      title: tr ? "Blok sayfasi" : "Block page",
+      clue: tr ? "Hata kodu, sayfa tasarimi veya metin vendor'a ozgu olabilir." : "Status code, page design, or text can be vendor-specific.",
+      report: tr ? "Ekran goruntusu ve HTTP durum kodunu ekle." : "Include screenshot and HTTP status code.",
+    },
+    harmless: {
+      icon: Fingerprint,
+      title: tr ? "Zararsiz test" : "Harmless test",
+      clue: tr ? "Sadece izinli ortamda zararsiz tetikleyiciyle farkli cevabi gozlersin." : "Only in authorized environments, observe response changes with harmless triggers.",
+      report: tr ? "Rules of Engagement kapsaminda oldugunu belirt." : "State that it is within Rules of Engagement scope.",
+    },
+  };
+  const active = signals[activeSignal];
+  const ActiveIcon = active.icon;
 
   return (
     <>
+      <NoteSection title={tr ? "WAF Tespit Sinyal Paneli" : "WAF Detection Signal Panel"}>
+        <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(signals).map(([id, signal]) => {
+              const Icon = signal.icon;
+              const selected = id === activeSignal;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActiveSignal(id)}
+                  className={[
+                    "flex min-h-24 flex-col justify-between rounded-lg border p-3 text-left transition",
+                    selected
+                      ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand)]"
+                      : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
+                  ].join(" ")}
+                >
+                  <Icon size={20} />
+                  <span className="text-sm font-bold">{signal.title}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Tespit sinyali" : "Detection signal"}</p>
+                <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
+              </div>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <ActiveIcon size={22} />
+              </span>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{active.clue}</p>
+            <div className="mt-5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+              <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
+                <ShieldCheck size={14} />
+                {tr ? "Raporlama refleksi" : "Reporting reflex"}
+              </div>
+              <p className="text-sm font-semibold">{active.report}</p>
+            </div>
+          </div>
+        </div>
+      </NoteSection>
+
       <NoteSection title={tr ? "WAF Nedir?" : "What Is a WAF?"}>
         <p className="text-sm leading-6 text-[var(--muted)]">
           {tr
