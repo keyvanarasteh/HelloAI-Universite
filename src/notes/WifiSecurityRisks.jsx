@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Eye, Gavel, KeyRound, LockKeyhole, Router, ShieldCheck } from "lucide-react";
 import { Mermaid, NoteCallout, NoteList, NoteSection, NoteTable } from "../components/NoteKit.jsx";
 
 const isolationDiagram = (tr) => `flowchart LR
@@ -13,9 +15,91 @@ const isolationDiagram = (tr) => `flowchart LR
 
 export function WifiSecurityRisksNote({ lang, theme }) {
   const tr = lang === "tr";
+  const [activeRisk, setActiveRisk] = useState("isolation");
+  const risks = {
+    isolation: {
+      icon: Router,
+      title: tr ? "Ag izolasyonu" : "Network isolation",
+      problem: tr ? "Guest ag ana kurumsal aga ulasabiliyorsa risk buyur." : "Risk grows if the guest network can reach the internal network.",
+      defense: tr ? "VLAN ile ayir, sadece Internet cikisi ver." : "Separate with VLAN and allow Internet-only access.",
+    },
+    plaintext: {
+      icon: Eye,
+      title: tr ? "Duz metin trafik" : "Plaintext traffic",
+      problem: tr ? "HTTP veya zayif portal formlari agda okunabilir hale gelebilir." : "HTTP or weak portal forms can become readable on the network.",
+      defense: tr ? "HTTPS/HSTS zorla, hassas formlari guvenli kanala tasi." : "Enforce HTTPS/HSTS and move sensitive forms to secure channels.",
+    },
+    otp: {
+      icon: KeyRound,
+      title: "OTP / Kod",
+      problem: tr ? "Dogrulama kodu gorulurse hesap ele gecirme zinciri baslayabilir." : "If verification codes are exposed, account takeover can begin.",
+      defense: tr ? "Kodlari asla HTTP/guvensiz portalda tasima; sure ve oran limitleri ekle." : "Never transmit codes over HTTP/unsafe portals; add expiry and rate limits.",
+    },
+    legal: {
+      icon: Gavel,
+      title: tr ? "Yasal sinir" : "Legal boundary",
+      problem: tr ? "Gercek kullanici verisini izinsiz hedeflemek suctur." : "Targeting real user data without authorization is a crime.",
+      defense: tr ? "Sadece yazili izinli, kapsamli ve izole lab testleri yap." : "Test only with written authorization, clear scope, and isolated labs.",
+    },
+  };
+  const active = risks[activeRisk];
+  const ActiveIcon = active.icon;
 
   return (
     <>
+      <NoteSection title={tr ? "Guest Wifi Risk Konsolu" : "Guest Wifi Risk Console"}>
+        <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(risks).map(([id, risk]) => {
+              const Icon = risk.icon;
+              const selected = id === activeRisk;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActiveRisk(id)}
+                  className={[
+                    "flex min-h-24 flex-col justify-between rounded-lg border p-3 text-left transition",
+                    selected
+                      ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand)]"
+                      : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
+                  ].join(" ")}
+                >
+                  <Icon size={20} />
+                  <span className="text-sm font-bold">{risk.title}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Risk modeli" : "Risk model"}</p>
+                <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
+              </div>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <ActiveIcon size={22} />
+              </span>
+            </div>
+            <div className="mt-5 grid gap-3">
+              <div className="rounded-lg border border-[var(--danger)]/40 bg-[var(--danger-soft)] p-4">
+                <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--danger)]">
+                  <LockKeyhole size={14} />
+                  {tr ? "Sorun" : "Problem"}
+                </div>
+                <p className="text-sm leading-6 text-[var(--text)]">{active.problem}</p>
+              </div>
+              <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+                <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
+                  <ShieldCheck size={14} />
+                  {tr ? "Savunma refleksi" : "Defense reflex"}
+                </div>
+                <p className="text-sm font-semibold">{active.defense}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </NoteSection>
+
       <NoteSection title={tr ? "Guest Wifi Neden Riskli Olabilir?" : "Why Guest Wifi Can Be Risky"}>
         <NoteList
           items={
