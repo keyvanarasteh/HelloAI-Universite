@@ -4,6 +4,7 @@ import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { CybersecurityFoundationNote } from "./notes/CybersecurityFoundation.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { PatchManagementNote } from "./notes/PatchManagement.jsx";
 import { ZeroDayNote } from "./notes/ZeroDay.jsx";
 import { WifiSecurityRisksNote } from "./notes/WifiSecurityRisks.jsx";
 import { OsWindowsLinuxNote } from "./notes/OsWindowsLinux.jsx";
@@ -434,6 +435,32 @@ export const knowledgeTopics = [
         items: [
           { tr: "Bug bounty: arastirmaci ureticiye bildirir, odul alir — yasal ve tesvik edilen yol.", en: "Bug bounty: the researcher reports to the vendor and gets rewarded — the legal, encouraged path." },
           { tr: "Kara/gri pazar: en yuksek teklife satilir; aliciilar arasinda siber suc gruplari olabilir.", en: "Black/gray market: sold to the highest bidder, sometimes including cybercriminal groups." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "patch-management",
+    tone: "hardware",
+    Component: PatchManagementNote,
+    title: { tr: "Guncel Kalmanin Onemi: Yama Yonetimi", en: "Why Staying Updated Matters: Patch Management" },
+    tagline: {
+      tr: "N-day riski, WannaCry/EternalBlue ornegi ve iyi yama yonetimi pratikleri.",
+      en: "The N-day risk window, the WannaCry/EternalBlue example, and good patch-management practice.",
+    },
+    sections: [
+      {
+        heading: { tr: "N-Day Riski", en: "The N-Day Risk" },
+        items: [
+          { tr: "Yama yayinlaninca acigin varligi kamuya acik olur; guncellenmemis sistemler kolay hedef haline gelir.", en: "Once a patch ships, the flaw becomes public — unpatched systems become easy targets." },
+          { tr: "WannaCry, aylar once yayinlanmis ama uygulanmamis bir Windows aciğini kullanarak dunya capinda yayildi.", en: "WannaCry spread worldwide by exploiting a Windows flaw patched months earlier but left unapplied." },
+        ],
+      },
+      {
+        heading: { tr: "Iyi Pratikler", en: "Good Practices" },
+        items: [
+          { tr: "Otomatik guncellemeleri acik tut, kritik yamalari once uygula.", en: "Keep auto-updates on, apply critical patches first." },
+          { tr: "Destegi biten (EOL) yazilimlardan hizla gecis yap.", en: "Migrate off End-of-Life software quickly." },
         ],
       },
     ],
