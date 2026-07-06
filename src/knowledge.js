@@ -3,6 +3,7 @@ import { AgentOutputAuditNote } from "./notes/AgentOutputAudit.jsx";
 import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { WebSecurityBasicsNote } from "./notes/WebSecurityBasics.jsx";
 import { RepoBasicsNote } from "./notes/RepoBasics.jsx";
 import { IdeSetupNote } from "./notes/IdeSetup.jsx";
 import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
@@ -289,6 +290,7 @@ export const knowledgeTopics = [
   {
     id: "web-security-basics",
     tone: "electronics",
+    Component: WebSecurityBasicsNote,
     title: { tr: "Web Temelleri ve Guvenlik", en: "Web Basics & Security" },
     tagline: {
       tr: "Tarayicidaki her site nasil calisir, HTTPS neyi korur, guest wifi'de neler gorulur?",
