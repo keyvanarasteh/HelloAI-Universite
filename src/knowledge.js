@@ -3,6 +3,7 @@ import { AgentOutputAuditNote } from "./notes/AgentOutputAudit.jsx";
 import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { CybersecurityFoundationNote } from "./notes/CybersecurityFoundation.jsx";
+import { CloudflareNote } from "./notes/Cloudflare.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
 import { PatchManagementNote } from "./notes/PatchManagement.jsx";
 import { ZeroDayNote } from "./notes/ZeroDay.jsx";
@@ -468,6 +469,7 @@ export const knowledgeTopics = [
   {
     id: "cloudflare-traffic-privacy",
     tone: "security",
+    Component: CloudflareNote,
     title: { tr: "Cloudflare: Trafik, Icerik ve Gizlilik", en: "Cloudflare: Traffic, Content & Privacy" },
     tagline: {
       tr: "Cloudflare neden bu kadar yaygin, ne gorur ve artilari/eksileri neler?",
