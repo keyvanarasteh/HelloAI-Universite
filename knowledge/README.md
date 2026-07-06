@@ -22,10 +22,15 @@ Bu klasor, bilgisayar bolumlerine yonelik verilen atolye/workshop boyunca islene
 16. [0-Day Zafiyetler Nedir?](16-0day-zafiyetler.md) — 0-day tanimi, neden tehlikeli oldugu, sorumlu bildirim vs kara pazar, savunma yaklasimlari.
 17. [Guncel Kalmanin Onemi: Yama Yonetimi](17-guncelleme-ve-yama-yonetimi.md) — N-day riski, WannaCry/EternalBlue ornegi, iyi yama yonetimi pratikleri.
 
-### 2. Gun: Ileri Siber Guvenlik (Yer Tutucu / Placeholder)
+### 2. Gun: Ileri Siber Guvenlik
 
-18. [Tersine Muhendislik ve Frida](18-reverse-engineering-frida.md) — ADB/Frida ile Android analizi; [sahelfarid/reverse-engineering](https://github.com/sahelfarid/reverse-engineering) uzerinden TOC ve katki cagrisi.
-19. [Web Guvenligi: Kesif ve Analiz (WebQ)](19-web-guvenligi-webq.md) — domain kesfi, subdomain/secret/CVE analizi; [keyvanarasteh/WebQ](https://github.com/keyvanarasteh/WebQ) uzerinden TOC ve katki cagrisi.
+18. [Sizma Testi Metodolojisi: Enumeration ve Kesif](18-pentest-metodolojisi-enumeration.md) — hacking/pentest adimlari, pasif/aktif enumeration turleri ve gercek dunya ornekleri, enumeration araclari (nmap, aircrack-ng, ...).
+19. [Exploitation ve Post-Exploitation: Exploit, Payload ve Shell Turleri](19-exploitation-post-exploitation.md) — exploit turleri, payload/shell turleri (bind/reverse, staged/stageless, web shell) ve post-exploitation turleri, hepsi gercek dunya ornekleriyle.
+
+### 2. Gun (devam): Ileri Siber Guvenlik (Yer Tutucu / Placeholder)
+
+20. [Tersine Muhendislik ve Frida](20-reverse-engineering-frida.md) — ADB/Frida ile Android analizi; [sahelfarid/reverse-engineering](https://github.com/sahelfarid/reverse-engineering) uzerinden TOC ve katki cagrisi.
+21. [Web Guvenligi: Kesif ve Analiz (WebQ)](21-web-guvenligi-webq.md) — domain kesfi, subdomain/secret/CVE analizi; [keyvanarasteh/WebQ](https://github.com/keyvanarasteh/WebQ) uzerinden TOC ve katki cagrisi.
 
 ## Ilgili Diger Dosyalar (Proje Kok Dizini)
 

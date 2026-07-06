@@ -27,9 +27,9 @@
 
 - Merkezilesme riski: Cloudflare'de yasanan genis capli bir kesinti, arkasindaki cok sayida siteyi ayni anda etkileyebilir.
 - Gizlilik tartismasi: Cloudflare, uzerinden gecen trafigin buyuk kismini teknik olarak gorebilecek konumdadir; bu durum gizlilik odakli kullanicilar/servisler icin bir tartisma konusudur.
-- Yanlis yapilandirilirsa gercek sunucu (origin) IP'si tespit edilebilir; bu da Cloudflare korumasini etkisiz hale getirebilir (bkz. [Web Guvenligi: Kesif ve Analiz (WebQ)](19-web-guvenligi-webq.md) — "Cloudflare/CDN arkasindaki gercek IP'yi bulma").
+- Yanlis yapilandirilirsa gercek sunucu (origin) IP'si tespit edilebilir; bu da Cloudflare korumasini etkisiz hale getirebilir (bkz. [Web Guvenligi: Kesif ve Analiz (WebQ)](21-web-guvenligi-webq.md) — "Cloudflare/CDN arkasindaki gercek IP'yi bulma").
 - Ucretsiz planlarda bazi gelismis guvenlik/analiz ozellikleri kisitlidir.
 
 ## Iliskili Not
 
-Bu konu, [Web Guvenligi: Kesif ve Analiz (WebQ)](19-web-guvenligi-webq.md) dosyasindaki Cloudflare/CDN analiz basligiyla dogrudan iliskilidir; orada bu bilgi pratik bir arac uzerinden ele alinacaktir.
+Bu konu, [Web Guvenligi: Kesif ve Analiz (WebQ)](21-web-guvenligi-webq.md) dosyasindaki Cloudflare/CDN analiz basligiyla dogrudan iliskilidir; orada bu bilgi pratik bir arac uzerinden ele alinacaktir.

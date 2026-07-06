@@ -15,6 +15,8 @@ import { RepoBasicsNote } from "./notes/RepoBasics.jsx";
 import { IdeSetupNote } from "./notes/IdeSetup.jsx";
 import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
 import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
+import { PentestEnumerationNote } from "./notes/PentestEnumeration.jsx";
+import { ExploitationPostExploitationNote } from "./notes/ExploitationPostExploitation.jsx";
 
 export const instructor = {
   name: "Keyvan Arasteh",
@@ -528,6 +530,44 @@ export const knowledgeTopics = [
           { tr: "Bir sistemin normalde nasil davranmasi gerektigini bilmeden, sapmalari fark edemezsin.", en: "You cannot spot deviations without knowing how a system is supposed to behave normally." },
           { tr: "Ornek: SQL injection'i anlamak icin once SQL sorgularinin nasil calistigini bilmek gerekir.", en: "Example: understanding SQL injection requires first knowing how SQL queries work." },
           { tr: "Siber guvenlik, sadece hazir araclari calistirmak degil, arkasindaki mantigi anlamaktir.", en: "Cybersecurity isn't just running ready-made tools — it's understanding the logic behind them." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "pentest-methodology-enumeration",
+    day: 2,
+    tone: "security",
+    Component: PentestEnumerationNote,
+    title: { tr: "Sizma Testi Metodolojisi: Enumeration ve Kesif", en: "Pentest Methodology: Enumeration & Recon" },
+    tagline: {
+      tr: "Hacking adimlari, pasif/aktif enumeration turleri ve nmap/aircrack-ng gibi araclar.",
+      en: "Hacking steps, passive/active enumeration types, and tools like nmap/aircrack-ng.",
+    },
+    sections: [
+      {
+        heading: { tr: "Hacking Adimlari", en: "Hacking Steps" },
+        items: [
+          { tr: "Enumeration -> Exploitation -> Post-Exploitation -> Raporlama.", en: "Enumeration -> Exploitation -> Post-Exploitation -> Reporting." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "exploitation-post-exploitation",
+    day: 2,
+    tone: "security",
+    Component: ExploitationPostExploitationNote,
+    title: { tr: "Exploitation ve Post-Exploitation: Exploit, Payload ve Shell Turleri", en: "Exploitation & Post-Exploitation: Exploit, Payload & Shell Types" },
+    tagline: {
+      tr: "Exploit turleri, reverse/bind shell, staged/stageless payload ve post-exploitation gercek dunya ornekleri.",
+      en: "Exploit types, reverse/bind shells, staged/stageless payloads, and real-world post-exploitation examples.",
+    },
+    sections: [
+      {
+        heading: { tr: "Fazlar", en: "Phases" },
+        items: [
+          { tr: "Exploit secimi, payload/shell turleri ve post-exploitation teknikleri.", en: "Exploit selection, payload/shell types, and post-exploitation techniques." },
         ],
       },
     ],
