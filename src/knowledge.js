@@ -3,6 +3,7 @@ import { AgentOutputAuditNote } from "./notes/AgentOutputAudit.jsx";
 import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { RepoBasicsNote } from "./notes/RepoBasics.jsx";
 import { IdeSetupNote } from "./notes/IdeSetup.jsx";
 import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
 import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
@@ -260,6 +261,7 @@ export const knowledgeTopics = [
   {
     id: "repo-basics",
     tone: "security",
+    Component: RepoBasicsNote,
     title: { tr: "Git Repo Temelleri: README, Badge, Lisans", en: "Repo Basics: README, Badges, Licenses" },
     tagline: {
       tr: "Bir reponun ilk izlenimini olusturan uc temel oge.",
