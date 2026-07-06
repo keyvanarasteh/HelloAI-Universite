@@ -1,10 +1,86 @@
+import { useState } from "react";
+import { BadgeCheck, BookOpenText, FileBadge, GitPullRequest, ShieldCheck } from "lucide-react";
 import { NoteCallout, NoteList, NoteSection, NoteTable } from "../components/NoteKit.jsx";
 
 export function RepoBasicsNote({ lang }) {
   const tr = lang === "tr";
+  const [activeSignal, setActiveSignal] = useState("readme");
+  const signals = {
+    readme: {
+      icon: BookOpenText,
+      title: "README",
+      says: tr ? "Bu proje ne, kime yarar, nasil calisir?" : "What is this project, who is it for, how does it run?",
+      fix: tr ? "Kurulum, ozellikler, ekran goruntusu ve katki adimi ekle." : "Add setup, features, screenshot, and contribution steps.",
+    },
+    badge: {
+      icon: BadgeCheck,
+      title: "Badges",
+      says: tr ? "Build, lisans, versiyon gibi durumlar hizlica gorunur." : "Build, license, version, and other states are visible fast.",
+      fix: tr ? "Shields.io ile sade ve anlamli badge'ler kullan." : "Use clean, meaningful badges with shields.io.",
+    },
+    license: {
+      icon: ShieldCheck,
+      title: tr ? "Lisans" : "License",
+      says: tr ? "Baskalari kodu hangi sartlarla kullanabilir?" : "Under which terms may others use the code?",
+      fix: tr ? "MIT/Apache/GPL gibi niyetine uygun bir LICENSE dosyasi sec." : "Choose a LICENSE file like MIT/Apache/GPL based on intent.",
+    },
+    contribute: {
+      icon: GitPullRequest,
+      title: tr ? "Katki Rehberi" : "Contribution Guide",
+      says: tr ? "Yeni gelen biri nereden baslamali ve nasil PR acmali?" : "Where should a newcomer start and how should they open a PR?",
+      fix: tr ? "Kucuk gorevler, branch adi, test komutu ve PR beklentisini yaz." : "Document small tasks, branch naming, test command, and PR expectations.",
+    },
+  };
+  const active = signals[activeSignal];
+  const ActiveIcon = active.icon;
 
   return (
     <>
+      <NoteSection title={tr ? "Repo Saglik Panosu" : "Repo Health Dashboard"}>
+        <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(signals).map(([id, signal]) => {
+              const Icon = signal.icon;
+              const selected = id === activeSignal;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActiveSignal(id)}
+                  className={[
+                    "flex min-h-24 flex-col justify-between rounded-lg border p-3 text-left transition",
+                    selected
+                      ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand)]"
+                      : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
+                  ].join(" ")}
+                >
+                  <Icon size={20} />
+                  <span className="text-sm font-bold">{signal.title}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Ziyaretciye mesaj" : "Message to visitor"}</p>
+                <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
+              </div>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <ActiveIcon size={22} />
+              </span>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{active.says}</p>
+            <div className="mt-5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+              <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
+                <FileBadge size={14} />
+                {tr ? "Iyilestirme" : "Improvement"}
+              </div>
+              <p className="text-sm font-semibold">{active.fix}</p>
+            </div>
+          </div>
+        </div>
+      </NoteSection>
+
       <NoteSection title={tr ? "README ve Badge" : "README & Badges"}>
         <NoteList
           items={
