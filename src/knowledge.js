@@ -1,4 +1,5 @@
 import { FrontendBackendAgenticNote } from "./notes/FrontendBackendAgentic.jsx";
+import { AgentOutputAuditNote } from "./notes/AgentOutputAudit.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
 import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
 import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
@@ -145,6 +146,7 @@ export const knowledgeTopics = [
   {
     id: "agent-output-audit",
     tone: "hardware",
+    Component: AgentOutputAuditNote,
     title: { tr: "Agent Ciktilarini Denetleme", en: "Auditing Agent Output" },
     tagline: {
       tr: "AI agent'larin yazdigi kodu korukorune guvenmeden dogrula.",
