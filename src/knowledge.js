@@ -324,6 +324,69 @@ export const knowledgeTopics = [
     ],
   },
   {
+    id: "os-windows-linux-opensource",
+    tone: "hardware",
+    title: { tr: "Isletim Sistemleri: Windows vs Linux ve Acik Kaynak", en: "Operating Systems: Windows vs Linux & Open Source" },
+    tagline: {
+      tr: "Windows/Linux farki, Kali/Ubuntu Server/CentOS/macOS kullanim alanlari ve acik kaynagin hizli buyume mantigi.",
+      en: "Windows vs Linux, where Kali/Ubuntu Server/CentOS/macOS fit, and why open source grows so fast.",
+    },
+    sections: [
+      {
+        heading: { tr: "Windows vs Linux", en: "Windows vs Linux" },
+        items: [
+          { tr: "Isletim sistemi, donanim ile uygulamalar arasindaki koprudur: bellek, dosya sistemi, surucu ve process yonetimi yapar.", en: "An OS bridges hardware and applications: it manages memory, the filesystem, drivers, and processes." },
+          { tr: "Windows: kapali kaynak, genis donanim/oyun/kurumsal yazilim destegi, kullanici dostu arayuz.", en: "Windows: closed source, broad hardware/gaming/enterprise software support, user-friendly UI." },
+          { tr: "Linux: acik kaynak cekirdek, yuzlerce dagitim (distro), sunucularda ve gelistirici ortamlarinda yaygin, terminal agirlikli.", en: "Linux: open-source kernel, hundreds of distros, common on servers and dev environments, terminal-heavy." },
+        ],
+      },
+      {
+        heading: { tr: "Dagitimlar (Distro) ve Kullanim Alanlari", en: "Distros & Use Cases" },
+        items: [
+          { tr: "Kali Linux: pentest/siber guvenlik arastirmasi icin guvenlik araclariyla gelen dagitim; sadece yasal, izinli testlerde kullanilir.", en: "Kali Linux: a distro preloaded with security tools for pentesting/research; only for legal, authorized testing." },
+          { tr: "Ubuntu Server: arayuzsuz, sunucu odakli Ubuntu; web/veritabani/Docker host'lari icin yaygin, apt ile yonetilir.", en: "Ubuntu Server: headless, server-focused Ubuntu; common for web/database/Docker hosts, managed with apt." },
+          { tr: "CentOS: RHEL uyumlu kurumsal dagitim, yum/dnf kullanir; klasik surum bitti, yerini CentOS Stream aldi.", en: "CentOS: RHEL-compatible enterprise distro using yum/dnf; the classic release ended, replaced by CentOS Stream." },
+          { tr: "macOS: Unix tabanli (Darwin), Apple donanimina ozel, hem grafik arayuz hem guclu terminal sunar.", en: "macOS: Unix-based (Darwin), Apple-hardware-only, offers both a GUI and a strong terminal." },
+        ],
+      },
+      {
+        heading: { tr: "Acik Kaynak Neden Hizli Buyuyor?", en: "Why Open Source Grows Fast" },
+        items: [
+          { tr: "Artilari: ucretsiz/dusuk maliyet, yuksek ozellestirilebilirlik, genis topluluk destegi, seffaflikla hizli hata duzeltme.", en: "Pros: free/low-cost, highly customizable, large community support, transparency speeds up bug fixes." },
+          { tr: "Eksileri: garanti resmi destek yok, dokumantasyon kalitesi degisken, dagitim/varyant fazlaligi (fragmantasyon), bilinen aciklar yama oncesi herkese gorunur.", en: "Cons: no guaranteed official support, inconsistent documentation, fragmentation across variants, known flaws are visible to everyone before a patch ships." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "cloudflare-traffic-privacy",
+    tone: "security",
+    title: { tr: "Cloudflare: Trafik, Icerik ve Gizlilik", en: "Cloudflare: Traffic, Content & Privacy" },
+    tagline: {
+      tr: "Cloudflare neden bu kadar yaygin, ne gorur ve artilari/eksileri neler?",
+      en: "Why Cloudflare is everywhere, what it can see, and its pros and cons.",
+    },
+    sections: [
+      {
+        heading: { tr: "Cloudflare Nedir ve Neden Yaygin?", en: "What Is Cloudflare & Why So Common?" },
+        items: [
+          { tr: "CDN + DDoS koruma + DNS + WAF hizmetlerini bir arada sunan bir altyapi sirketi.", en: "An infrastructure provider bundling CDN, DDoS protection, DNS, and WAF." },
+          { tr: "Site Cloudflare arkasindaysa trafik once Cloudflare'e, oradan gercek sunucuya (origin) gider.", en: "If a site sits behind Cloudflare, traffic hits Cloudflare first, then the real (origin) server." },
+          { tr: "Ucretsiz plan, kolay DNS entegrasyonu ve guclu DDoS korumasi sayesinde bircok kurumsal site ve bazi AI/LLM servisleri tarafindan tercih edilir.", en: "A free tier, easy DNS setup, and strong DDoS protection make it a common choice for enterprise sites and some AI/LLM services." },
+        ],
+      },
+      {
+        heading: { tr: "Ne Gorur? Artilari/Eksileri", en: "What It Sees, Pros & Cons" },
+        items: [
+          { tr: "Trafik: gelen her istegin IP, User-Agent, zaman ve hedef sayfa bilgisi once Cloudflare'den gecer.", en: "Traffic: every request's IP, User-Agent, timing, and target page passes through Cloudflare first." },
+          { tr: "Icerik: HTTPS genelde Cloudflare'de sonlandirilir, yani sifresi cozulmus veri teknik olarak oradan gecer.", en: "Content: HTTPS is usually terminated at Cloudflare, so the decrypted data technically passes through it." },
+          { tr: "Artilari: DDoS koruma, CDN hizi, ucretsiz SSL, WAF ile SQLi/XSS'e karsi ek katman.", en: "Pros: DDoS protection, CDN speed, free SSL, a WAF layer against SQLi/XSS." },
+          { tr: "Eksileri: merkezilesme riski, gizlilik tartismasi, yanlis yapilandirmada gercek sunucu IP'sinin bulunabilmesi.", en: "Cons: centralization risk, privacy debate, and a misconfigured origin IP can be uncovered." },
+        ],
+      },
+    ],
+  },
+  {
     id: "cybersecurity-foundation",
     tone: "security",
     title: { tr: "Siber Guvenlik Icin Temel Bilgi", en: "The Foundation Cybersecurity Needs" },

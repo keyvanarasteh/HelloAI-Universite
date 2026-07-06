@@ -16,11 +16,13 @@ Bu klasor, bilgisayar bolumlerine yonelik verilen atolye/workshop boyunca islene
 10. [Web Temelleri ve Guvenlik](10-web-temelleri-ve-guvenlik.md) — website odevi, HTTPS vs HTTP, guest wifi guvenligi ve loglama.
 11. [Siber Guvenlik Icin Temel Bilgi](11-siber-guvenlik-icin-temel-bilgi.md) — algoritma ve yazilim mantiginin siber guvenlik icin neden sart oldugu.
 12. [LLM Modelleri Arasindaki Farklar ve Dusunme Seviyeleri](12-llm-modelleri-ve-dusunme-seviyeleri.md) — egitim verisi, sinir agi benzetmesi, Claude'un zor gorevlerdeki gucu, mini/full/extra thinking seviyeleri, yeni model cikinca gecis mantigi.
+13. [Isletim Sistemleri: Windows vs Linux ve Acik Kaynagin Hizli Buyumesi](13-isletim-sistemleri-ve-acik-kaynak.md) — Windows/Linux farki, Kali Linux/Ubuntu Server/CentOS/macOS kullanim alanlari, acik kaynagin hizli buyumesinin artilari ve eksileri.
+14. [Cloudflare: Trafik, Icerik ve Gizlilik](14-cloudflare-trafik-icerik-gizlilik.md) — Cloudflare'in ne gordugu (trafik/icerik/gizlilik), neden bu kadar yaygin oldugu, artilari ve eksileri.
 
 ### 2. Gun: Ileri Siber Guvenlik (Yer Tutucu / Placeholder)
 
-13. [Tersine Muhendislik ve Frida](13-reverse-engineering-frida.md) — ADB/Frida ile Android analizi; [sahelfarid/reverse-engineering](https://github.com/sahelfarid/reverse-engineering) uzerinden TOC ve katki cagrisi.
-14. [Web Guvenligi: Kesif ve Analiz (WebQ)](14-web-guvenligi-webq.md) — domain kesfi, subdomain/secret/CVE analizi; [keyvanarasteh/WebQ](https://github.com/keyvanarasteh/WebQ) uzerinden TOC ve katki cagrisi.
+15. [Tersine Muhendislik ve Frida](15-reverse-engineering-frida.md) — ADB/Frida ile Android analizi; [sahelfarid/reverse-engineering](https://github.com/sahelfarid/reverse-engineering) uzerinden TOC ve katki cagrisi.
+16. [Web Guvenligi: Kesif ve Analiz (WebQ)](16-web-guvenligi-webq.md) — domain kesfi, subdomain/secret/CVE analizi; [keyvanarasteh/WebQ](https://github.com/keyvanarasteh/WebQ) uzerinden TOC ve katki cagrisi.
 
 ## Ilgili Diger Dosyalar (Proje Kok Dizini)
 
