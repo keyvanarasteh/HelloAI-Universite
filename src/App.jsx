@@ -1059,17 +1059,21 @@ function ResourcesPage({ lang, copy, navigate }) {
 
 function KnowledgePage({ lang, copy }) {
   const [progress, setProgress] = useStoredState("bp_knowledge_progress", {});
+  const [dayFilter, setDayFilter] = useState("all");
   const [selectedId, setSelectedId] = useState(knowledgeTopics[0].id);
   const [flipped, setFlipped] = useState(false);
 
   const total = knowledgeTopics.length;
+  const visibleTopics =
+    dayFilter === "all" ? knowledgeTopics : knowledgeTopics.filter((item) => item.day === dayFilter);
   const selectedIndex = Math.max(
     0,
     knowledgeTopics.findIndex((item) => item.id === selectedId)
   );
   const topic = knowledgeTopics[selectedIndex];
-  const doneCount = Object.values(progress).filter(Boolean).length;
-  const percent = Math.round((doneCount / total) * 100);
+  const learnableTopics = knowledgeTopics.filter((item) => !item.placeholder);
+  const doneCount = learnableTopics.filter((item) => progress[item.id]).length;
+  const percent = learnableTopics.length ? Math.round((doneCount / learnableTopics.length) * 100) : 0;
 
   const selectTopic = (id) => {
     setSelectedId(id);
@@ -1084,25 +1088,33 @@ function KnowledgePage({ lang, copy }) {
   const toggleLearned = () => setProgress({ ...progress, [topic.id]: !progress[topic.id] });
 
   const randomReview = () => {
-    const notLearned = knowledgeTopics.filter((item) => !progress[item.id]);
-    const pool = notLearned.length > 0 ? notLearned : knowledgeTopics;
+    const notLearned = learnableTopics.filter((item) => !progress[item.id]);
+    const pool = notLearned.length > 0 ? notLearned : learnableTopics;
     const random = pool[Math.floor(Math.random() * pool.length)];
     selectTopic(random.id);
   };
+
+  const dayTabs = [
+    { id: "all", label: copy.knowledge.dayAll },
+    { id: 1, label: copy.knowledge.day1 },
+    { id: 2, label: copy.knowledge.day2 },
+  ];
 
   return (
     <PageFrame title={copy.knowledge.title} subtitle={copy.knowledge.subtitle}>
       <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
         <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--muted)]">
           <span>
-            {copy.knowledge.progressLabel}: {doneCount}/{total} {copy.knowledge.topicsLabel}
+            {copy.knowledge.progressLabel}: {doneCount}/{learnableTopics.length} {copy.knowledge.topicsLabel}
           </span>
           <span>{percent}%</span>
         </div>
         <div className="mt-3 h-3 overflow-hidden rounded-full bg-[var(--surface-2)]">
           <div className="h-full rounded-full bg-[var(--brand)] transition-all" style={{ width: `${percent}%` }} />
         </div>
-        {doneCount === total && <p className="mt-3 text-sm font-semibold text-[var(--ok)]">{copy.knowledge.allDone}</p>}
+        {doneCount === learnableTopics.length && (
+          <p className="mt-3 text-sm font-semibold text-[var(--ok)]">{copy.knowledge.allDone}</p>
+        )}
         <div className="mt-4 flex flex-wrap gap-3">
           <SecondaryButton icon={Shuffle} onClick={randomReview}>
             {copy.knowledge.randomReview}
@@ -1113,9 +1125,27 @@ function KnowledgePage({ lang, copy }) {
         </div>
       </section>
 
+      <div className="flex flex-wrap gap-2">
+        {dayTabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setDayFilter(tab.id)}
+            className={[
+              "rounded-md border px-3 py-2 text-sm font-semibold transition",
+              dayFilter === tab.id
+                ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand)]"
+                : "border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:bg-[var(--surface-2)]",
+            ].join(" ")}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
         <section className="grid content-start gap-2">
-          {knowledgeTopics.map((item, index) => {
+          {visibleTopics.map((item) => {
+            const index = knowledgeTopics.indexOf(item);
             const isActive = item.id === selectedId;
             const isLearned = !!progress[item.id];
             return (
@@ -1138,6 +1168,11 @@ function KnowledgePage({ lang, copy }) {
                   {isLearned ? <CheckCircle2 size={18} /> : index + 1}
                 </span>
                 <span className="min-w-0 flex-1 truncate text-sm font-bold">{item.title[lang]}</span>
+                {item.placeholder && (
+                  <span className="shrink-0 rounded-md bg-[var(--surface-2)] px-2 py-1 text-[10px] font-bold uppercase text-[var(--muted)]">
+                    {copy.knowledge.placeholderBadge}
+                  </span>
+                )}
               </button>
             );
           })}
@@ -1166,6 +1201,35 @@ function KnowledgePage({ lang, copy }) {
               <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
                 {copy.knowledge.flipHint}
               </p>
+            </div>
+          ) : topic.placeholder ? (
+            <div className="mt-5 grid gap-4">
+              <p className="rounded-md border border-dashed border-[var(--border)] p-3 text-sm leading-6 text-[var(--muted)]">
+                {copy.knowledge.placeholderNote}
+              </p>
+              <div>
+                <h3 className="font-bold">{copy.knowledge.tocTitle}</h3>
+                <ul className="mt-2 grid gap-2 text-sm leading-6 text-[var(--muted)]">
+                  {topic.toc.map((item) => (
+                    <li key={item[lang]} className="flex gap-2">
+                      <CheckCircle2 className="mt-1 shrink-0 text-[var(--muted)]" size={15} />
+                      <span>{item[lang]}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {topic.repo && (
+                <a
+                  href={topic.repo.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(event) => event.stopPropagation()}
+                  className="inline-flex w-fit items-center gap-2 rounded-md border border-[var(--border)] px-4 py-2 text-sm font-semibold transition hover:bg-[var(--surface-2)]"
+                >
+                  <Github size={16} />
+                  {copy.knowledge.contribute}: {topic.repo.label}
+                </a>
+              )}
             </div>
           ) : (
             <div className="mt-5 grid gap-5">
@@ -1197,9 +1261,11 @@ function KnowledgePage({ lang, copy }) {
                 {copy.knowledge.next}
               </SecondaryButton>
             </div>
-            <PrimaryButton icon={CheckCircle2} onClick={toggleLearned}>
-              {progress[topic.id] ? copy.knowledge.unmark : copy.knowledge.markLearned}
-            </PrimaryButton>
+            {!topic.placeholder && (
+              <PrimaryButton icon={CheckCircle2} onClick={toggleLearned}>
+                {progress[topic.id] ? copy.knowledge.unmark : copy.knowledge.markLearned}
+              </PrimaryButton>
+            )}
           </div>
         </section>
       </div>

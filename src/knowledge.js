@@ -9,6 +9,24 @@ export const instructor = {
   internshipUrl: "https://aday.istinye.edu.tr/yaz-arastirma-staji",
 };
 
+export class KnowledgeTopic {
+  constructor({ id, tone, title, tagline, day = 1, sections = [], toc = [], repo = null, placeholder = false }) {
+    this.id = id;
+    this.tone = tone;
+    this.title = title;
+    this.tagline = tagline;
+    this.day = day;
+    this.sections = sections;
+    this.toc = toc;
+    this.repo = repo;
+    this.placeholder = placeholder;
+  }
+
+  hasContent() {
+    return !this.placeholder && this.sections.length > 0;
+  }
+}
+
 export const knowledgeTopics = [
   {
     id: "git-github",
@@ -277,6 +295,35 @@ export const knowledgeTopics = [
     ],
   },
   {
+    id: "llm-models-thinking-levels",
+    tone: "software",
+    title: { tr: "LLM Modelleri ve Dusunme Seviyeleri", en: "LLM Models & Thinking Levels" },
+    tagline: {
+      tr: "Egitim verisi, sinir agi mantigi ve ise gore dogru model/dusunme seviyesini secme.",
+      en: "Training data, the neural-network idea, and picking the right model/thinking level for the job.",
+    },
+    sections: [
+      {
+        heading: { tr: "Egitim Verisi ve Sinir Agi", en: "Training Data & Neural Networks" },
+        items: [
+          { tr: "Model, devasa metin verisinden kelimeler arasi oruntuleri ogrenir; ezber degil, oruntu ogrenimi yapar.", en: "A model learns patterns between words from huge amounts of text; it's pattern learning, not memorization." },
+          { tr: "Egitim verisinin kalitesi, modelin kalitesini dogrudan belirler.", en: "The quality of the training data directly determines the quality of the model." },
+          { tr: "Sinir aglari, insan beynindeki noron-sinaps mantigindan esinlenir ama birebir ayni degildir.", en: "Neural networks are inspired by the brain's neuron-synapse logic, but are not identical to it." },
+          { tr: "Claude gibi modellerin zor gorevlerdeki gucu, buyuk olcude kaliteli/secilmis egitim verisinden gelir.", en: "Models like Claude perform well on hard tasks largely due to high-quality, carefully selected training data." },
+        ],
+      },
+      {
+        heading: { tr: "Dusunme Seviyeleri ve Model Secimi", en: "Thinking Levels & Model Choice" },
+        items: [
+          { tr: "Base/mini modeller: basit, hizli, net talimatli isler icin.", en: "Base/mini models: for simple, fast, clearly instructed tasks." },
+          { tr: "Full modeller: orta-yuksek karmasiklikta dengeli secim.", en: "Full models: a balanced choice for medium-to-high complexity." },
+          { tr: "Extra thinking/reasoning: karmasik, cok adimli, mantik gerektiren islerde daha derin dusunme.", en: "Extra thinking/reasoning: deeper thinking for complex, multi-step, logic-heavy work." },
+          { tr: "Yeni bir model cikinca ilk 1-2 ay genelde en yuksek performansi verir; guncel modele gecmek mantiklidir.", en: "A newly released model usually performs best in its first 1-2 months; switching to it early is often worthwhile." },
+        ],
+      },
+    ],
+  },
+  {
     id: "cybersecurity-foundation",
     tone: "security",
     title: { tr: "Siber Guvenlik Icin Temel Bilgi", en: "The Foundation Cybersecurity Needs" },
@@ -295,4 +342,52 @@ export const knowledgeTopics = [
       },
     ],
   },
+  new KnowledgeTopic({
+    id: "reverse-engineering-frida",
+    tone: "hardware",
+    day: 2,
+    placeholder: true,
+    title: { tr: "Tersine Muhendislik ve Frida", en: "Reverse Engineering & Frida" },
+    tagline: {
+      tr: "Android uygulamalarini ADB ve Frida ile analiz etmek, dinamik enstrumantasyon.",
+      en: "Analyzing Android apps with ADB and Frida, dynamic instrumentation.",
+    },
+    repo: { label: "sahelfarid/reverse-engineering", url: "https://github.com/sahelfarid/reverse-engineering" },
+    toc: [
+      { tr: "ADB temelleri: cihaz baglama, yetkilendirme, shell erisimi.", en: "ADB basics: connecting devices, authorization, shell access." },
+      { tr: "Cihaz ve paket yonetimi: APK kurma/kaldirma, izinler, App Inspector.", en: "Device & package management: installing/removing APKs, permissions, App Inspector." },
+      { tr: "Dosya sistemi erisimi ve yedekleme (backup/pull/push).", en: "Filesystem access and backup (pull/push)." },
+      { tr: "Logcat ile canli log izleme ve filtreleme.", en: "Live log monitoring and filtering with Logcat." },
+      { tr: "Ekran araclari ve input otomasyonu (tap/swipe/macro).", en: "Screen tools and input automation (tap/swipe/macros)." },
+      { tr: "Root tespiti ve rootlu cihazlarda calisma.", en: "Root detection and working with rooted devices." },
+      { tr: "Frida ile dinamik enstrumantasyon: frida-server, process attach/spawn.", en: "Dynamic instrumentation with Frida: frida-server, process attach/spawn." },
+      { tr: "Frida script yazma: JavaScript hook'lari, fonksiyon ele gecirme.", en: "Writing Frida scripts: JavaScript hooks, function hooking." },
+      { tr: "Guvenlik modeli: yetkili test, login/CSRF/audit log onemi.", en: "Security model: authorized testing, importance of login/CSRF/audit logging." },
+      { tr: "Yasal ve etik sinirlar: sadece kendi cihaz/uygulamaniz uzerinde test.", en: "Legal & ethical boundaries: only test your own devices/apps." },
+    ],
+  }),
+  new KnowledgeTopic({
+    id: "web-security-webq",
+    tone: "security",
+    day: 2,
+    placeholder: true,
+    title: { tr: "Web Guvenligi: Kesif ve Analiz (WebQ)", en: "Web Security: Recon & Analysis (WebQ)" },
+    tagline: {
+      tr: "Domain kesfi, altyapi analizi ve zafiyet tarama araclarinin mantigi.",
+      en: "The logic behind domain recon, infrastructure analysis, and vulnerability scanning tools.",
+    },
+    repo: { label: "keyvanarasteh/WebQ", url: "https://github.com/keyvanarasteh/WebQ" },
+    toc: [
+      { tr: "Domain Insight: WHOIS, SSL zinciri, DNS haritalama, port taramasi.", en: "Domain Insight: WHOIS, SSL chain checks, DNS mapping, port scanning." },
+      { tr: "SEO ve teknoloji parmak izi: CMS/framework/CDN tespiti.", en: "SEO & tech fingerprinting: detecting CMS/frameworks/CDNs." },
+      { tr: "Toplu domain dogrulama (bulk domain validation).", en: "Bulk domain validation." },
+      { tr: "Subdomain kesfi ve canli/olu subdomain filtreleme.", en: "Subdomain discovery and live/dead subdomain filtering." },
+      { tr: "Contact spidering: BFS ile e-posta ve sosyal veri toplama.", en: "Contact spidering: BFS crawling for emails and social data." },
+      { tr: "Secret scanner: /config, /env gibi noktalardaki sizintilar.", en: "Secret scanner: leaked credentials in /config, /env endpoints." },
+      { tr: "Subdomain takeover analizi: savunmasiz CNAME kayitlari.", en: "Subdomain takeover analysis: vulnerable CNAME records." },
+      { tr: "Cloudflare/CDN arkasindaki gercek IP'yi bulma.", en: "Uncovering the real IP behind Cloudflare/CDN." },
+      { tr: "Nmap ciktisini CVE veritabanlariyla eslestirme.", en: "Correlating Nmap output with CVE databases." },
+      { tr: "Guvenlik puanlama modeli: WAF, CORS, header analiziyle A+ - F derecelendirme.", en: "Security grading model: A+ to F scoring via WAF, CORS, header analysis." },
+    ],
+  }),
 ];
