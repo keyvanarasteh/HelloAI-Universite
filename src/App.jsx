@@ -192,6 +192,7 @@ function App() {
 
   const shared = {
     lang,
+    theme,
     copy,
     navigate,
     openKnowledgeTopic,
@@ -1282,7 +1283,7 @@ function ResourcesPage({ lang, copy, navigate }) {
   );
 }
 
-function KnowledgePage({ lang, copy, pendingKnowledgeTopic, setPendingKnowledgeTopic }) {
+function KnowledgePage({ lang, theme, copy, pendingKnowledgeTopic, setPendingKnowledgeTopic }) {
   const [progress, setProgress] = useStoredState("bp_knowledge_progress", {});
   const [dayFilter, setDayFilter] = useState("all");
   const [selectedId, setSelectedId] = useState(knowledgeTopics[0].id);
@@ -1463,6 +1464,10 @@ function KnowledgePage({ lang, copy, pendingKnowledgeTopic, setPendingKnowledgeT
                   {copy.knowledge.contribute}: {topic.repo.label}
                 </a>
               )}
+            </div>
+          ) : topic.Component ? (
+            <div className="mt-5 grid gap-6" onClick={(event) => event.stopPropagation()}>
+              <topic.Component lang={lang} theme={theme} />
             </div>
           ) : (
             <div className="mt-5 grid gap-5">
