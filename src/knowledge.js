@@ -1,5 +1,6 @@
 import { FrontendBackendAgenticNote } from "./notes/FrontendBackendAgentic.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
 
 export const instructor = {
   name: "Keyvan Arasteh",
@@ -90,6 +91,7 @@ export const knowledgeTopics = [
   {
     id: "problem-solving",
     tone: "software",
+    Component: ProblemSolvingNote,
     title: { tr: "Problem Cozme Sureci (0-100)", en: "Problem-Solving Process (0-100)" },
     tagline: {
       tr: "Bir fikri, planlanmis ve izlenebilir adimlarla calisan bir urune donustur.",
