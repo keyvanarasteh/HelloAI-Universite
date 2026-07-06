@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.86);
+  --surface-2: #edf2f7;
+  --input: #ffffff;
+  --text: #172033;
+  --muted: #657286;
+  --border: #d8e0ea;
+  --brand: #2563eb;
+  --brand-soft: #e8f0ff;
+  --ok: #0f766e;
+  --ok-soft: #e6f5f2;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --software: #2563eb;
+  --software-soft: #e8f0ff;
+  --security: #0f766e;
+  --security-soft: #e6f5f2;
+  --hardware: #b45309;
+  --hardware-soft: #fff2dc;
+  --electronics: #7c3aed;
+  --electronics-soft: #f1eafe;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101722;
+  --surface: #172033;
+  --surface-glass: rgba(23, 32, 51, 0.86);
+  --surface-2: #222d43;
+  --input: #121b2b;
+  --text: #f1f5f9;
+  --muted: #aab7c8;
+  --border: #334158;
+  --brand: #60a5fa;
+  --brand-soft: #152b4f;
+  --ok: #5eead4;
+  --ok-soft: #123b37;
+  --danger: #f87171;
+  --danger-soft: #4d1d24;
+  --software: #60a5fa;
+  --software-soft: #142947;
+  --security: #5eead4;
+  --security-soft: #123b37;
+  --hardware: #fbbf24;
+  --hardware-soft: #3d2b11;
+  --electronics: #c4b5fd;
+  --electronics-soft: #2d244b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background: var(--bg);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+::selection {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.field-icon {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+}
+
+.field-card {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.field-software {
+  background: var(--software-soft);
+  color: var(--software);
+}
+
+.field-security {
+  background: var(--security-soft);
+  color: var(--security);
+}
+
+.field-hardware {
+  background: var(--hardware-soft);
+  color: var(--hardware);
+}
+
+.field-electronics {
+  background: var(--electronics-soft);
+  color: var(--electronics);
+}
+
+.progress-software {
+  background: var(--software);
+}
+
+.progress-security {
+  background: var(--security);
+}
+
+.progress-hardware {
+  background: var(--hardware);
+}
+
+.progress-electronics {
+  background: var(--electronics);
+}
+
+.icon-action {
+  display: inline-flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--text);
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.icon-action:hover {
+  background: var(--surface-2);
+}
+
+.icon-action.danger {
+  color: var(--danger);
+}
+
+.icon-action.danger:hover {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
