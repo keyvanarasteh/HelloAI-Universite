@@ -22,6 +22,8 @@ import { WafEnumerationNote } from "./notes/WafEnumeration.jsx";
 import { HostVpsEnumerationNote } from "./notes/HostVpsEnumeration.jsx";
 import { WappalyzerFingerprintingNote } from "./notes/WappalyzerFingerprinting.jsx";
 import { BrowserExtensionsRisksNote } from "./notes/BrowserExtensionsRisks.jsx";
+import { ReverseEngineeringFridaNote } from "./notes/ReverseEngineeringFrida.jsx";
+import { WebQSecurityNote } from "./notes/WebQSecurity.jsx";
 
 export const instructor = {
   name: "Keyvan Arasteh",
@@ -35,9 +37,10 @@ export const instructor = {
 };
 
 export class KnowledgeTopic {
-  constructor({ id, tone, title, tagline, day = 1, sections = [], toc = [], repo = null, placeholder = false }) {
+  constructor({ id, tone, title, tagline, day = 1, Component = null, sections = [], toc = [], repo = null, placeholder = false }) {
     this.id = id;
     this.tone = tone;
+    this.Component = Component;
     this.title = title;
     this.tagline = tagline;
     this.day = day;
@@ -676,13 +679,21 @@ export const knowledgeTopics = [
     id: "reverse-engineering-frida",
     tone: "hardware",
     day: 2,
-    placeholder: true,
+    Component: ReverseEngineeringFridaNote,
     title: { tr: "Tersine Muhendislik ve Frida", en: "Reverse Engineering & Frida" },
     tagline: {
       tr: "Android uygulamalarini ADB ve Frida ile analiz etmek, dinamik enstrumantasyon.",
       en: "Analyzing Android apps with ADB and Frida, dynamic instrumentation.",
     },
     repo: { label: "sahelfarid/reverse-engineering", url: "https://github.com/sahelfarid/reverse-engineering" },
+    sections: [
+      {
+        heading: { tr: "Lab Rotasi", en: "Lab Route" },
+        items: [
+          { tr: "ADB ile cihaz baglantisi, paket inceleme, logcat ve Frida enstrumantasyonu yetkili lablarda calisilir.", en: "ADB device connection, package inspection, logcat, and Frida instrumentation are practiced in authorized labs." },
+        ],
+      },
+    ],
     toc: [
       { tr: "ADB temelleri: cihaz baglama, yetkilendirme, shell erisimi.", en: "ADB basics: connecting devices, authorization, shell access." },
       { tr: "Cihaz ve paket yonetimi: APK kurma/kaldirma, izinler, App Inspector.", en: "Device & package management: installing/removing APKs, permissions, App Inspector." },
@@ -700,13 +711,21 @@ export const knowledgeTopics = [
     id: "web-security-webq",
     tone: "security",
     day: 2,
-    placeholder: true,
+    Component: WebQSecurityNote,
     title: { tr: "Web Guvenligi: Kesif ve Analiz (WebQ)", en: "Web Security: Recon & Analysis (WebQ)" },
     tagline: {
       tr: "Domain kesfi, altyapi analizi ve zafiyet tarama araclarinin mantigi.",
       en: "The logic behind domain recon, infrastructure analysis, and vulnerability scanning tools.",
     },
     repo: { label: "keyvanarasteh/WebQ", url: "https://github.com/keyvanarasteh/WebQ" },
+    sections: [
+      {
+        heading: { tr: "Analiz Rotasi", en: "Analysis Route" },
+        items: [
+          { tr: "Domain, DNS, teknoloji parmak izi, subdomain, secret ve guvenlik skoru izinli hedeflerde incelenir.", en: "Domain, DNS, tech fingerprinting, subdomain, secret, and security scoring are reviewed on authorized targets." },
+        ],
+      },
+    ],
     toc: [
       { tr: "Domain Insight: WHOIS, SSL zinciri, DNS haritalama, port taramasi.", en: "Domain Insight: WHOIS, SSL chain checks, DNS mapping, port scanning." },
       { tr: "SEO ve teknoloji parmak izi: CMS/framework/CDN tespiti.", en: "SEO & tech fingerprinting: detecting CMS/frameworks/CDNs." },
