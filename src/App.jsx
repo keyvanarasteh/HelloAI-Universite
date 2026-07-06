@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowLeft,
@@ -7,6 +7,7 @@ import {
   BarChart3,
   BookOpen,
   CheckCircle2,
+  ChevronDown,
   ClipboardCheck,
   Code2,
   Compass,
@@ -14,6 +15,7 @@ import {
   ExternalLink,
   FlaskConical,
   Github,
+  GitCommit,
   GraduationCap,
   Home,
   Languages,
@@ -46,9 +48,15 @@ import {
   talkQuestions,
 } from "./data.js";
 import { instructor, knowledgeTopics } from "./knowledge.js";
+import { buildInProgress, buildTimeline } from "./buildProcess.js";
 
-const pages = [
-  { id: "home", icon: Home },
+const primaryNav = [
+  { id: "landing", icon: Home },
+  { id: "knowledge", icon: GraduationCap },
+];
+
+const pusulaPages = [
+  { id: "home", icon: Compass },
   { id: "test", icon: ClipboardCheck },
   { id: "results", icon: BarChart3 },
   { id: "guide", icon: BookOpen },
@@ -57,7 +65,10 @@ const pages = [
   { id: "shortlist", icon: ListChecks },
   { id: "journal", icon: NotebookPen },
   { id: "resources", icon: ExternalLink },
-  { id: "knowledge", icon: GraduationCap },
+];
+
+const secondaryNav = [
+  { id: "buildProcess", icon: GitCommit },
   { id: "instructor", icon: UserRound },
 ];
 
@@ -149,13 +160,14 @@ function calculateScores(answers) {
 function App() {
   const [lang, setLang] = useStoredState("bp_lang", "tr");
   const [theme, setTheme] = useState(getInitialTheme);
-  const [page, setPage] = useStoredState("bp_page", "home");
+  const [page, setPage] = useStoredState("bp_page", "landing");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [answers, setAnswers] = useStoredState("bp_answers", {});
   const [result, setResult] = useStoredState("bp_result", null);
   const [comparisons, setComparisons] = useStoredState("bp_comparisons", []);
   const [shortlist, setShortlist] = useStoredState("bp_shortlist", []);
   const [journal, setJournal] = useStoredState("bp_journal", emptyJournal);
+  const [pendingKnowledgeTopic, setPendingKnowledgeTopic] = useState(null);
 
   const copy = t[lang] || t.tr;
 
@@ -170,6 +182,11 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const openKnowledgeTopic = (topicId) => {
+    setPendingKnowledgeTopic(topicId);
+    navigate("knowledge");
+  };
+
   const toggleLanguage = () => setLang((current) => (current === "tr" ? "en" : "tr"));
   const toggleTheme = () => setTheme((current) => (current === "light" ? "dark" : "light"));
 
@@ -177,6 +194,7 @@ function App() {
     lang,
     copy,
     navigate,
+    openKnowledgeTopic,
     answers,
     setAnswers,
     result,
@@ -187,6 +205,8 @@ function App() {
     setShortlist,
     journal,
     setJournal,
+    pendingKnowledgeTopic,
+    setPendingKnowledgeTopic,
   };
 
   return (
@@ -204,6 +224,7 @@ function App() {
       />
 
       <main className="mx-auto max-w-7xl px-4 pb-14 pt-4 sm:px-6 lg:px-8">
+        {page === "landing" && <WorkshopLandingPage {...shared} />}
         {page === "home" && <HomePage {...shared} />}
         {page === "test" && <TestPage {...shared} />}
         {page === "results" && <ResultsPage {...shared} />}
@@ -214,6 +235,7 @@ function App() {
         {page === "journal" && <JournalPage {...shared} />}
         {page === "resources" && <ResourcesPage {...shared} />}
         {page === "knowledge" && <KnowledgePage {...shared} />}
+        {page === "buildProcess" && <BuildProcessPage {...shared} />}
         {page === "instructor" && <InstructorPage {...shared} />}
       </main>
 
@@ -235,12 +257,14 @@ function Header({
   mobileOpen,
   setMobileOpen,
 }) {
+  const pusulaActive = pusulaPages.some((item) => item.id === page);
+
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--surface-glass)] backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 sm:px-6 lg:px-8">
         <button
           className="flex shrink-0 items-center gap-2 rounded-md px-2 py-2 text-left font-semibold text-[var(--text)] transition hover:bg-[var(--surface-2)]"
-          onClick={() => navigate("home")}
+          onClick={() => navigate("landing")}
         >
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
             <Compass size={20} />
@@ -249,7 +273,17 @@ function Header({
         </button>
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex">
-          {pages.map((item) => (
+          {primaryNav.map((item) => (
+            <NavButton
+              key={item.id}
+              item={item}
+              active={page === item.id}
+              label={copy.nav[item.id]}
+              onClick={() => navigate(item.id)}
+            />
+          ))}
+          <PusulaDropdown copy={copy} page={page} navigate={navigate} active={pusulaActive} />
+          {secondaryNav.map((item) => (
             <NavButton
               key={item.id}
               item={item}
@@ -260,7 +294,7 @@ function Header({
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-2">
           <IconTextButton
             icon={Languages}
             label={lang.toUpperCase()}
@@ -285,7 +319,31 @@ function Header({
 
       {mobileOpen && (
         <nav className="grid gap-2 border-t border-[var(--border)] bg-[var(--surface)] px-4 py-3 lg:hidden">
-          {pages.map((item) => (
+          {primaryNav.map((item) => (
+            <NavButton
+              key={item.id}
+              item={item}
+              active={page === item.id}
+              label={copy.nav[item.id]}
+              onClick={() => navigate(item.id)}
+              mobile
+            />
+          ))}
+          <p className="mt-2 px-3 text-xs font-bold uppercase tracking-wide text-[var(--muted)]">
+            {copy.nav.pusula}
+          </p>
+          {pusulaPages.map((item) => (
+            <NavButton
+              key={item.id}
+              item={item}
+              active={page === item.id}
+              label={copy.nav[item.id]}
+              onClick={() => navigate(item.id)}
+              mobile
+              indent
+            />
+          ))}
+          {secondaryNav.map((item) => (
             <NavButton
               key={item.id}
               item={item}
@@ -301,21 +359,78 @@ function Header({
   );
 }
 
-function NavButton({ item, label, active, onClick, mobile = false }) {
+function PusulaDropdown({ copy, page, navigate, active }) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
+
+  const select = (id) => {
+    navigate(id);
+    setOpen(false);
+  };
+
+  return (
+    <div className="relative" ref={containerRef}>
+      <button
+        onClick={() => setOpen((value) => !value)}
+        title={copy.nav.pusula}
+        className={[
+          "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition",
+          active || open
+            ? "bg-[var(--brand-soft)] text-[var(--brand)]"
+            : "text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]",
+        ].join(" ")}
+      >
+        <Compass size={17} />
+        <span className="hidden xl:inline">{copy.nav.pusula}</span>
+        <ChevronDown size={14} className={`transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      {open && (
+        <div className="absolute left-1/2 top-full z-40 mt-2 grid w-56 -translate-x-1/2 gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 shadow-soft">
+          {pusulaPages.map((item) => (
+            <NavButton
+              key={item.id}
+              item={item}
+              active={page === item.id}
+              label={copy.nav[item.id]}
+              onClick={() => select(item.id)}
+              mobile
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function NavButton({ item, label, active, onClick, mobile = false, indent = false }) {
   const Icon = item.icon;
   return (
     <button
       onClick={onClick}
+      title={label}
       className={[
         "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition",
         mobile ? "justify-start" : "justify-center",
+        indent ? "ml-3" : "",
         active
           ? "bg-[var(--brand-soft)] text-[var(--brand)]"
           : "text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]",
       ].join(" ")}
     >
       <Icon size={17} />
-      <span>{label}</span>
+      <span className={mobile ? "" : "hidden xl:inline"}>{label}</span>
     </button>
   );
 }
@@ -331,6 +446,116 @@ function IconTextButton({ icon: Icon, label, ariaLabel, onClick }) {
       <Icon size={17} />
       <span className="hidden sm:inline">{label}</span>
     </button>
+  );
+}
+
+function WorkshopLandingPage({ lang, copy, navigate, openKnowledgeTopic }) {
+  return (
+    <div className="space-y-10 py-6">
+      <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
+        <div className="min-w-0 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 shadow-soft sm:p-8 lg:flex lg:min-h-[380px] lg:flex-col lg:justify-center">
+          <p className="text-sm font-semibold uppercase text-[var(--brand)]">{copy.landing.eyebrow}</p>
+          <h1 className="mt-4 max-w-3xl break-words text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+            {copy.landing.title}
+          </h1>
+          <p className="mt-5 max-w-2xl break-words text-base leading-7 text-[var(--muted)] sm:text-lg">
+            {copy.landing.subtitle}
+          </p>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <PrimaryButton icon={GraduationCap} onClick={() => navigate("knowledge")}>
+              {copy.landing.ctaNotes}
+            </PrimaryButton>
+            <SecondaryButton icon={Compass} onClick={() => navigate("home")}>
+              {copy.landing.ctaPusula}
+            </SecondaryButton>
+            <SecondaryButton icon={GitCommit} onClick={() => navigate("buildProcess")}>
+              {copy.landing.ctaProcess}
+            </SecondaryButton>
+          </div>
+        </div>
+
+        <div className="grid min-w-0 gap-4">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex items-center gap-3">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <UserRound size={22} />
+              </span>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-[var(--muted)]">{copy.nav.instructor}</p>
+                <h2 className="truncate text-lg font-bold">{instructor.name}</h2>
+              </div>
+            </div>
+            <button
+              className="mt-5 flex w-full items-center justify-center rounded-md border border-[var(--border)] px-4 py-3 text-sm font-semibold text-[var(--text)] transition hover:bg-[var(--surface-2)]"
+              onClick={() => navigate("instructor")}
+            >
+              {copy.landing.ctaInstructor}
+            </button>
+          </div>
+
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <h2 className="text-lg font-bold">{copy.landing.pusulaTitle}</h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{copy.landing.pusulaSubtitle}</p>
+            <button
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-md bg-[var(--brand)] px-4 py-3 text-sm font-bold text-white transition hover:opacity-90"
+              onClick={() => navigate("home")}
+            >
+              <ExternalLink size={16} />
+              {copy.landing.pusulaCta}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl font-bold">{copy.landing.notesTitle}</h2>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{copy.landing.notesSubtitle}</p>
+          </div>
+          <SecondaryButton icon={GraduationCap} onClick={() => navigate("knowledge")}>
+            {copy.landing.notesSeeAll}
+          </SecondaryButton>
+        </div>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {knowledgeTopics.map((topicItem) => (
+            <button
+              key={topicItem.id}
+              onClick={() => openKnowledgeTopic(topicItem.id)}
+              className="field-card min-h-[188px] rounded-lg border border-[var(--border)] p-5 text-left transition hover:-translate-y-0.5 hover:shadow-soft"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className={`field-icon field-${topicItem.tone}`}>
+                  <GraduationCap size={20} />
+                </span>
+                <span className="rounded-md bg-[var(--surface-2)] px-2 py-1 text-[10px] font-bold uppercase text-[var(--muted)]">
+                  {topicItem.day === 2 ? copy.knowledge.day2 : copy.knowledge.day1}
+                </span>
+              </div>
+              <h3 className="mt-4 text-base font-bold leading-snug">{topicItem.title[lang]}</h3>
+              <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--muted)]">{topicItem.tagline[lang]}</p>
+              {topicItem.placeholder && (
+                <span className="mt-3 inline-block rounded-md bg-[var(--surface-2)] px-2 py-1 text-[10px] font-bold uppercase text-[var(--muted)]">
+                  {copy.knowledge.placeholderBadge}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl font-bold">{copy.landing.processTitle}</h2>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{copy.landing.processSubtitle}</p>
+          </div>
+          <PrimaryButton icon={GitCommit} onClick={() => navigate("buildProcess")}>
+            {copy.landing.processCta}
+          </PrimaryButton>
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -1057,11 +1282,19 @@ function ResourcesPage({ lang, copy, navigate }) {
   );
 }
 
-function KnowledgePage({ lang, copy }) {
+function KnowledgePage({ lang, copy, pendingKnowledgeTopic, setPendingKnowledgeTopic }) {
   const [progress, setProgress] = useStoredState("bp_knowledge_progress", {});
   const [dayFilter, setDayFilter] = useState("all");
   const [selectedId, setSelectedId] = useState(knowledgeTopics[0].id);
   const [flipped, setFlipped] = useState(false);
+
+  useEffect(() => {
+    if (pendingKnowledgeTopic) {
+      setSelectedId(pendingKnowledgeTopic);
+      setFlipped(true);
+      setPendingKnowledgeTopic(null);
+    }
+  }, [pendingKnowledgeTopic, setPendingKnowledgeTopic]);
 
   const total = knowledgeTopics.length;
   const visibleTopics =
@@ -1268,6 +1501,66 @@ function KnowledgePage({ lang, copy }) {
             )}
           </div>
         </section>
+      </div>
+    </PageFrame>
+  );
+}
+
+function BuildProcessPage({ lang, copy, openKnowledgeTopic }) {
+  return (
+    <PageFrame title={copy.buildProcess.title} subtitle={copy.buildProcess.subtitle}>
+      <div className="relative grid gap-6 pl-7 sm:pl-9">
+        <div className="absolute bottom-2 left-[11px] top-2 w-px bg-[var(--border)] sm:left-[15px]" />
+
+        {buildTimeline.map((commit, index) => (
+          <article key={commit.hash} className="relative rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <span className="absolute -left-7 top-6 flex h-6 w-6 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--brand-soft)] text-[var(--brand)] sm:-left-9">
+              <GitCommit size={14} />
+            </span>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="rounded-md bg-[var(--surface-2)] px-2 py-1 font-mono text-xs font-bold text-[var(--text)]">
+                  {commit.hash}
+                </span>
+                <span className="text-xs font-semibold text-[var(--muted)]">{commit.date}</span>
+              </div>
+              <span className="text-xs font-semibold uppercase text-[var(--muted)]">
+                {copy.buildProcess.commitLabel} {index + 1}/{buildTimeline.length}
+              </span>
+            </div>
+            <h3 className="mt-3 text-lg font-bold leading-snug">{commit.message[lang]}</h3>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{copy.buildProcess.filesTitle}</p>
+                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{commit.files[lang]}</p>
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{copy.buildProcess.lessonTitle}</p>
+                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{commit.lesson[lang]}</p>
+              </div>
+            </div>
+            {commit.relatedTopic && (
+              <button
+                className="mt-4 inline-flex items-center gap-2 rounded-md border border-[var(--border)] px-3 py-2 text-xs font-semibold text-[var(--text)] transition hover:bg-[var(--surface-2)]"
+                onClick={() => openKnowledgeTopic(commit.relatedTopic)}
+              >
+                <GraduationCap size={14} />
+                {copy.buildProcess.relatedNote}
+              </button>
+            )}
+          </article>
+        ))}
+
+        <article className="relative rounded-lg border border-dashed border-[var(--brand)] bg-[var(--brand-soft)] p-5">
+          <span className="absolute -left-7 top-6 flex h-6 w-6 items-center justify-center rounded-full border border-[var(--brand)] bg-[var(--surface)] sm:-left-9">
+            <span className="block h-2.5 w-2.5 animate-pulse rounded-full bg-[var(--brand)]" />
+          </span>
+          <span className="inline-block rounded-md bg-[var(--brand)] px-2 py-1 text-xs font-bold uppercase text-white">
+            {copy.buildProcess.liveBadge}
+          </span>
+          <p className="mt-3 text-sm leading-6 text-[var(--text)]">{buildInProgress.message[lang]}</p>
+          <p className="mt-3 text-xs text-[var(--muted)]">{copy.buildProcess.liveNote}</p>
+        </article>
       </div>
     </PageFrame>
   );

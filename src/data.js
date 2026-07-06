@@ -354,7 +354,8 @@ export const t = {
   tr: {
     appName: "Bolum Pusulasi",
     nav: {
-      home: "Ana Sayfa",
+      landing: "Ana Sayfa",
+      home: "Genel Bakis",
       test: "Alan Testi",
       results: "Sonuc",
       guide: "Alan Rehberi",
@@ -364,6 +365,8 @@ export const t = {
       journal: "Gunluk",
       resources: "Kaynaklar",
       knowledge: "Atolye Notlari",
+      pusula: "Bolum Pusulasi",
+      buildProcess: "Yapim Sureci",
       instructor: "Egitmen",
     },
     common: {
@@ -502,6 +505,27 @@ export const t = {
       tocTitle: "Islenecek Basliklar",
       contribute: "Repo'ya Katki Yap",
     },
+    landing: {
+      eyebrow: "Atolye Ana Sayfasi",
+      title: "Agentic AI ile yazilim gelistirmeyi ogrenen bir atolyeye hos geldin.",
+      subtitle:
+        "Bu atolyede hem AI destekli yazilim gelistirmeyi ogreniyoruz hem de bu ogrendiklerimizi canli bir proje olan Bolum Pusulasi'nda uyguluyoruz. Asagidan Atolye Notlarina, projeye ve yapim surecine goz atabilirsin.",
+      ctaNotes: "Atolye Notlarina Git",
+      ctaPusula: "Bolum Pusulasi'ni Kesfet",
+      ctaProcess: "Yapim Surecini Gor",
+      ctaInstructor: "Egitmeni Tani",
+      notesTitle: "Atolye Notlari",
+      notesSubtitle: "Islenen her konu icin kisa bir onizleme; devamini Atolye Notlari sayfasinda okuyabilirsin.",
+      notesSeeAll: "Tum notlari gor",
+      pusulaTitle: "Proje: Bolum Pusulasi",
+      pusulaSubtitle:
+        "Bu atolyede agentic AI araclariyla (Claude Code, Codex) baştan sona kodladigimiz gercek bir web uygulamasi: universite bolum karari icin test, rehber, karsilastirma ve karar gunlugu.",
+      pusulaCta: "Projeyi Ac",
+      processTitle: "Nasil Yapildi?",
+      processSubtitle:
+        "Bolum Pusulasi tek seferde degil, gercek commit'lerle adim adim ilerledi. Yapim Surecini incelersen agentic AI ile bir projenin nasil buyudugunu gorursun.",
+      processCta: "Yapim Surecini Ac",
+    },
     instructor: {
       title: "Egitmen",
       subtitle: "Bu atolyeyi hazirlayan ve sunan egitmen hakkinda kisa bilgi.",
@@ -516,11 +540,23 @@ export const t = {
       internshipCta: "Programi Incele",
       backToKnowledge: "Atolye Notlarina Don",
     },
+    buildProcess: {
+      title: "Yapim Sureci",
+      subtitle:
+        "Bolum Pusulasi tek buyuk adimda degil, gercek commit'lerle ilerledi. Bu zaman cizelgesi, agentic AI ile bir projenin nasil adim adim buyudugunu gosterir.",
+      commitLabel: "Commit",
+      filesTitle: "Neler degisti",
+      lessonTitle: "Buradan cikan ders",
+      liveBadge: "Su an devam ediyor",
+      liveNote: "Atolye ve site, canli oturumlarda gelismeye devam ediyor; bu zaman cizelgesi surekli uzuyor.",
+      relatedNote: "Ilgili not",
+    },
   },
   en: {
     appName: "Path Compass",
     nav: {
-      home: "Home",
+      landing: "Home",
+      home: "Overview",
       test: "Field Test",
       results: "Results",
       guide: "Field Guide",
@@ -530,6 +566,8 @@ export const t = {
       journal: "Journal",
       resources: "Resources",
       knowledge: "Workshop Notes",
+      pusula: "Path Compass",
+      buildProcess: "Build Process",
       instructor: "Instructor",
     },
     common: {
@@ -673,6 +711,27 @@ export const t = {
       tocTitle: "Topics to Cover",
       contribute: "Contribute on the Repo",
     },
+    landing: {
+      eyebrow: "Workshop Home",
+      title: "Welcome to a workshop about building software with agentic AI.",
+      subtitle:
+        "Here we learn AI-assisted software development and apply it live in a real project, Path Compass (Bolum Pusulasi). Explore the Workshop Notes, the project itself, and how it was actually built.",
+      ctaNotes: "Go to Workshop Notes",
+      ctaPusula: "Explore Path Compass",
+      ctaProcess: "See the Build Process",
+      ctaInstructor: "Meet the Instructor",
+      notesTitle: "Workshop Notes",
+      notesSubtitle: "A quick preview of each topic covered; read the full notes on the Workshop Notes page.",
+      notesSeeAll: "See all notes",
+      pusulaTitle: "Project: Path Compass",
+      pusulaSubtitle:
+        "A real web app built end-to-end in this workshop with agentic AI tools (Claude Code, Codex): a test, guide, comparison tool, and decision journal for choosing a university major.",
+      pusulaCta: "Open the Project",
+      processTitle: "How Was It Built?",
+      processSubtitle:
+        "Path Compass didn't appear all at once — it grew commit by commit. Check the Build Process to see how a project grows with agentic AI.",
+      processCta: "Open the Build Process",
+    },
     instructor: {
       title: "Instructor",
       subtitle: "A short introduction to the instructor who prepared and delivered this workshop.",
@@ -686,6 +745,17 @@ export const t = {
       internshipDesc: "Visit the official page for up-to-date information and applications for Istinye University's summer research internship program.",
       internshipCta: "View the Program",
       backToKnowledge: "Back to Workshop Notes",
+    },
+    buildProcess: {
+      title: "Build Process",
+      subtitle:
+        "Path Compass grew through real commits, not one giant leap. This timeline shows how a project grows step by step with agentic AI.",
+      commitLabel: "Commit",
+      filesTitle: "What changed",
+      lessonTitle: "The takeaway",
+      liveBadge: "In progress right now",
+      liveNote: "The workshop and this site keep evolving in live sessions; this timeline keeps growing.",
+      relatedNote: "Related note",
     },
   },
 };
