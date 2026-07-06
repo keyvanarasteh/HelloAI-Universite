@@ -18,11 +18,14 @@ Bu klasor, bilgisayar bolumlerine yonelik verilen atolye/workshop boyunca islene
 12. [LLM Modelleri Arasindaki Farklar ve Dusunme Seviyeleri](12-llm-modelleri-ve-dusunme-seviyeleri.md) — egitim verisi, sinir agi benzetmesi, Claude'un zor gorevlerdeki gucu, mini/full/extra thinking seviyeleri, yeni model cikinca gecis mantigi.
 13. [Isletim Sistemleri: Windows vs Linux ve Acik Kaynagin Hizli Buyumesi](13-isletim-sistemleri-ve-acik-kaynak.md) — Windows/Linux farki, Kali Linux/Ubuntu Server/CentOS/macOS kullanim alanlari, acik kaynagin hizli buyumesinin artilari ve eksileri.
 14. [Cloudflare: Trafik, Icerik ve Gizlilik](14-cloudflare-trafik-icerik-gizlilik.md) — Cloudflare'in ne gordugu (trafik/icerik/gizlilik), neden bu kadar yaygin oldugu, artilari ve eksileri.
+15. [Kablosuz Ag Guvenligi: Guest Wifi Riskleri ve KVKK](15-wifi-guvenligi-ve-guest-ag-riskleri.md) — guest wifi risk kategorileri, KVKK/TCK hukuki boyutu, yasal test siniri ve savunma onerileri.
+16. [0-Day Zafiyetler Nedir?](16-0day-zafiyetler.md) — 0-day tanimi, neden tehlikeli oldugu, sorumlu bildirim vs kara pazar, savunma yaklasimlari.
+17. [Guncel Kalmanin Onemi: Yama Yonetimi](17-guncelleme-ve-yama-yonetimi.md) — N-day riski, WannaCry/EternalBlue ornegi, iyi yama yonetimi pratikleri.
 
 ### 2. Gun: Ileri Siber Guvenlik (Yer Tutucu / Placeholder)
 
-15. [Tersine Muhendislik ve Frida](15-reverse-engineering-frida.md) — ADB/Frida ile Android analizi; [sahelfarid/reverse-engineering](https://github.com/sahelfarid/reverse-engineering) uzerinden TOC ve katki cagrisi.
-16. [Web Guvenligi: Kesif ve Analiz (WebQ)](16-web-guvenligi-webq.md) — domain kesfi, subdomain/secret/CVE analizi; [keyvanarasteh/WebQ](https://github.com/keyvanarasteh/WebQ) uzerinden TOC ve katki cagrisi.
+18. [Tersine Muhendislik ve Frida](18-reverse-engineering-frida.md) — ADB/Frida ile Android analizi; [sahelfarid/reverse-engineering](https://github.com/sahelfarid/reverse-engineering) uzerinden TOC ve katki cagrisi.
+19. [Web Guvenligi: Kesif ve Analiz (WebQ)](19-web-guvenligi-webq.md) — domain kesfi, subdomain/secret/CVE analizi; [keyvanarasteh/WebQ](https://github.com/keyvanarasteh/WebQ) uzerinden TOC ve katki cagrisi.
 
 ## Ilgili Diger Dosyalar (Proje Kok Dizini)
 

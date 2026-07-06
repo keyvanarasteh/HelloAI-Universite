@@ -4,6 +4,7 @@ import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { CybersecurityFoundationNote } from "./notes/CybersecurityFoundation.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { WifiSecurityRisksNote } from "./notes/WifiSecurityRisks.jsx";
 import { OsWindowsLinuxNote } from "./notes/OsWindowsLinux.jsx";
 import { LlmModelsThinkingLevelsNote } from "./notes/LlmModelsThinkingLevels.jsx";
 import { WebSecurityBasicsNote } from "./notes/WebSecurityBasics.jsx";
@@ -380,6 +381,32 @@ export const knowledgeTopics = [
         items: [
           { tr: "Artilari: ucretsiz/dusuk maliyet, yuksek ozellestirilebilirlik, genis topluluk destegi, seffaflikla hizli hata duzeltme.", en: "Pros: free/low-cost, highly customizable, large community support, transparency speeds up bug fixes." },
           { tr: "Eksileri: garanti resmi destek yok, dokumantasyon kalitesi degisken, dagitim/varyant fazlaligi (fragmantasyon), bilinen aciklar yama oncesi herkese gorunur.", en: "Cons: no guaranteed official support, inconsistent documentation, fragmentation across variants, known flaws are visible to everyone before a patch ships." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "wifi-security-risks",
+    tone: "electronics",
+    Component: WifiSecurityRisksNote,
+    title: { tr: "Kablosuz Ag Guvenligi: Guest Wifi Riskleri ve KVKK", en: "Wireless Security: Guest Wifi Risks & KVKK" },
+    tagline: {
+      tr: "Guest wifi'da neler ele gecirilebilir, KVKK/TCK acisindan riski ve dogru/yasal test siniri.",
+      en: "What can be exposed on guest wifi, the legal risk under Turkish law, and where the legal testing line is.",
+    },
+    sections: [
+      {
+        heading: { tr: "Risk ve Sonuclari", en: "Risk & Consequences" },
+        items: [
+          { tr: "Izole edilmemis guest aglarinda sifrelenmemis trafik ve zayif giris ekranlari izlenebilir hale gelebilir.", en: "On poorly isolated guest networks, unencrypted traffic and weak login screens can become observable." },
+          { tr: "Kimlik no, telefon, OTP gibi bilgilerin ele gecirilmesi kimlik hirsizligina ve hesap ele gecirmeye yol acabilir.", en: "Exposed ID numbers, phone numbers, or OTPs can enable identity theft and account takeover." },
+        ],
+      },
+      {
+        heading: { tr: "Yasal Sinir ve Savunma", en: "Legal Line & Defense" },
+        items: [
+          { tr: "Bu tur testler sadece yazili izinli pentest anlasmalari icinde, izole lab ortamlarinda yapilabilir; KVKK/TCK ihlali suctur.", en: "Such testing may only happen under a written pentest agreement in an isolated lab; unauthorized capture is a crime under Turkish law." },
+          { tr: "Savunma: VLAN izolasyonu, zorunlu HTTPS, guclu kimlik dogrulama, ag izleme.", en: "Defense: VLAN isolation, enforced HTTPS, strong authentication, network monitoring." },
         ],
       },
     ],
