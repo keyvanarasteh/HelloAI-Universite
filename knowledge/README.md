@@ -26,11 +26,16 @@ Bu klasor, bilgisayar bolumlerine yonelik verilen atolye/workshop boyunca islene
 
 18. [Sizma Testi Metodolojisi: Enumeration ve Kesif](18-pentest-metodolojisi-enumeration.md) — hacking/pentest adimlari, pasif/aktif enumeration turleri ve gercek dunya ornekleri, enumeration araclari (nmap, aircrack-ng, ...).
 19. [Exploitation ve Post-Exploitation: Exploit, Payload ve Shell Turleri](19-exploitation-post-exploitation.md) — exploit turleri, payload/shell turleri (bind/reverse, staged/stageless, web shell) ve post-exploitation turleri, hepsi gercek dunya ornekleriyle.
+20. [DNS Tanimi ve DNS Enumeration](20-dns-tanimi-ve-enumeration.md) — DNS kayit turleri, pasif/aktif DNS enumeration, subdomain takeover ornegi, dig/dnsenum/Amass gibi araclar.
+21. [WAF Tanimi ve WAF Tespiti](21-waf-tanimi-ve-tespiti.md) — WAF nedir, header/cookie/block-page tabanli tespit teknikleri, wafw00f araci.
+22. [Host, VPS Tanimi ve Enumeration Teknikleri](22-host-vps-tanimi-ve-enumeration.md) — host/VPS tanimlari, reverse DNS/IP, ASN sorgusu, CDN arkasindaki gercek IP'yi bulma.
+23. [Wappalyzer Eklentisi ve Kullanimi](23-wappalyzer-eklentisi.md) — pasif teknoloji parmak izi cikarma, bug bounty kesif akisinda kullanimi.
+24. [Tarayici Eklentileri: Izinler, Riskler ve Erisilen Veriler](24-tarayici-eklentileri-izin-ve-riskler.md) — eklenti izin turleri, gercek dunya veri toplama/ele gecirme vakalari, savunma onerileri.
 
 ### 2. Gun (devam): Ileri Siber Guvenlik (Yer Tutucu / Placeholder)
 
-20. [Tersine Muhendislik ve Frida](20-reverse-engineering-frida.md) — ADB/Frida ile Android analizi; [sahelfarid/reverse-engineering](https://github.com/sahelfarid/reverse-engineering) uzerinden TOC ve katki cagrisi.
-21. [Web Guvenligi: Kesif ve Analiz (WebQ)](21-web-guvenligi-webq.md) — domain kesfi, subdomain/secret/CVE analizi; [keyvanarasteh/WebQ](https://github.com/keyvanarasteh/WebQ) uzerinden TOC ve katki cagrisi.
+25. [Tersine Muhendislik ve Frida](25-reverse-engineering-frida.md) — ADB/Frida ile Android analizi; [sahelfarid/reverse-engineering](https://github.com/sahelfarid/reverse-engineering) uzerinden TOC ve katki cagrisi.
+26. [Web Guvenligi: Kesif ve Analiz (WebQ)](26-web-guvenligi-webq.md) — domain kesfi, subdomain/secret/CVE analizi; [keyvanarasteh/WebQ](https://github.com/keyvanarasteh/WebQ) uzerinden TOC ve katki cagrisi.
 
 ## Ilgili Diger Dosyalar (Proje Kok Dizini)
 

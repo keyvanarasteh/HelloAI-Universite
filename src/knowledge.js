@@ -17,6 +17,11 @@ import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
 import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
 import { PentestEnumerationNote } from "./notes/PentestEnumeration.jsx";
 import { ExploitationPostExploitationNote } from "./notes/ExploitationPostExploitation.jsx";
+import { DnsEnumerationNote } from "./notes/DnsEnumeration.jsx";
+import { WafEnumerationNote } from "./notes/WafEnumeration.jsx";
+import { HostVpsEnumerationNote } from "./notes/HostVpsEnumeration.jsx";
+import { WappalyzerFingerprintingNote } from "./notes/WappalyzerFingerprinting.jsx";
+import { BrowserExtensionsRisksNote } from "./notes/BrowserExtensionsRisks.jsx";
 
 export const instructor = {
   name: "Keyvan Arasteh",
@@ -568,6 +573,101 @@ export const knowledgeTopics = [
         heading: { tr: "Fazlar", en: "Phases" },
         items: [
           { tr: "Exploit secimi, payload/shell turleri ve post-exploitation teknikleri.", en: "Exploit selection, payload/shell types, and post-exploitation techniques." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "dns-definition-enumeration",
+    day: 2,
+    tone: "security",
+    Component: DnsEnumerationNote,
+    title: { tr: "DNS Tanimi ve DNS Enumeration", en: "DNS Definition & DNS Enumeration" },
+    tagline: {
+      tr: "DNS kayit turleri, pasif/aktif DNS enumeration ve subdomain takeover gercek dunya ornegi.",
+      en: "DNS record types, passive/active DNS enumeration, and a real-world subdomain takeover example.",
+    },
+    sections: [
+      {
+        heading: { tr: "DNS Enumeration", en: "DNS Enumeration" },
+        items: [
+          { tr: "Pasif (crt.sh, SecurityTrails) ve aktif (dig, zone transfer, brute-force) yontemler.", en: "Passive (crt.sh, SecurityTrails) and active (dig, zone transfer, brute-force) methods." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "waf-definition-enumeration",
+    day: 2,
+    tone: "security",
+    Component: WafEnumerationNote,
+    title: { tr: "WAF Tanimi ve WAF Tespiti", en: "WAF Definition & Fingerprinting" },
+    tagline: {
+      tr: "WAF nedir, header/cookie/block-page tabanli tespit teknikleri ve wafw00f araci.",
+      en: "What a WAF is, header/cookie/block-page fingerprinting techniques, and the wafw00f tool.",
+    },
+    sections: [
+      {
+        heading: { tr: "WAF Tespiti", en: "WAF Fingerprinting" },
+        items: [
+          { tr: "Header, cookie ve engelleme sayfasi analiziyle WAF tespiti.", en: "Detecting a WAF via header, cookie, and block-page analysis." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "host-vps-enumeration",
+    day: 2,
+    tone: "security",
+    Component: HostVpsEnumerationNote,
+    title: { tr: "Host, VPS Tanimi ve Enumeration Teknikleri", en: "Host & VPS Definitions & Enumeration Techniques" },
+    tagline: {
+      tr: "Host/VPS tanimlari, reverse DNS/IP, ASN sorgusu ve CDN arkasindaki gercek IP'yi bulma.",
+      en: "Host/VPS definitions, reverse DNS/IP, ASN lookups, and uncovering the real IP behind a CDN.",
+    },
+    sections: [
+      {
+        heading: { tr: "Enumeration Teknikleri", en: "Enumeration Techniques" },
+        items: [
+          { tr: "Reverse DNS/IP, ASN sorgusu ve CDN arkasindaki gercek origin IP'yi bulma.", en: "Reverse DNS/IP, ASN lookups, and finding the real origin IP behind a CDN." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "wappalyzer-tech-fingerprinting",
+    day: 2,
+    tone: "security",
+    Component: WappalyzerFingerprintingNote,
+    title: { tr: "Wappalyzer Eklentisi ve Kullanimi", en: "The Wappalyzer Extension & How to Use It" },
+    tagline: {
+      tr: "Pasif teknoloji parmak izi cikarma ve bug bounty kesif akisinda kullanimi.",
+      en: "Passive technology fingerprinting and its use in the bug bounty recon flow.",
+    },
+    sections: [
+      {
+        heading: { tr: "Kullanim", en: "Usage" },
+        items: [
+          { tr: "CMS/framework/CDN tespiti icin pasif bir tarayici eklentisi.", en: "A passive browser extension for detecting CMS/framework/CDN." },
+        ],
+      },
+    ],
+  },
+  {
+    id: "browser-extensions-permissions-risks",
+    day: 2,
+    tone: "security",
+    Component: BrowserExtensionsRisksNote,
+    title: { tr: "Tarayici Eklentileri: Izinler, Riskler ve Erisilen Veriler", en: "Browser Extensions: Permissions, Risks & Data Access" },
+    tagline: {
+      tr: "Eklenti izin turleri, gercek dunya veri toplama/ele gecirme vakalari ve savunma onerileri.",
+      en: "Extension permission types, real-world data-harvesting/hijack cases, and defensive recommendations.",
+    },
+    sections: [
+      {
+        heading: { tr: "Riskler", en: "Risks" },
+        items: [
+          { tr: "Genis izinli eklentiler veri toplayabilir veya ele gecirilebilir (orn. The Great Suspender).", en: "Broadly-permissioned extensions can harvest data or get hijacked (e.g. The Great Suspender)." },
         ],
       },
     ],
