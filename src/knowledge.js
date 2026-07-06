@@ -3,6 +3,7 @@ import { AgentOutputAuditNote } from "./notes/AgentOutputAudit.jsx";
 import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { IdeSetupNote } from "./notes/IdeSetup.jsx";
 import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
 import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
 
@@ -231,6 +232,7 @@ export const knowledgeTopics = [
   {
     id: "ide-setup",
     tone: "hardware",
+    Component: IdeSetupNote,
     title: { tr: "IDE ve Kurulum", en: "IDE & Setup" },
     tagline: {
       tr: "VSCode'u AI agent eklentileriyle ve dogru git ayarlariyla kur.",
