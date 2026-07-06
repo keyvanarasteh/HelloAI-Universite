@@ -13,19 +13,25 @@ import {
   Cpu,
   ExternalLink,
   FlaskConical,
+  Github,
+  GraduationCap,
   Home,
   Languages,
+  Linkedin,
   ListChecks,
   Menu,
   Moon,
   NotebookPen,
   Plus,
   RotateCcw,
+  Rocket,
   Save,
   ShieldCheck,
+  Shuffle,
   Sun,
   Trash2,
   University,
+  UserRound,
   X,
   Zap,
 } from "lucide-react";
@@ -39,6 +45,7 @@ import {
   t,
   talkQuestions,
 } from "./data.js";
+import { instructor, knowledgeTopics } from "./knowledge.js";
 
 const pages = [
   { id: "home", icon: Home },
@@ -50,6 +57,8 @@ const pages = [
   { id: "shortlist", icon: ListChecks },
   { id: "journal", icon: NotebookPen },
   { id: "resources", icon: ExternalLink },
+  { id: "knowledge", icon: GraduationCap },
+  { id: "instructor", icon: UserRound },
 ];
 
 const fieldIcons = {
@@ -204,6 +213,8 @@ function App() {
         {page === "shortlist" && <ShortlistPage {...shared} />}
         {page === "journal" && <JournalPage {...shared} />}
         {page === "resources" && <ResourcesPage {...shared} />}
+        {page === "knowledge" && <KnowledgePage {...shared} />}
+        {page === "instructor" && <InstructorPage {...shared} />}
       </main>
 
       <footer className="border-t border-[var(--border)] px-4 py-8 text-center text-sm text-[var(--muted)]">
@@ -1039,6 +1050,233 @@ function ResourcesPage({ lang, copy, navigate }) {
                 {copy.nav.projects}
               </SecondaryButton>
             </div>
+          </div>
+        </div>
+      </section>
+    </PageFrame>
+  );
+}
+
+function KnowledgePage({ lang, copy }) {
+  const [progress, setProgress] = useStoredState("bp_knowledge_progress", {});
+  const [selectedId, setSelectedId] = useState(knowledgeTopics[0].id);
+  const [flipped, setFlipped] = useState(false);
+
+  const total = knowledgeTopics.length;
+  const selectedIndex = Math.max(
+    0,
+    knowledgeTopics.findIndex((item) => item.id === selectedId)
+  );
+  const topic = knowledgeTopics[selectedIndex];
+  const doneCount = Object.values(progress).filter(Boolean).length;
+  const percent = Math.round((doneCount / total) * 100);
+
+  const selectTopic = (id) => {
+    setSelectedId(id);
+    setFlipped(false);
+  };
+
+  const goRelative = (delta) => {
+    const nextIndex = (selectedIndex + delta + total) % total;
+    selectTopic(knowledgeTopics[nextIndex].id);
+  };
+
+  const toggleLearned = () => setProgress({ ...progress, [topic.id]: !progress[topic.id] });
+
+  const randomReview = () => {
+    const notLearned = knowledgeTopics.filter((item) => !progress[item.id]);
+    const pool = notLearned.length > 0 ? notLearned : knowledgeTopics;
+    const random = pool[Math.floor(Math.random() * pool.length)];
+    selectTopic(random.id);
+  };
+
+  return (
+    <PageFrame title={copy.knowledge.title} subtitle={copy.knowledge.subtitle}>
+      <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--muted)]">
+          <span>
+            {copy.knowledge.progressLabel}: {doneCount}/{total} {copy.knowledge.topicsLabel}
+          </span>
+          <span>{percent}%</span>
+        </div>
+        <div className="mt-3 h-3 overflow-hidden rounded-full bg-[var(--surface-2)]">
+          <div className="h-full rounded-full bg-[var(--brand)] transition-all" style={{ width: `${percent}%` }} />
+        </div>
+        {doneCount === total && <p className="mt-3 text-sm font-semibold text-[var(--ok)]">{copy.knowledge.allDone}</p>}
+        <div className="mt-4 flex flex-wrap gap-3">
+          <SecondaryButton icon={Shuffle} onClick={randomReview}>
+            {copy.knowledge.randomReview}
+          </SecondaryButton>
+          <SecondaryButton icon={RotateCcw} onClick={() => setProgress({})}>
+            {copy.knowledge.resetProgress}
+          </SecondaryButton>
+        </div>
+      </section>
+
+      <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
+        <section className="grid content-start gap-2">
+          {knowledgeTopics.map((item, index) => {
+            const isActive = item.id === selectedId;
+            const isLearned = !!progress[item.id];
+            return (
+              <button
+                key={item.id}
+                onClick={() => selectTopic(item.id)}
+                className={[
+                  "flex items-center gap-3 rounded-lg border p-3 text-left transition",
+                  isActive
+                    ? "border-[var(--brand)] bg-[var(--brand-soft)]"
+                    : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
+                ].join(" ")}
+              >
+                <span
+                  className={[
+                    "flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-sm font-bold",
+                    isLearned ? "bg-[var(--ok-soft)] text-[var(--ok)]" : "bg-[var(--surface-2)] text-[var(--text)]",
+                  ].join(" ")}
+                >
+                  {isLearned ? <CheckCircle2 size={18} /> : index + 1}
+                </span>
+                <span className="min-w-0 flex-1 truncate text-sm font-bold">{item.title[lang]}</span>
+              </button>
+            );
+          })}
+        </section>
+
+        <section
+          className="cursor-pointer select-none rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 transition sm:p-6"
+          onClick={() => setFlipped((value) => !value)}
+          title={copy.knowledge.flipHint}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-[var(--brand)]">
+                {selectedIndex + 1} / {total}
+              </p>
+              <h2 className="mt-2 text-2xl font-bold leading-snug">{topic.title[lang]}</h2>
+            </div>
+            <span className={`field-icon field-${topic.tone}`}>
+              <GraduationCap size={22} />
+            </span>
+          </div>
+
+          {!flipped ? (
+            <div className="mt-5">
+              <p className="leading-7 text-[var(--muted)]">{topic.tagline[lang]}</p>
+              <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
+                {copy.knowledge.flipHint}
+              </p>
+            </div>
+          ) : (
+            <div className="mt-5 grid gap-5">
+              {topic.sections.map((section) => (
+                <div key={section.heading[lang]}>
+                  <h3 className="font-bold">{section.heading[lang]}</h3>
+                  <ul className="mt-2 grid gap-2 text-sm leading-6 text-[var(--muted)]">
+                    {section.items.map((item) => (
+                      <li key={item[lang]} className="flex gap-2">
+                        <CheckCircle2 className="mt-1 shrink-0 text-[var(--ok)]" size={15} />
+                        <span>{item[lang]}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div
+            className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex gap-2">
+              <SecondaryButton icon={ArrowLeft} onClick={() => goRelative(-1)}>
+                {copy.knowledge.previous}
+              </SecondaryButton>
+              <SecondaryButton icon={ArrowRight} onClick={() => goRelative(1)}>
+                {copy.knowledge.next}
+              </SecondaryButton>
+            </div>
+            <PrimaryButton icon={CheckCircle2} onClick={toggleLearned}>
+              {progress[topic.id] ? copy.knowledge.unmark : copy.knowledge.markLearned}
+            </PrimaryButton>
+          </div>
+        </section>
+      </div>
+    </PageFrame>
+  );
+}
+
+function InstructorPage({ copy, navigate }) {
+  return (
+    <PageFrame title={copy.instructor.title} subtitle={copy.instructor.subtitle}>
+      <section className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 text-center lg:text-left">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--brand-soft)] text-[var(--brand)] lg:mx-0">
+            <UserRound size={30} />
+          </span>
+          <h2 className="mt-4 text-2xl font-bold">{instructor.name}</h2>
+          <p className="mt-1 text-sm font-semibold text-[var(--muted)]">{copy.instructor.roleLabel}</p>
+          <p className="mt-4 leading-7 text-[var(--muted)]">{copy.instructor.bio}</p>
+
+          <div className="mt-6">
+            <h3 className="text-sm font-bold uppercase text-[var(--muted)]">{copy.instructor.linksTitle}</h3>
+            <div className="mt-3 flex flex-wrap justify-center gap-3 lg:justify-start">
+              <a
+                href={instructor.links.academicProfile}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] px-4 py-2 text-sm font-semibold transition hover:bg-[var(--surface-2)]"
+              >
+                <GraduationCap size={16} />
+                {copy.instructor.academicProfile}
+              </a>
+              <a
+                href={instructor.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] px-4 py-2 text-sm font-semibold transition hover:bg-[var(--surface-2)]"
+              >
+                <Github size={16} />
+                {copy.instructor.github}
+              </a>
+              <a
+                href={instructor.links.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] px-4 py-2 text-sm font-semibold transition hover:bg-[var(--surface-2)]"
+              >
+                <Linkedin size={16} />
+                {copy.instructor.linkedin}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-5">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
+            <div className="flex items-center gap-3">
+              <span className="flex h-11 w-11 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <Rocket size={22} />
+              </span>
+              <h2 className="text-xl font-bold">{copy.instructor.internshipTitle}</h2>
+            </div>
+            <p className="mt-4 leading-7 text-[var(--muted)]">{copy.instructor.internshipDesc}</p>
+            <a
+              href={instructor.internshipUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[var(--brand)] px-5 text-sm font-bold text-white transition hover:opacity-90"
+            >
+              <ExternalLink size={17} />
+              {copy.instructor.internshipCta}
+            </a>
+          </div>
+
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
+            <SecondaryButton icon={GraduationCap} onClick={() => navigate("knowledge")}>
+              {copy.instructor.backToKnowledge}
+            </SecondaryButton>
           </div>
         </div>
       </section>
