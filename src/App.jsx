@@ -34,7 +34,6 @@ import {
   Rocket,
   Save,
   ShieldCheck,
-  Sparkles,
   Shuffle,
   Sun,
   Trash2,
@@ -68,6 +67,7 @@ const workshopNav = [
 ];
 
 const pusulaPages = [
+  { id: "buildProcess", icon: GitCommit },
   { id: "home", icon: Compass },
   { id: "test", icon: ClipboardCheck },
   { id: "results", icon: BarChart3 },
@@ -79,16 +79,14 @@ const pusulaPages = [
   { id: "resources", icon: ExternalLink },
 ];
 
-const secondaryNav = [
-  { id: "buildProcess", icon: GitCommit },
-  { id: "instructor", icon: UserRound },
-];
-
 const navGroups = [
   { id: "workshop", icon: GraduationCap, children: workshopNav },
   { id: "pusula", icon: Compass, children: pusulaPages },
-  { id: "project", icon: Rocket, children: secondaryNav },
 ];
+
+const instructorNavItem = { id: "instructor", icon: UserRound };
+const isuLogoSrc = "/images/isu-logo.svg";
+const instructorPhotoSrc = "/images/keyvan-arasteh.jpeg";
 
 const fieldIcons = {
   software: Code2,
@@ -266,7 +264,17 @@ function App() {
       </main>
 
       <footer className="border-t border-[var(--border)] px-4 py-8 text-center text-sm text-[var(--muted)]">
-        <p>{copy.common.yourData}</p>
+        <p>
+          {copy.common.footerCreditPrefix}{" "}
+          <button
+            type="button"
+            onClick={() => navigate("instructor")}
+            className="font-bold text-[var(--brand)] underline-offset-4 transition hover:underline"
+          >
+            Keyvan Arasteh
+          </button>
+          .
+        </p>
       </footer>
     </div>
   );
@@ -295,13 +303,19 @@ function Header({
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
             <Compass size={20} />
           </span>
-          <span className="hidden shrink-0 xl:inline">{copy.appName}</span>
+          <span className="hidden shrink-0 xl:inline">Q-ISU</span>
         </button>
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex">
           {navGroups.map((group) => (
             <NavGroupDropdown key={group.id} group={group} copy={copy} page={page} navigate={navigate} />
           ))}
+          <NavButton
+            item={instructorNavItem}
+            active={page === instructorNavItem.id}
+            label={copy.nav.instructor}
+            onClick={() => navigate(instructorNavItem.id)}
+          />
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
@@ -309,7 +323,7 @@ function Header({
           <IconTextButton
             icon={Languages}
             label={lang.toUpperCase()}
-            ariaLabel={copy.common.language}
+            ariaLabel={`${copy.common.language}: ${lang.toUpperCase()}`}
             onClick={toggleLanguage}
           />
           <IconTextButton
@@ -352,6 +366,13 @@ function Header({
               </div>
             );
           })}
+          <NavButton
+            item={instructorNavItem}
+            active={page === instructorNavItem.id}
+            label={copy.nav.instructor}
+            onClick={() => navigate(instructorNavItem.id)}
+            mobile
+          />
         </nav>
       )}
     </header>
@@ -445,7 +466,6 @@ function ViewModeToggle({ copy, viewMode, setViewMode }) {
             ].join(" ")}
           >
             <Icon size={16} />
-            <span className="ml-2 hidden 2xl:inline">{option.label}</span>
           </button>
         );
       })}
@@ -477,13 +497,13 @@ function NavButton({ item, label, active, onClick, mobile = false, indent = fals
 function IconTextButton({ icon: Icon, label, ariaLabel, onClick }) {
   return (
     <button
-      className="flex min-h-10 items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--text)] transition hover:bg-[var(--surface-2)]"
+      className="flex h-10 w-10 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--surface)] text-sm font-semibold text-[var(--text)] transition hover:bg-[var(--surface-2)]"
       onClick={onClick}
       aria-label={ariaLabel}
       title={ariaLabel}
     >
       <Icon size={17} />
-      <span className="hidden sm:inline">{label}</span>
+      <span className="sr-only">{label}</span>
     </button>
   );
 }
@@ -493,7 +513,14 @@ function WorkshopLandingPage({ lang, copy, navigate, openKnowledgeTopic }) {
     <div className="space-y-10 py-6">
       <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
         <div className="min-w-0 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 shadow-soft sm:p-8 lg:flex lg:min-h-[380px] lg:flex-col lg:justify-center">
-          <p className="text-sm font-semibold uppercase text-[var(--brand)]">{copy.landing.eyebrow}</p>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-sm font-semibold uppercase text-[var(--brand)]">{copy.landing.eyebrow}</p>
+            <img
+              src={isuLogoSrc}
+              alt="Istinye University"
+              className="h-11 max-w-[180px] object-contain"
+            />
+          </div>
           <h1 className="mt-4 max-w-3xl break-words text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
             {copy.landing.title}
           </h1>
@@ -516,9 +543,11 @@ function WorkshopLandingPage({ lang, copy, navigate, openKnowledgeTopic }) {
         <div className="grid min-w-0 gap-4">
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
-                <UserRound size={22} />
-              </span>
+              <img
+                src={instructorPhotoSrc}
+                alt={instructor.name}
+                className="h-14 w-14 shrink-0 rounded-md border border-[var(--border)] object-cover"
+              />
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-[var(--muted)]">{copy.nav.instructor}</p>
                 <h2 className="truncate text-lg font-bold">{instructor.name}</h2>
@@ -1325,12 +1354,10 @@ function KnowledgePage({ lang, theme, viewMode, copy, pendingKnowledgeTopic, set
   const [progress, setProgress] = useStoredState("bp_knowledge_progress", {});
   const [dayFilter, setDayFilter] = useState("all");
   const [selectedId, setSelectedId] = useState(knowledgeTopics[0].id);
-  const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
     if (pendingKnowledgeTopic) {
       setSelectedId(pendingKnowledgeTopic);
-      setFlipped(true);
       setPendingKnowledgeTopic(null);
     }
   }, [pendingKnowledgeTopic, setPendingKnowledgeTopic]);
@@ -1349,7 +1376,6 @@ function KnowledgePage({ lang, theme, viewMode, copy, pendingKnowledgeTopic, set
 
   const selectTopic = (id) => {
     setSelectedId(id);
-    setFlipped(false);
   };
 
   const goRelative = (delta) => {
@@ -1414,47 +1440,45 @@ function KnowledgePage({ lang, theme, viewMode, copy, pendingKnowledgeTopic, set
         ))}
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
-        <section className="grid content-start gap-2">
-          {visibleTopics.map((item) => {
-            const index = knowledgeTopics.indexOf(item);
-            const isActive = item.id === selectedId;
-            const isLearned = !!progress[item.id];
-            return (
-              <button
-                key={item.id}
-                onClick={() => selectTopic(item.id)}
-                className={[
-                  "flex items-center gap-3 rounded-lg border p-3 text-left transition",
-                  isActive
-                    ? "border-[var(--brand)] bg-[var(--brand-soft)]"
-                    : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
-                ].join(" ")}
-              >
-                <span
+      <div className="grid gap-5">
+        <section className="sticky top-[4.25rem] z-20 -mx-4 border-y border-[var(--border)] bg-[var(--bg)] px-4 py-3 shadow-[0_14px_28px_rgba(15,23,42,0.06)] sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div className="flex gap-2 overflow-x-auto pb-1">
+            {visibleTopics.map((item) => {
+              const index = knowledgeTopics.indexOf(item);
+              const isActive = item.id === selectedId;
+              const isLearned = !!progress[item.id];
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => selectTopic(item.id)}
                   className={[
-                    "flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-sm font-bold",
-                    isLearned ? "bg-[var(--ok-soft)] text-[var(--ok)]" : "bg-[var(--surface-2)] text-[var(--text)]",
+                    "flex min-w-[235px] max-w-[320px] shrink-0 items-center gap-3 rounded-lg border p-3 text-left transition sm:min-w-[280px]",
+                    isActive
+                      ? "border-[var(--brand)] bg-[var(--brand-soft)]"
+                      : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
                   ].join(" ")}
                 >
-                  {isLearned ? <CheckCircle2 size={18} /> : index + 1}
-                </span>
-                <span className="min-w-0 flex-1 truncate text-sm font-bold">{item.title[lang]}</span>
-                {item.placeholder && (
-                  <span className="shrink-0 rounded-md bg-[var(--surface-2)] px-2 py-1 text-[10px] font-bold uppercase text-[var(--muted)]">
-                    {copy.knowledge.placeholderBadge}
+                  <span
+                    className={[
+                      "flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-sm font-bold",
+                      isLearned ? "bg-[var(--ok-soft)] text-[var(--ok)]" : "bg-[var(--surface-2)] text-[var(--text)]",
+                    ].join(" ")}
+                  >
+                    {isLearned ? <CheckCircle2 size={18} /> : index + 1}
                   </span>
-                )}
-              </button>
-            );
-          })}
+                  <span className="min-w-0 flex-1 truncate text-sm font-bold">{item.title[lang]}</span>
+                  {item.placeholder && (
+                    <span className="shrink-0 rounded-md bg-[var(--surface-2)] px-2 py-1 text-[10px] font-bold uppercase text-[var(--muted)]">
+                      {copy.knowledge.placeholderBadge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </section>
 
-        <section
-          className="cursor-pointer select-none rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 transition sm:p-6"
-          onClick={() => setFlipped((value) => !value)}
-          title={copy.knowledge.flipHint}
-        >
+        <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 transition sm:p-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div className="min-w-0">
               <p className="text-sm font-semibold text-[var(--brand)]">
@@ -1463,24 +1487,13 @@ function KnowledgePage({ lang, theme, viewMode, copy, pendingKnowledgeTopic, set
               <h2 className="mt-2 text-2xl font-bold leading-snug">{topic.title[lang]}</h2>
             </div>
             <div className="flex shrink-0 items-center gap-2">
-              <span className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface-2)] px-3 py-2 text-xs font-bold uppercase text-[var(--muted)]">
-                {viewMode === "compact" ? <LayoutList size={14} /> : <Sparkles size={14} />}
-                {viewMode === "compact" ? copy.common.compactMode : copy.common.visualizedMode}
-              </span>
               <span className={`field-icon field-${topic.tone}`}>
                 <GraduationCap size={22} />
               </span>
             </div>
           </div>
 
-          {!flipped ? (
-            <div className="mt-5">
-              <p className="leading-7 text-[var(--muted)]">{topic.tagline[lang]}</p>
-              <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
-                {copy.knowledge.flipHint}
-              </p>
-            </div>
-          ) : topic.placeholder ? (
+          {topic.placeholder ? (
             <div className="mt-5 grid gap-4">
               <p className="rounded-md border border-dashed border-[var(--border)] p-3 text-sm leading-6 text-[var(--muted)]">
                 {copy.knowledge.placeholderNote}
@@ -1501,7 +1514,6 @@ function KnowledgePage({ lang, theme, viewMode, copy, pendingKnowledgeTopic, set
                   href={topic.repo.url}
                   target="_blank"
                   rel="noreferrer"
-                  onClick={(event) => event.stopPropagation()}
                   className="inline-flex w-fit items-center gap-2 rounded-md border border-[var(--border)] px-4 py-2 text-sm font-semibold transition hover:bg-[var(--surface-2)]"
                 >
                   <Github size={16} />
@@ -1512,7 +1524,7 @@ function KnowledgePage({ lang, theme, viewMode, copy, pendingKnowledgeTopic, set
           ) : viewMode === "compact" ? (
             <CompactKnowledgeTopic topic={topic} lang={lang} copy={copy} />
           ) : topic.Component ? (
-            <div className="mt-5 grid gap-6" onClick={(event) => event.stopPropagation()}>
+            <div className="mt-5 grid gap-6">
               <topic.Component lang={lang} theme={theme} />
             </div>
           ) : (
@@ -1533,10 +1545,7 @@ function KnowledgePage({ lang, theme, viewMode, copy, pendingKnowledgeTopic, set
             </div>
           )}
 
-          <div
-            className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
-            onClick={(event) => event.stopPropagation()}
-          >
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex gap-2">
               <SecondaryButton icon={ArrowLeft} onClick={() => goRelative(-1)}>
                 {copy.knowledge.previous}
@@ -1752,9 +1761,11 @@ function InstructorPage({ copy, navigate }) {
     <PageFrame title={copy.instructor.title} subtitle={copy.instructor.subtitle}>
       <section className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 text-center lg:text-left">
-          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--brand-soft)] text-[var(--brand)] lg:mx-0">
-            <UserRound size={30} />
-          </span>
+          <img
+            src={instructorPhotoSrc}
+            alt={instructor.name}
+            className="mx-auto h-28 w-28 rounded-lg border border-[var(--border)] object-cover shadow-soft lg:mx-0"
+          />
           <h2 className="mt-4 text-2xl font-bold">{instructor.name}</h2>
           <p className="mt-1 text-sm font-semibold text-[var(--muted)]">{copy.instructor.roleLabel}</p>
           <p className="mt-4 leading-7 text-[var(--muted)]">{copy.instructor.bio}</p>
@@ -1795,11 +1806,18 @@ function InstructorPage({ copy, navigate }) {
 
         <div className="grid gap-5">
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
-            <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
-                <Rocket size={22} />
-              </span>
-              <h2 className="text-xl font-bold">{copy.instructor.internshipTitle}</h2>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-11 w-11 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                  <Rocket size={22} />
+                </span>
+                <h2 className="text-xl font-bold">{copy.instructor.internshipTitle}</h2>
+              </div>
+              <img
+                src={isuLogoSrc}
+                alt="Istinye University"
+                className="h-10 max-w-[170px] object-contain"
+              />
             </div>
             <p className="mt-4 leading-7 text-[var(--muted)]">{copy.instructor.internshipDesc}</p>
             <a

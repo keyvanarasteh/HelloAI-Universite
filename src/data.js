@@ -396,6 +396,7 @@ export const t = {
       official: "Resmi kaynak",
       open: "Ac",
       yourData: "Verilerin bu tarayicida saklanir.",
+      footerCreditPrefix: "Derleyen, duzenleyen ve uygulayan",
     },
     home: {
       eyebrow: "Static karar araci",
@@ -625,6 +626,7 @@ export const t = {
       official: "Official source",
       open: "Open",
       yourData: "Your data stays in this browser.",
+      footerCreditPrefix: "Collected, organized, and implemented by",
     },
     home: {
       eyebrow: "Static decision tool",
