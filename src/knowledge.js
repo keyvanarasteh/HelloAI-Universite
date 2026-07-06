@@ -4,6 +4,7 @@ import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { CybersecurityFoundationNote } from "./notes/CybersecurityFoundation.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { OsWindowsLinuxNote } from "./notes/OsWindowsLinux.jsx";
 import { LlmModelsThinkingLevelsNote } from "./notes/LlmModelsThinkingLevels.jsx";
 import { WebSecurityBasicsNote } from "./notes/WebSecurityBasics.jsx";
 import { RepoBasicsNote } from "./notes/RepoBasics.jsx";
@@ -350,6 +351,7 @@ export const knowledgeTopics = [
   {
     id: "os-windows-linux-opensource",
     tone: "hardware",
+    Component: OsWindowsLinuxNote,
     title: { tr: "Isletim Sistemleri: Windows vs Linux ve Acik Kaynak", en: "Operating Systems: Windows vs Linux & Open Source" },
     tagline: {
       tr: "Windows/Linux farki, Kali/Ubuntu Server/CentOS/macOS kullanim alanlari ve acik kaynagin hizli buyume mantigi.",
