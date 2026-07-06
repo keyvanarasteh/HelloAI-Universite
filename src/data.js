@@ -368,6 +368,9 @@ export const t = {
       pusula: "Bolum Pusulasi",
       buildProcess: "Yapim Sureci",
       instructor: "Egitmen",
+      homeworks: "Odevler",
+      glossary: "Terimler Sozlugu",
+      feedback: "Geri Bildirim",
     },
     common: {
       startTest: "Teste Basla",
@@ -551,6 +554,26 @@ export const t = {
       liveNote: "Atolye ve site, canli oturumlarda gelismeye devam ediyor; bu zaman cizelgesi surekli uzuyor.",
       relatedNote: "Ilgili not",
     },
+    homeworks: {
+      title: "Odevler",
+      subtitle: "Atolyede verilen odevler ve her biri icin adim adim katki rehberi.",
+      numberLabel: "Odev",
+    },
+    glossary: {
+      title: "Terimler Sozlugu",
+      subtitle: "Atolyede islenen tum terimler, kisa aciklamalari ve gercek dunya ornekleriyle.",
+      exampleLabel: "Gercek Dunya Ornegi",
+      pendingBadge: "Katki Bekliyor",
+      pendingNote: "Bu terimin ornegi henuz eklenmedi — Odev 3'te bunu sen ekleyebilirsin.",
+    },
+    feedback: {
+      title: "Geri Bildirim",
+      subtitle: "Atolyeye katilan ogrencilerin gercek gorusleri.",
+      emptyTitle: "Henuz geri bildirim yok.",
+      emptyBody: "Bu atolyeye katildin mi? Ilk geri bildirimi ekleyen sen ol.",
+      ctaBody: "Geri bildirimini eklemek, git/github katki surecini gercek hayatta uygulamanin en iyi yolu. Adim adim rehber Odev 2'de.",
+      ctaButton: "Odev 2'yi Ac",
+    },
   },
   en: {
     appName: "Path Compass",
@@ -569,6 +592,9 @@ export const t = {
       pusula: "Path Compass",
       buildProcess: "Build Process",
       instructor: "Instructor",
+      homeworks: "Homeworks",
+      glossary: "Glossary",
+      feedback: "Feedback",
     },
     common: {
       startTest: "Start Test",
@@ -756,6 +782,26 @@ export const t = {
       liveBadge: "In progress right now",
       liveNote: "The workshop and this site keep evolving in live sessions; this timeline keeps growing.",
       relatedNote: "Related note",
+    },
+    homeworks: {
+      title: "Homeworks",
+      subtitle: "The homeworks assigned in this workshop, each with a step-by-step contribution guide.",
+      numberLabel: "Homework",
+    },
+    glossary: {
+      title: "Glossary",
+      subtitle: "Every term covered in the workshop, with a short description and a real-world example.",
+      exampleLabel: "Real-World Example",
+      pendingBadge: "Awaiting Contribution",
+      pendingNote: "This term's example hasn't been added yet — you can add it in Homework 3.",
+    },
+    feedback: {
+      title: "Feedback",
+      subtitle: "Real feedback from students who joined this workshop.",
+      emptyTitle: "No feedback yet.",
+      emptyBody: "Did you join this workshop? Be the first to add your feedback.",
+      ctaBody: "Adding your feedback is the best way to practice the git/github contribution flow for real. The step-by-step guide is in Homework 2.",
+      ctaButton: "Open Homework 2",
     },
   },
 };

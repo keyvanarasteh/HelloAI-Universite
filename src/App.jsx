@@ -12,6 +12,7 @@ import {
   Code2,
   Compass,
   Cpu,
+  ClipboardList,
   ExternalLink,
   FlaskConical,
   Github,
@@ -19,9 +20,11 @@ import {
   GraduationCap,
   Home,
   Languages,
+  Library,
   Linkedin,
   ListChecks,
   Menu,
+  MessageSquare,
   Moon,
   NotebookPen,
   Plus,
@@ -49,10 +52,16 @@ import {
 } from "./data.js";
 import { instructor, knowledgeTopics } from "./knowledge.js";
 import { buildInProgress, buildTimeline } from "./buildProcess.js";
+import { homeworks } from "./homeworksData.js";
+import { feedbackEntries } from "./feedback.js";
+import { glossaryCategories } from "./glossary.js";
 
 const primaryNav = [
   { id: "landing", icon: Home },
   { id: "knowledge", icon: GraduationCap },
+  { id: "homeworks", icon: ClipboardList },
+  { id: "glossary", icon: Library },
+  { id: "feedback", icon: MessageSquare },
 ];
 
 const pusulaPages = [
@@ -236,6 +245,9 @@ function App() {
         {page === "journal" && <JournalPage {...shared} />}
         {page === "resources" && <ResourcesPage {...shared} />}
         {page === "knowledge" && <KnowledgePage {...shared} />}
+        {page === "homeworks" && <HomeworksPage {...shared} />}
+        {page === "glossary" && <GlossaryPage {...shared} />}
+        {page === "feedback" && <FeedbackPage {...shared} />}
         {page === "buildProcess" && <BuildProcessPage {...shared} />}
         {page === "instructor" && <InstructorPage {...shared} />}
       </main>
@@ -1506,6 +1518,112 @@ function KnowledgePage({ lang, theme, copy, pendingKnowledgeTopic, setPendingKno
             )}
           </div>
         </section>
+      </div>
+    </PageFrame>
+  );
+}
+
+function HomeworksPage({ lang, copy }) {
+  return (
+    <PageFrame title={copy.homeworks.title} subtitle={copy.homeworks.subtitle}>
+      <div className="grid gap-8">
+        {homeworks.map((hw) => (
+          <article
+            key={hw.id}
+            className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5 shadow-soft sm:p-7"
+          >
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-sm font-bold text-[var(--brand)]">
+                {hw.number}
+              </span>
+              <div className="min-w-0">
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">
+                  {copy.homeworks.numberLabel} {hw.number}
+                </p>
+                <h2 className="text-xl font-bold">{hw.title[lang] || hw.title.tr}</h2>
+              </div>
+            </div>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{hw.tagline[lang] || hw.tagline.tr}</p>
+            <div className="mt-5 grid gap-6">
+              <hw.Component lang={lang} />
+            </div>
+          </article>
+        ))}
+      </div>
+    </PageFrame>
+  );
+}
+
+function GlossaryPage({ lang, copy }) {
+  return (
+    <PageFrame title={copy.glossary.title} subtitle={copy.glossary.subtitle}>
+      <div className="grid gap-8">
+        {glossaryCategories.map((category) => (
+          <section key={category.id} className="grid gap-4">
+            <h2 className="text-lg font-bold">{category.title[lang] || category.title.tr}</h2>
+            <div className="grid gap-3 md:grid-cols-2">
+              {category.terms.map((term) => (
+                <div key={term.term} className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="font-bold">{term.term}</h3>
+                    {term.pending && (
+                      <span className="shrink-0 rounded-full border border-[var(--danger)]/40 bg-[var(--danger)]/10 px-2 py-0.5 text-[11px] font-bold text-[var(--danger)]">
+                        {copy.glossary.pendingBadge}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                    {term.description[lang] || term.description.tr}
+                  </p>
+                  <div className="mt-3 rounded-md bg-[var(--surface-2)] p-3">
+                    <p className="text-xs font-bold uppercase text-[var(--muted)]">{copy.glossary.exampleLabel}</p>
+                    {term.example ? (
+                      <p className="mt-1 text-sm leading-6 text-[var(--text)]">{term.example[lang] || term.example.tr}</p>
+                    ) : (
+                      <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{copy.glossary.pendingNote}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </PageFrame>
+  );
+}
+
+function FeedbackPage({ lang, copy, navigate }) {
+  return (
+    <PageFrame title={copy.feedback.title} subtitle={copy.feedback.subtitle}>
+      <div className="grid gap-4">
+        {feedbackEntries.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-[var(--border)] bg-[var(--surface)] p-8 text-center">
+            <p className="text-lg font-bold">{copy.feedback.emptyTitle}</p>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{copy.feedback.emptyBody}</p>
+          </div>
+        ) : (
+          feedbackEntries.map((entry, index) => (
+            <article key={index} className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <h3 className="font-bold">{entry.name}</h3>
+                <span className="text-xs font-semibold text-[var(--muted)]">
+                  {entry.program} — {entry.date}
+                </span>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-[var(--text)]">{entry.message}</p>
+            </article>
+          ))
+        )}
+
+        <div className="rounded-lg border border-[var(--border)] bg-[var(--brand-soft)] p-5">
+          <p className="text-sm leading-6 text-[var(--text)]">{copy.feedback.ctaBody}</p>
+          <div className="mt-4">
+            <PrimaryButton icon={ClipboardList} onClick={() => navigate("homeworks")}>
+              {copy.feedback.ctaButton}
+            </PrimaryButton>
+          </div>
+        </div>
       </div>
     </PageFrame>
   );
