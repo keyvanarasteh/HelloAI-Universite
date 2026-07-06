@@ -20,6 +20,7 @@ import {
   GraduationCap,
   Home,
   Languages,
+  LayoutList,
   Library,
   Linkedin,
   ListChecks,
@@ -27,11 +28,13 @@ import {
   MessageSquare,
   Moon,
   NotebookPen,
+  PanelsTopLeft,
   Plus,
   RotateCcw,
   Rocket,
   Save,
   ShieldCheck,
+  Sparkles,
   Shuffle,
   Sun,
   Trash2,
@@ -56,7 +59,7 @@ import { homeworks } from "./homeworksData.js";
 import { feedbackEntries } from "./feedback.js";
 import { glossaryCategories } from "./glossary.js";
 
-const primaryNav = [
+const workshopNav = [
   { id: "landing", icon: Home },
   { id: "knowledge", icon: GraduationCap },
   { id: "homeworks", icon: ClipboardList },
@@ -79,6 +82,12 @@ const pusulaPages = [
 const secondaryNav = [
   { id: "buildProcess", icon: GitCommit },
   { id: "instructor", icon: UserRound },
+];
+
+const navGroups = [
+  { id: "workshop", icon: GraduationCap, children: workshopNav },
+  { id: "pusula", icon: Compass, children: pusulaPages },
+  { id: "project", icon: Rocket, children: secondaryNav },
 ];
 
 const fieldIcons = {
@@ -169,6 +178,7 @@ function calculateScores(answers) {
 function App() {
   const [lang, setLang] = useStoredState("bp_lang", "tr");
   const [theme, setTheme] = useState(getInitialTheme);
+  const [viewMode, setViewMode] = useStoredState("bp_view_mode", "visualized");
   const [page, setPage] = useStoredState("bp_page", "landing");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [answers, setAnswers] = useStoredState("bp_answers", {});
@@ -202,6 +212,7 @@ function App() {
   const shared = {
     lang,
     theme,
+    viewMode,
     copy,
     navigate,
     openKnowledgeTopic,
@@ -229,6 +240,8 @@ function App() {
         toggleLanguage={toggleLanguage}
         theme={theme}
         toggleTheme={toggleTheme}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
         mobileOpen={mobileOpen}
         setMobileOpen={setMobileOpen}
       />
@@ -267,11 +280,11 @@ function Header({
   toggleLanguage,
   theme,
   toggleTheme,
+  viewMode,
+  setViewMode,
   mobileOpen,
   setMobileOpen,
 }) {
-  const pusulaActive = pusulaPages.some((item) => item.id === page);
-
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--surface-glass)] backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 sm:px-6 lg:px-8">
@@ -286,28 +299,13 @@ function Header({
         </button>
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex">
-          {primaryNav.map((item) => (
-            <NavButton
-              key={item.id}
-              item={item}
-              active={page === item.id}
-              label={copy.nav[item.id]}
-              onClick={() => navigate(item.id)}
-            />
-          ))}
-          <PusulaDropdown copy={copy} page={page} navigate={navigate} active={pusulaActive} />
-          {secondaryNav.map((item) => (
-            <NavButton
-              key={item.id}
-              item={item}
-              active={page === item.id}
-              label={copy.nav[item.id]}
-              onClick={() => navigate(item.id)}
-            />
+          {navGroups.map((group) => (
+            <NavGroupDropdown key={group.id} group={group} copy={copy} page={page} navigate={navigate} />
           ))}
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
+          <ViewModeToggle copy={copy} viewMode={viewMode} setViewMode={setViewMode} />
           <IconTextButton
             icon={Languages}
             label={lang.toUpperCase()}
@@ -331,50 +329,41 @@ function Header({
       </div>
 
       {mobileOpen && (
-        <nav className="grid gap-2 border-t border-[var(--border)] bg-[var(--surface)] px-4 py-3 lg:hidden">
-          {primaryNav.map((item) => (
-            <NavButton
-              key={item.id}
-              item={item}
-              active={page === item.id}
-              label={copy.nav[item.id]}
-              onClick={() => navigate(item.id)}
-              mobile
-            />
-          ))}
-          <p className="mt-2 px-3 text-xs font-bold uppercase tracking-wide text-[var(--muted)]">
-            {copy.nav.pusula}
-          </p>
-          {pusulaPages.map((item) => (
-            <NavButton
-              key={item.id}
-              item={item}
-              active={page === item.id}
-              label={copy.nav[item.id]}
-              onClick={() => navigate(item.id)}
-              mobile
-              indent
-            />
-          ))}
-          {secondaryNav.map((item) => (
-            <NavButton
-              key={item.id}
-              item={item}
-              active={page === item.id}
-              label={copy.nav[item.id]}
-              onClick={() => navigate(item.id)}
-              mobile
-            />
-          ))}
+        <nav className="grid max-h-[calc(100vh-4.25rem)] gap-3 overflow-y-auto border-t border-[var(--border)] bg-[var(--surface)] px-4 py-3 lg:hidden">
+          {navGroups.map((group) => {
+            const GroupIcon = group.icon;
+            return (
+              <div key={group.id} className="grid gap-1">
+                <p className="flex items-center gap-2 px-3 text-xs font-bold uppercase tracking-wide text-[var(--muted)]">
+                  <GroupIcon size={14} />
+                  {copy.nav[group.id]}
+                </p>
+                {group.children.map((item) => (
+                  <NavButton
+                    key={item.id}
+                    item={item}
+                    active={page === item.id}
+                    label={copy.nav[item.id]}
+                    onClick={() => navigate(item.id)}
+                    mobile
+                    indent
+                  />
+                ))}
+              </div>
+            );
+          })}
         </nav>
       )}
     </header>
   );
 }
 
-function PusulaDropdown({ copy, page, navigate, active }) {
+function NavGroupDropdown({ group, copy, page, navigate }) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
+  const active = group.children.some((item) => item.id === page);
+  const GroupIcon = group.icon;
+  const activeChild = group.children.find((item) => item.id === page);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -396,22 +385,23 @@ function PusulaDropdown({ copy, page, navigate, active }) {
     <div className="relative" ref={containerRef}>
       <button
         onClick={() => setOpen((value) => !value)}
-        title={copy.nav.pusula}
+        title={copy.nav[group.id]}
         className={[
-          "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition",
+          "flex h-10 items-center gap-2 rounded-md px-3 text-sm font-medium transition",
           active || open
             ? "bg-[var(--brand-soft)] text-[var(--brand)]"
             : "text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]",
         ].join(" ")}
       >
-        <Compass size={17} />
-        <span className="hidden xl:inline">{copy.nav.pusula}</span>
+        <GroupIcon size={17} />
+        <span className="hidden xl:inline">{copy.nav[group.id]}</span>
+        {activeChild && <span className="hidden max-w-28 truncate text-xs text-[var(--muted)] 2xl:inline">{copy.nav[activeChild.id]}</span>}
         <ChevronDown size={14} className={`transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open && (
         <div className="absolute left-1/2 top-full z-40 mt-2 grid w-56 -translate-x-1/2 gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 shadow-soft">
-          {pusulaPages.map((item) => (
+          {group.children.map((item) => (
             <NavButton
               key={item.id}
               item={item}
@@ -423,6 +413,42 @@ function PusulaDropdown({ copy, page, navigate, active }) {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+function ViewModeToggle({ copy, viewMode, setViewMode }) {
+  const options = [
+    { id: "compact", icon: LayoutList, label: copy.common.compactMode },
+    { id: "visualized", icon: PanelsTopLeft, label: copy.common.visualizedMode },
+  ];
+
+  return (
+    <div
+      className="flex h-10 items-center rounded-md border border-[var(--border)] bg-[var(--surface)] p-1"
+      role="group"
+      aria-label={copy.common.viewMode}
+      title={copy.common.viewMode}
+    >
+      {options.map((option) => {
+        const Icon = option.icon;
+        const active = viewMode === option.id;
+        return (
+          <button
+            key={option.id}
+            onClick={() => setViewMode(option.id)}
+            aria-label={option.label}
+            title={option.label}
+            className={[
+              "flex h-8 min-w-8 items-center justify-center rounded px-2 text-sm font-semibold transition",
+              active ? "bg-[var(--brand-soft)] text-[var(--brand)]" : "text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--text)]",
+            ].join(" ")}
+          >
+            <Icon size={16} />
+            <span className="ml-2 hidden 2xl:inline">{option.label}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -1295,7 +1321,7 @@ function ResourcesPage({ lang, copy, navigate }) {
   );
 }
 
-function KnowledgePage({ lang, theme, copy, pendingKnowledgeTopic, setPendingKnowledgeTopic }) {
+function KnowledgePage({ lang, theme, viewMode, copy, pendingKnowledgeTopic, setPendingKnowledgeTopic }) {
   const [progress, setProgress] = useStoredState("bp_knowledge_progress", {});
   const [dayFilter, setDayFilter] = useState("all");
   const [selectedId, setSelectedId] = useState(knowledgeTopics[0].id);
@@ -1429,16 +1455,22 @@ function KnowledgePage({ lang, theme, copy, pendingKnowledgeTopic, setPendingKno
           onClick={() => setFlipped((value) => !value)}
           title={copy.knowledge.flipHint}
         >
-          <div className="flex items-start justify-between gap-3">
-            <div>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0">
               <p className="text-sm font-semibold text-[var(--brand)]">
                 {selectedIndex + 1} / {total}
               </p>
               <h2 className="mt-2 text-2xl font-bold leading-snug">{topic.title[lang]}</h2>
             </div>
-            <span className={`field-icon field-${topic.tone}`}>
-              <GraduationCap size={22} />
-            </span>
+            <div className="flex shrink-0 items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface-2)] px-3 py-2 text-xs font-bold uppercase text-[var(--muted)]">
+                {viewMode === "compact" ? <LayoutList size={14} /> : <Sparkles size={14} />}
+                {viewMode === "compact" ? copy.common.compactMode : copy.common.visualizedMode}
+              </span>
+              <span className={`field-icon field-${topic.tone}`}>
+                <GraduationCap size={22} />
+              </span>
+            </div>
           </div>
 
           {!flipped ? (
@@ -1477,6 +1509,8 @@ function KnowledgePage({ lang, theme, copy, pendingKnowledgeTopic, setPendingKno
                 </a>
               )}
             </div>
+          ) : viewMode === "compact" ? (
+            <CompactKnowledgeTopic topic={topic} lang={lang} copy={copy} />
           ) : topic.Component ? (
             <div className="mt-5 grid gap-6" onClick={(event) => event.stopPropagation()}>
               <topic.Component lang={lang} theme={theme} />
@@ -1520,6 +1554,30 @@ function KnowledgePage({ lang, theme, copy, pendingKnowledgeTopic, setPendingKno
         </section>
       </div>
     </PageFrame>
+  );
+}
+
+function CompactKnowledgeTopic({ topic, lang, copy }) {
+  return (
+    <div className="mt-5 grid gap-5" onClick={(event) => event.stopPropagation()}>
+      <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+        <p className="text-xs font-bold uppercase text-[var(--muted)]">{copy.knowledge.quickReview}</p>
+        <p className="mt-2 text-sm leading-6 text-[var(--text)]">{topic.tagline[lang]}</p>
+      </div>
+      {topic.sections.map((section) => (
+        <div key={section.heading[lang]} className="rounded-lg border border-[var(--border)] p-4">
+          <h3 className="font-bold">{section.heading[lang]}</h3>
+          <ul className="mt-3 grid gap-2 text-sm leading-6 text-[var(--muted)]">
+            {section.items.map((item) => (
+              <li key={item[lang]} className="flex gap-2">
+                <CheckCircle2 className="mt-1 shrink-0 text-[var(--ok)]" size={15} />
+                <span>{item[lang]}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 }
 
