@@ -4,6 +4,7 @@ import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { CybersecurityFoundationNote } from "./notes/CybersecurityFoundation.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { LlmModelsThinkingLevelsNote } from "./notes/LlmModelsThinkingLevels.jsx";
 import { WebSecurityBasicsNote } from "./notes/WebSecurityBasics.jsx";
 import { RepoBasicsNote } from "./notes/RepoBasics.jsx";
 import { IdeSetupNote } from "./notes/IdeSetup.jsx";
@@ -319,6 +320,7 @@ export const knowledgeTopics = [
   {
     id: "llm-models-thinking-levels",
     tone: "software",
+    Component: LlmModelsThinkingLevelsNote,
     title: { tr: "LLM Modelleri ve Dusunme Seviyeleri", en: "LLM Models & Thinking Levels" },
     tagline: {
       tr: "Egitim verisi, sinir agi mantigi ve ise gore dogru model/dusunme seviyesini secme.",
