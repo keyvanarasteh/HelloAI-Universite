@@ -1,6 +1,7 @@
 import { FrontendBackendAgenticNote } from "./notes/FrontendBackendAgentic.jsx";
 import { AgentOutputAuditNote } from "./notes/AgentOutputAudit.jsx";
 import { DocumentationNote } from "./notes/Documentation.jsx";
+import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
 import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
 import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
@@ -201,6 +202,7 @@ export const knowledgeTopics = [
   {
     id: "agent-rules-tools",
     tone: "software",
+    Component: AgentRulesToolsNote,
     title: { tr: "Agent Kurallari, Modeller ve Araclar", en: "Agent Rules, Models & Tools" },
     tagline: {
       tr: "Codex, Claude Code ve VSCode Chat'i proje kurallariyla nasil yonlendirirsin?",
