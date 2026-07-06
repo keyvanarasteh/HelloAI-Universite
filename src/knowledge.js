@@ -2,6 +2,7 @@ import { FrontendBackendAgenticNote } from "./notes/FrontendBackendAgentic.jsx";
 import { AgentOutputAuditNote } from "./notes/AgentOutputAudit.jsx";
 import { DocumentationNote } from "./notes/Documentation.jsx";
 import { AgentRulesToolsNote } from "./notes/AgentRulesTools.jsx";
+import { CybersecurityFoundationNote } from "./notes/CybersecurityFoundation.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
 import { WebSecurityBasicsNote } from "./notes/WebSecurityBasics.jsx";
 import { RepoBasicsNote } from "./notes/RepoBasics.jsx";
@@ -410,6 +411,7 @@ export const knowledgeTopics = [
   {
     id: "cybersecurity-foundation",
     tone: "security",
+    Component: CybersecurityFoundationNote,
     title: { tr: "Siber Guvenlik Icin Temel Bilgi", en: "The Foundation Cybersecurity Needs" },
     tagline: {
       tr: "Bir sistemi kirmayi anlamadan once, onun nasil calistigini anlamak gerekir.",
