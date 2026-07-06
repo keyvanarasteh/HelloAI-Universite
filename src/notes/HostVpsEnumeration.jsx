@@ -1,10 +1,97 @@
+import { useState } from "react";
+import { Boxes, Cloud, Database, Network, Server, ShieldCheck } from "lucide-react";
 import { NoteCallout, NoteList, NoteSection, NoteTable, TerminalBlock } from "../components/NoteKit.jsx";
 
 export function HostVpsEnumerationNote({ lang }) {
   const tr = lang === "tr";
+  const [activeTopology, setActiveTopology] = useState("vps");
+  const topologies = {
+    shared: {
+      icon: Boxes,
+      title: tr ? "Shared hosting" : "Shared hosting",
+      visible: tr ? "Ayni IP uzerinde cok sayida domain bulunabilir." : "Many domains can sit on the same IP.",
+      defense: tr ? "Komşu domain riskini ve izolasyonu takip et." : "Track neighboring-domain risk and isolation.",
+    },
+    vps: {
+      icon: Server,
+      title: "VPS",
+      visible: tr ? "Tek sanal sunucu, kendi OS'u ve servisleriyle gorunur." : "One virtual server appears with its own OS and services.",
+      defense: tr ? "Gereksiz portlari kapat, guvenlik guncellemelerini izle." : "Close unnecessary ports and track security updates.",
+    },
+    cloud: {
+      icon: Cloud,
+      title: tr ? "Cloud instance" : "Cloud instance",
+      visible: tr ? "Bulut IP bloklari, security group ve public servis izleri gorunebilir." : "Cloud IP ranges, security groups, and public service traces may be visible.",
+      defense: tr ? "Security group ve public exposure kontrolu yap." : "Review security groups and public exposure.",
+    },
+    cdn: {
+      icon: ShieldCheck,
+      title: tr ? "CDN arkasinda origin" : "Origin behind CDN",
+      visible: tr ? "Gecmis DNS veya yanlis mail kaydi origin'i aciga cikarabilir." : "Historical DNS or wrong mail records can expose the origin.",
+      defense: tr ? "Origin'e sadece CDN'den gelen trafigi kabul ettir." : "Allow origin traffic only from the CDN.",
+    },
+    asn: {
+      icon: Network,
+      title: "ASN / IP range",
+      visible: tr ? "Bir kurumun IP araliklari ve BGP iliskileri gorunur." : "An organization's IP ranges and BGP relationships are visible.",
+      defense: tr ? "Varlik envanterini IP bloklariyla eslestir." : "Match asset inventory to IP ranges.",
+    },
+  };
+  const active = topologies[activeTopology];
+  const ActiveIcon = active.icon;
 
   return (
     <>
+      <NoteSection title={tr ? "Hosting Topoloji Paneli" : "Hosting Topology Panel"}>
+        <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5 lg:grid-cols-2">
+            {Object.entries(topologies).map(([id, topology]) => {
+              const Icon = topology.icon;
+              const selected = id === activeTopology;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setActiveTopology(id)}
+                  className={[
+                    "flex min-h-24 flex-col justify-between rounded-lg border p-3 text-left transition",
+                    selected
+                      ? "border-[var(--brand)] bg-[var(--brand-soft)] text-[var(--brand)]"
+                      : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-2)]",
+                  ].join(" ")}
+                >
+                  <Icon size={20} />
+                  <span className="text-sm font-bold">{topology.title}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Altyapi turu" : "Infrastructure type"}</p>
+                <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
+              </div>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                <ActiveIcon size={22} />
+              </span>
+            </div>
+            <div className="mt-5 grid gap-3">
+              <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+                <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
+                  <Database size={14} />
+                  {tr ? "Gorunurluk" : "Visibility"}
+                </div>
+                <p className="text-sm leading-6">{active.visible}</p>
+              </div>
+              <div className="rounded-lg border border-[var(--border)] p-4">
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Savunma kontrolu" : "Defense check"}</p>
+                <p className="mt-2 text-sm font-semibold">{active.defense}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </NoteSection>
+
       <NoteSection title={tr ? "Host ve VPS Nedir?" : "What Are Host & VPS?"}>
         <NoteList
           items={
