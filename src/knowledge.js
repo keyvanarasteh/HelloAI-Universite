@@ -1,5 +1,6 @@
 import { FrontendBackendAgenticNote } from "./notes/FrontendBackendAgentic.jsx";
 import { GitGithubNote } from "./notes/GitGithub.jsx";
+import { OpenSourceContributionNote } from "./notes/OpenSourceContribution.jsx";
 import { ProblemSolvingNote } from "./notes/ProblemSolving.jsx";
 
 export const instructor = {
@@ -115,6 +116,7 @@ export const knowledgeTopics = [
   {
     id: "open-source-contribution",
     tone: "security",
+    Component: OpenSourceContributionNote,
     title: { tr: "Open Source'a Katki Sureci", en: "Contributing to Open Source" },
     tagline: {
       tr: "Bir acik kaynak projeye nasil PR gonderilir ve merge edilir?",
