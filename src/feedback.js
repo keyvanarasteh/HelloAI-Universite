@@ -8,8 +8,8 @@ export const feedbackEntries = [{
 
  date: "07.07.2026",
 
- lang: "tr",
+ lang: "en",
 
  message: "a great website for choosing a university.",
 
-},];
+}];
