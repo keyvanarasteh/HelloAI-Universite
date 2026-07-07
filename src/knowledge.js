@@ -27,7 +27,7 @@ import { WebQSecurityNote } from "./notes/WebQSecurity.jsx";
 
 export const instructor = {
   name: "Keyvan Arasteh",
-  affiliation: "Istinye Universitesi - Meslek Yuksekokulu",
+  affiliation: "İstinye Üniversitesi - Meslek Yüksekokulu",
   links: {
     academicProfile: "https://www.istinye.edu.tr/tr/myo/akademik-kadro/keyvan-arasteh",
     github: "https://github.com/keyvanarasteh",

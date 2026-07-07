@@ -835,7 +835,7 @@ function WorkshopLandingPage({ lang, copy, navigate, openKnowledgeTopic }) {
         <div className="min-w-0 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 shadow-soft sm:p-8 lg:flex lg:min-h-[440px] lg:flex-col lg:justify-center">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm font-semibold uppercase text-[var(--brand)]">{copy.landing.eyebrow}</p>
-            <img src={isuLogoSrc} alt="Istinye University" className="h-11 max-w-[180px] object-contain" />
+            <img src={isuLogoSrc} alt="İstinye Üniversitesi logo" className="h-11 max-w-[180px] object-contain" />
           </div>
           <h1 className="mt-4 max-w-4xl break-words text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
             {copy.landing.title}
@@ -2471,7 +2471,7 @@ function InstructorPage({ copy, navigate }) {
               </div>
               <img
                 src={isuLogoSrc}
-                alt="Istinye University"
+                alt="İstinye Üniversitesi logo"
                 className="h-10 max-w-[170px] object-contain"
               />
             </div>

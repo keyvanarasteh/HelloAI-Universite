@@ -28,11 +28,11 @@ export function OpenSourceContributionNote({ lang, theme }) {
         { icon: GitMerge, title: "Merge", purpose: "Onaylanan katkı ana koda girer.", action: "Katkın artık projenin parçasıdır." },
       ]
     : [
-        { icon: Download, title: "Fork", purpose: "Copy the project into your own Github account.", action: "Press Fork on the original repository." },
+        { icon: Download, title: "Fork", purpose: "Copy the project into your own GitHub account.", action: "Press Fork on the original repository." },
         { icon: Download, title: "Clone", purpose: "Download your copy to your computer.", action: "Use git clone to open a local workspace." },
         { icon: GitBranch, title: "Branch", purpose: "Create a safe work branch away from main.", action: "Make the change on that branch." },
         { icon: GitCommit, title: "Commit", purpose: "Record a small, meaningful change.", action: "Keep the message short, clear, and real." },
-        { icon: Upload, title: "Push", purpose: "Send the change to your Github fork.", action: "Push the branch to origin." },
+        { icon: Upload, title: "Push", purpose: "Send the change to your GitHub fork.", action: "Push the branch to origin." },
         { icon: GitPullRequest, title: "Pull Request", purpose: "Propose your change to the main project.", action: "Explain what changed and how you tested it." },
         { icon: MessageSquare, title: "Review", purpose: "Maintainers comment and may request edits.", action: "Read calmly, update the same branch." },
         { icon: GitMerge, title: "Merge", purpose: "The approved contribution enters main.", action: "Your contribution is now part of the project." },
@@ -119,7 +119,7 @@ export function OpenSourceContributionNote({ lang, theme }) {
                   "git add .",
                   'git commit -m "short clear description"',
                   "git push origin fix/short-description",
-                  { comment: true, text: "# On Github, click 'Compare & pull request'" },
+                  { comment: true, text: "# On GitHub, click 'Compare & pull request'" },
                 ]
           }
         />

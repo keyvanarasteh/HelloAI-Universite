@@ -9,32 +9,32 @@ export function HostVpsEnumerationNote({ lang }) {
     shared: {
       icon: Boxes,
       title: tr ? "Shared hosting" : "Shared hosting",
-      visible: tr ? "Ayni IP uzerinde cok sayida domain bulunabilir." : "Many domains can sit on the same IP.",
+      visible: tr ? "Aynı IP üzerinde çok sayıda domain bulunabilir." : "Many domains can sit on the same IP.",
       defense: tr ? "Komşu domain riskini ve izolasyonu takip et." : "Track neighboring-domain risk and isolation.",
     },
     vps: {
       icon: Server,
       title: "VPS",
-      visible: tr ? "Tek sanal sunucu, kendi OS'u ve servisleriyle gorunur." : "One virtual server appears with its own OS and services.",
-      defense: tr ? "Gereksiz portlari kapat, guvenlik guncellemelerini izle." : "Close unnecessary ports and track security updates.",
+      visible: tr ? "Tek sanal sunucu, kendi OS'u ve servisleriyle görünür." : "One virtual server appears with its own OS and services.",
+      defense: tr ? "Gereksiz portları kapat, güvenlik güncellemelerini izle." : "Close unnecessary ports and track security updates.",
     },
     cloud: {
       icon: Cloud,
       title: tr ? "Cloud instance" : "Cloud instance",
-      visible: tr ? "Bulut IP bloklari, security group ve public servis izleri gorunebilir." : "Cloud IP ranges, security groups, and public service traces may be visible.",
-      defense: tr ? "Security group ve public exposure kontrolu yap." : "Review security groups and public exposure.",
+      visible: tr ? "Bulut IP blokları, security group ve public servis izleri görünebilir." : "Cloud IP ranges, security groups, and public service traces may be visible.",
+      defense: tr ? "Security group ve public exposure kontrolü yap." : "Review security groups and public exposure.",
     },
     cdn: {
       icon: ShieldCheck,
-      title: tr ? "CDN arkasinda origin" : "Origin behind CDN",
-      visible: tr ? "Gecmis DNS veya yanlis mail kaydi origin'i aciga cikarabilir." : "Historical DNS or wrong mail records can expose the origin.",
-      defense: tr ? "Origin'e sadece CDN'den gelen trafigi kabul ettir." : "Allow origin traffic only from the CDN.",
+      title: tr ? "CDN arkasında origin" : "Origin behind CDN",
+      visible: tr ? "Geçmiş DNS veya yanlış mail kaydı origin'i açığa çıkarabilir." : "Historical DNS or wrong mail records can expose the origin.",
+      defense: tr ? "Origin'e yalnızca CDN'den gelen trafiği kabul ettir." : "Allow origin traffic only from the CDN.",
     },
     asn: {
       icon: Network,
       title: "ASN / IP range",
-      visible: tr ? "Bir kurumun IP araliklari ve BGP iliskileri gorunur." : "An organization's IP ranges and BGP relationships are visible.",
-      defense: tr ? "Varlik envanterini IP bloklariyla eslestir." : "Match asset inventory to IP ranges.",
+      visible: tr ? "Bir kurumun IP aralıkları ve BGP ilişkileri görünür." : "An organization's IP ranges and BGP relationships are visible.",
+      defense: tr ? "Varlık envanterini IP bloklarıyla eşleştir." : "Match asset inventory to IP ranges.",
     },
   };
   const active = topologies[activeTopology];
@@ -68,7 +68,7 @@ export function HostVpsEnumerationNote({ lang }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Altyapi turu" : "Infrastructure type"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Altyapı türü" : "Infrastructure type"}</p>
                 <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -79,12 +79,12 @@ export function HostVpsEnumerationNote({ lang }) {
               <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
                 <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                   <Database size={14} />
-                  {tr ? "Gorunurluk" : "Visibility"}
+                  {tr ? "Görünürlük" : "Visibility"}
                 </div>
                 <p className="text-sm leading-6">{active.visible}</p>
               </div>
               <div className="rounded-lg border border-[var(--border)] p-4">
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Savunma kontrolu" : "Defense check"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Savunma kontrolü" : "Defense check"}</p>
                 <p className="mt-2 text-sm font-semibold">{active.defense}</p>
               </div>
             </div>
@@ -97,10 +97,10 @@ export function HostVpsEnumerationNote({ lang }) {
           items={
             tr
               ? [
-                  "Host: ag uzerinde bir IP adresi ve genelde bir hostname ile tanimlanan herhangi bir cihaz/sunucu.",
-                  "Barindirma turleri: shared hosting (bircok site ayni sunucuyu paylasir), dedicated server (tum sunucu tek musteriye ait), VPS, cloud/instance tabanli (AWS EC2, Google Cloud, Azure).",
-                  "VPS (Virtual Private Server): fiziksel bir sunucunun sanallastirma (KVM, Xen, vb.) ile bagimsiz dilimlere bolunmesiyle olusan sanal sunucu; kendi isletim sistemine ve kaynaklarina sahiptir.",
-                  "Yaygin VPS saglayicilari: DigitalOcean, Linode, Hetzner, Vultr, AWS Lightsail/EC2.",
+                  "Host: ağ üzerinde bir IP adresi ve genellikle bir hostname ile tanımlanan herhangi bir cihaz veya sunucu.",
+                  "Barındırma türleri: shared hosting (birçok site aynı sunucuyu paylaşır), dedicated server (tüm sunucu tek müşteriye ait), VPS, cloud/instance tabanlı servisler (AWS EC2, Google Cloud, Azure).",
+                  "VPS (Virtual Private Server): fiziksel bir sunucunun sanallaştırma (KVM, Xen vb.) ile bağımsız dilimlere bölünmesiyle oluşan sanal sunucu; kendi işletim sistemine ve kaynaklarına sahiptir.",
+                  "Yaygın VPS sağlayıcıları: DigitalOcean, Linode, Hetzner, Vultr, AWS Lightsail/EC2.",
                 ]
               : [
                   "Host: any device/server identified by an IP address and usually a hostname on a network.",
@@ -114,45 +114,45 @@ export function HostVpsEnumerationNote({ lang }) {
 
       <NoteSection title={tr ? "Host / IP Enumeration Teknikleri" : "Host / IP Enumeration Techniques"}>
         <NoteTable
-          headers={tr ? ["Teknik", "Aciklama"] : ["Technique", "Description"]}
+          headers={tr ? ["Teknik", "Açıklama"] : ["Technique", "Description"]}
           rows={[
             [
               tr ? "Reverse DNS (PTR)" : "Reverse DNS (PTR)",
-              tr ? "Bir IP'den o IP'ye kayitli hostname'i bulma." : "Finding the hostname registered to an IP address.",
+              tr ? "Bir IP'den o IP'ye kayıtlı hostname'i bulma." : "Finding the hostname registered to an IP address.",
             ],
             [
               tr ? "Reverse IP lookup" : "Reverse IP lookup",
               tr
-                ? "Ayni IP/sunucu uzerinde baska hangi domainlerin barindigini bulma (shared hosting'de onemli)."
+                ? "Aynı IP/sunucu üzerinde başka hangi domainlerin barındığını bulma (shared hosting'de önemli)."
                 : "Finding which other domains share the same IP/server (important on shared hosting).",
             ],
             [
               tr ? "ASN / IP blok sorgusu" : "ASN / IP range lookup",
-              tr ? "Bir sirketin sahip oldugu tum IP araligini bulma (BGP/whois araclariyla)." : "Finding a company's entire owned IP range via BGP/whois tools.",
+              tr ? "Bir şirketin sahip olduğu tüm IP aralığını bulma (BGP/whois araçlarıyla)." : "Finding a company's entire owned IP range via BGP/whois tools.",
             ],
             [
-              tr ? "CDN arkasindaki gercek IP" : "Real IP behind a CDN",
+              tr ? "CDN arkasındaki gerçek IP" : "Real IP behind a CDN",
               tr
-                ? "Gecmis DNS kayitlari, MX kayitlari, veya sertifika/favicon imzasi uzerinden Shodan/Censys'te eslesen IP arama."
+                ? "Geçmiş DNS kayıtları, MX kayıtları veya sertifika/favicon imzası üzerinden Shodan/Censys'te eşleşen IP arama."
                 : "Historical DNS records, MX records, or matching a certificate/favicon signature on Shodan/Censys.",
             ],
           ]}
         />
         <NoteCallout tone="warning">
           {tr
-            ? "Gercek dunya ornegi: bircok guvenlik arastirmasinda, Cloudflare gibi bir CDN/WAF arkasina saklanan sitelerin gercek origin IP'si gecmis DNS kayitlari veya yanlis yapilandirilmis mail sunucusu uzerinden bulunmus, boylece CDN'in DDoS/WAF korumasi tamamen atlatilabilmistir — Cloudflare notundaki 'yanlis yapilandirmada gercek IP bulunabilir' riskinin somut karsiligi budur."
+            ? "Gerçek dünya örneği: birçok güvenlik araştırmasında, Cloudflare gibi bir CDN/WAF arkasına saklanan sitelerin gerçek origin IP'si geçmiş DNS kayıtları veya yanlış yapılandırılmış mail sunucusu üzerinden bulunmuş, böylece CDN'in DDoS/WAF koruması tamamen atlatılmıştır. Bu, Cloudflare notundaki 'yanlış yapılandırmada gerçek IP bulunabilir' riskinin somut karşılığıdır."
             : "Real-world example: security research has repeatedly found a site's real origin IP behind a CDN/WAF like Cloudflare via historical DNS records or a misconfigured mail server — fully bypassing the CDN's DDoS/WAF protection. This is the concrete version of the 'a misconfigured origin IP can be uncovered' risk from the Cloudflare note."}
         </NoteCallout>
       </NoteSection>
 
-      <NoteSection title={tr ? "Araclar ve Ornek Komutlar" : "Tools & Example Commands"}>
+      <NoteSection title={tr ? "Araçlar ve Örnek Komutlar" : "Tools & Example Commands"}>
         <NoteTable
-          headers={tr ? ["Arac", "Amac"] : ["Tool", "Purpose"]}
+          headers={tr ? ["Araç", "Amaç"] : ["Tool", "Purpose"]}
           rows={[
             ["whois", tr ? "IP/domain sahiplik ve ASN bilgisi." : "IP/domain ownership and ASN info."],
             ["dig -x <ip>", tr ? "Reverse DNS (PTR) sorgusu." : "Reverse DNS (PTR) lookup."],
-            ["viewdns.info", tr ? "Ayni sunucudaki diger domainleri listeleme (Reverse IP Lookup)." : "Listing other domains on the same server (Reverse IP Lookup)."],
-            ["Shodan / Censys", tr ? "IP, favicon hash, sertifika imzasi uzerinden arama." : "Search by IP, favicon hash, or certificate signature."],
+            ["viewdns.info", tr ? "Aynı sunucudaki diğer domainleri listeleme (Reverse IP Lookup)." : "Listing other domains on the same server (Reverse IP Lookup)."],
+            ["Shodan / Censys", tr ? "IP, favicon hash veya sertifika imzası üzerinden arama." : "Search by IP, favicon hash, or certificate signature."],
           ]}
         />
         <TerminalBlock
@@ -160,7 +160,7 @@ export function HostVpsEnumerationNote({ lang }) {
           lines={[
             { comment: true, text: tr ? "# IP'nin sahiplik/ASN bilgisini sorgula" : "# Query the IP's ownership/ASN info" },
             "whois 93.184.216.34",
-            { comment: true, text: tr ? "# IP'den hostname'e ters cozumleme" : "# Reverse-resolve the IP to a hostname" },
+            { comment: true, text: tr ? "# IP'den hostname'e ters çözümleme" : "# Reverse-resolve the IP to a hostname" },
             "dig -x 93.184.216.34",
           ]}
         />
@@ -168,7 +168,7 @@ export function HostVpsEnumerationNote({ lang }) {
 
       <NoteCallout>
         {tr
-          ? "Pasif kaynaklardan (whois, crt.sh, Shodan aramasi) bilgi toplamak genelde yasaldir; bulunan gercek origin IP'ye dogrudan tarama/istek yapmak aktif mudahale sayilir ve sadece kendi sisteminizde veya yazili izinli bir pentest kapsaminda yapilmalidir."
+          ? "Pasif kaynaklardan (whois, crt.sh, Shodan araması) bilgi toplamak genellikle yasaldır; bulunan gerçek origin IP'ye doğrudan tarama/istek yapmak aktif müdahale sayılır ve yalnızca kendi sisteminizde veya yazılı izinli bir pentest kapsamında yapılmalıdır."
           : "Gathering info from passive sources (whois, crt.sh, Shodan search) is generally legal; actively scanning or connecting to the discovered real origin IP counts as active interference and should only happen on your own systems or under a written pentest agreement."}
       </NoteCallout>
     </>

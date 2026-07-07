@@ -15,26 +15,26 @@ export function WappalyzerFingerprintingNote({ lang }) {
     js: {
       icon: Braces,
       title: "JavaScript",
-      reveals: tr ? "React, Vue, analytics veya tag manager izleri gorunebilir." : "React, Vue, analytics, or tag-manager traces may appear.",
-      audit: tr ? "Ucuncu taraf script envanterini temiz tut." : "Keep third-party script inventory clean.",
+      reveals: tr ? "React, Vue, analytics veya tag manager izleri görünebilir." : "React, Vue, analytics, or tag-manager traces may appear.",
+      audit: tr ? "Üçüncü taraf script envanterini temiz tut." : "Keep third-party script inventory clean.",
     },
     headers: {
       icon: ScrollText,
       title: tr ? "Header" : "Headers",
-      reveals: tr ? "Server, CDN/WAF ve cache katmani hakkinda ipucu verir." : "Hints at server, CDN/WAF, and cache layers.",
-      audit: tr ? "Gereksiz banner/header bilgilerini sinirla." : "Limit unnecessary banner/header information.",
+      reveals: tr ? "Server, CDN/WAF ve cache katmanı hakkında ipucu verir." : "Hints at server, CDN/WAF, and cache layers.",
+      audit: tr ? "Gereksiz banner/header bilgilerini sınırla." : "Limit unnecessary banner/header information.",
     },
     cookies: {
       icon: Cookie,
       title: "Cookies",
-      reveals: tr ? "Framework, load balancer veya analytics cookie'leri stack'i gosterebilir." : "Framework, load-balancer, or analytics cookies can reveal stack details.",
-      audit: tr ? "Cookie adlarini ve gereksiz izlemeyi gozden gecir." : "Review cookie names and unnecessary tracking.",
+      reveals: tr ? "Framework, load balancer veya analytics cookie'leri stack'i gösterebilir." : "Framework, load-balancer, or analytics cookies can reveal stack details.",
+      audit: tr ? "Cookie adlarını ve gereksiz izlemeyi gözden geçir." : "Review cookie names and unnecessary tracking.",
     },
     cdn: {
       icon: Globe2,
       title: "CDN",
-      reveals: tr ? "Cloudflare, Akamai, AWS gibi altyapi izleri gorunebilir." : "Infrastructure traces like Cloudflare, Akamai, or AWS may be visible.",
-      audit: tr ? "CDN ve origin yapilandirmasini tutarli yap." : "Keep CDN and origin configuration consistent.",
+      reveals: tr ? "Cloudflare, Akamai, AWS gibi altyapı izleri görünebilir." : "Infrastructure traces like Cloudflare, Akamai, or AWS may be visible.",
+      audit: tr ? "CDN ve origin yapılandırmasını tutarlı yap." : "Keep CDN and origin configuration consistent.",
     },
   };
   const active = hints[activeHint];
@@ -42,7 +42,7 @@ export function WappalyzerFingerprintingNote({ lang }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Pasif Parmak Izi Mercegi" : "Passive Fingerprinting Lens"}>
+      <NoteSection title={tr ? "Pasif Parmak İzi Merceği" : "Passive Fingerprinting Lens"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-5 lg:grid-cols-2">
             {Object.entries(hints).map(([id, hint]) => {
@@ -68,7 +68,7 @@ export function WappalyzerFingerprintingNote({ lang }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Imza kaynagi" : "Signature source"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "İmza kaynağı" : "Signature source"}</p>
                 <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -90,24 +90,24 @@ export function WappalyzerFingerprintingNote({ lang }) {
       <NoteSection title={tr ? "Wappalyzer Nedir?" : "What Is Wappalyzer?"}>
         <p className="text-sm leading-6 text-[var(--muted)]">
           {tr
-            ? "Wappalyzer, bir web sitesinin arkasinda hangi teknolojilerin (CMS, JS framework, analytics, CDN, e-ticaret altyapisi, sunucu yazilimi) kullanildigini tespit eden bir tarayici eklentisi ve web servisidir."
+            ? "Wappalyzer, bir web sitesinin arkasında hangi teknolojilerin (CMS, JS framework, analytics, CDN, e-ticaret altyapısı, sunucu yazılımı) kullanıldığını tespit eden bir tarayıcı eklentisi ve web servisidir."
             : "Wappalyzer is a browser extension and web service that detects which technologies (CMS, JS framework, analytics, CDN, e-commerce platform, server software) power a website."}
         </p>
         <NoteCallout>
           {tr
-            ? "Tamamen pasif calisir: hedefe ekstra istek gondermez, sadece tarayicinin zaten yukledigi HTML/JS kaynagini, HTTP header'larini ve cookie'lerini bilinen teknoloji imzalariyla karsilastirir."
+            ? "Tamamen pasif çalışır: hedefe ekstra istek göndermez, yalnızca tarayıcının zaten yüklediği HTML/JS kaynağını, HTTP header'larını ve cookie'lerini bilinen teknoloji imzalarıyla karşılaştırır."
             : "It's entirely passive: it sends no extra requests to the target, just matches the HTML/JS/headers/cookies the browser already loaded against a database of known technology signatures."}
         </NoteCallout>
       </NoteSection>
 
-      <NoteSection title={tr ? "Nasil Kullanilir?" : "How to Use It"}>
+      <NoteSection title={tr ? "Nasıl Kullanılır?" : "How to Use It"}>
         <NoteSteps
           steps={
             tr
               ? [
-                  "Chrome/Firefox web magazasindan Wappalyzer eklentisini kur.",
+                  "Chrome/Firefox web mağazasından Wappalyzer eklentisini kur.",
                   "Herhangi bir siteyi ziyaret et.",
-                  "Adres cubugundaki Wappalyzer ikonuna tikla.",
+                  "Adres çubuğundaki Wappalyzer ikonuna tıkla.",
                   "Tespit edilen teknolojileri incele: CMS, JS framework, analytics, CDN/WAF, sunucu.",
                 ]
               : [
@@ -120,14 +120,14 @@ export function WappalyzerFingerprintingNote({ lang }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Kullanim Alanlari" : "Use Cases"}>
+      <NoteSection title={tr ? "Kullanım Alanları" : "Use Cases"}>
         <NoteList
           items={
             tr
               ? [
-                  "Pazarlama/rekabet analizi: rakip sitelerin altyapisini gorme.",
-                  "Bug bounty/pentest kesif fazi: hangi CMS/eklenti/versiyon kullanildigini ogrenip bilinen CVE'leri arastirma.",
-                  "Kendi sitenizi denetleme: teknolojilerinizin disaridan ne kadar goruntulenebilir oldugunu anlama.",
+                  "Pazarlama/rekabet analizi: rakip sitelerin altyapısını görme.",
+                  "Bug bounty/pentest keşif fazı: hangi CMS/eklenti/versiyon kullanıldığını öğrenip bilinen CVE'leri araştırma.",
+                  "Kendi sitenizi denetleme: teknolojilerinizin dışarıdan ne kadar görüntülenebilir olduğunu anlama.",
                 ]
               : [
                   "Marketing/competitive analysis: seeing what stack competitor sites run.",
@@ -138,19 +138,19 @@ export function WappalyzerFingerprintingNote({ lang }) {
         />
         <NoteCallout tone="warning">
           {tr
-            ? "Gercek dunya ornegi: bug bounty avcilari sikca once Wappalyzer ile bir hedefin eski/guncellenmemis bir WordPress eklentisi kullandigini tespit eder, sonra o eklentinin bilinen CVE'sini arastirip zafiyeti dogrular."
+            ? "Gerçek dünya örneği: bug bounty avcıları sıkça önce Wappalyzer ile bir hedefin eski/güncellenmemiş bir WordPress eklentisi kullandığını tespit eder, sonra o eklentinin bilinen CVE'sini araştırıp zafiyeti doğrular."
             : "Real-world example: bug bounty hunters often use Wappalyzer to spot an outdated WordPress plugin on a target, then research that plugin's known CVE to confirm a vulnerability."}
         </NoteCallout>
       </NoteSection>
 
-      <NoteSection title={tr ? "Benzer Araclar" : "Similar Tools"}>
+      <NoteSection title={tr ? "Benzer Araçlar" : "Similar Tools"}>
         <NoteList
           items={
             tr
               ? [
-                  "BuiltWith — benzer amacli, daha genis veritabanina sahip web servisi.",
-                  "WhatCMS — sadece CMS tespitine ozellesmis servis.",
-                  "Nmap http-generator script'i — HTTP meta etiketlerinden CMS tespiti yapan komut satiri alternatifi.",
+                  "BuiltWith - benzer amaçlı, daha geniş veritabanına sahip web servisi.",
+                  "WhatCMS - yalnızca CMS tespitine özelleşmiş servis.",
+                  "Nmap http-generator script'i - HTTP meta etiketlerinden CMS tespiti yapan komut satırı alternatifi.",
                 ]
               : [
                   "BuiltWith — a similar web service with a broader database.",

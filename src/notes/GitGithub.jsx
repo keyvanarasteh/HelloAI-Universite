@@ -150,7 +150,7 @@ export function GitGithubNote({ lang, theme }) {
                   "Teamwork: birden fazla kişinin aynı projede çakışma yaşamadan branch'ler ile çalışması.",
                 ]
               : [
-                  "Your Github account works like your software CV — employers and collaborators look at your commit history.",
+                  "Your GitHub account works like your software CV; employers and collaborators look at your commit history.",
                   "Branch: an independent line of work split off from the main code.",
                   "Changelog: commit messages that clearly summarize what changed.",
                   "Teamwork: multiple people work on the same project without conflicts, using branches.",

@@ -105,7 +105,7 @@ export function DocumentationNote({ lang }) {
                 ]
               : [
                   "Important decisions and workflows are written in docs/*.md files using Markdown.",
-                  "Markdown is simple, readable, and renders nicely on Github/Gitlab automatically.",
+                  "Markdown is simple, readable, and renders nicely on GitHub/GitLab automatically.",
                   "This project uses the same idea: README.md, ROADMAP.md, ADIMLAR.md, ODEV.md.",
                 ]
           }

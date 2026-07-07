@@ -8,33 +8,33 @@ export function BrowserExtensionsRisksNote({ lang }) {
   const permissions = {
     all: {
       icon: Eye,
-      title: tr ? "Tum site verileri" : "All site data",
-      canSee: tr ? "Ziyaret ettigin sayfalarin icerigini okuyup degistirebilir." : "Can read and change content on pages you visit.",
-      decision: tr ? "Sadece cok guvendigin ve gercekten gereken eklentiye ver." : "Grant only to extensions you truly trust and need.",
+      title: tr ? "Tüm site verileri" : "All site data",
+      canSee: tr ? "Ziyaret ettiğin sayfaların içeriğini okuyup değiştirebilir." : "Can read and change content on pages you visit.",
+      decision: tr ? "Yalnızca çok güvendiğin ve gerçekten gereken eklentiye ver." : "Grant only to extensions you truly trust and need.",
     },
     tabs: {
       icon: SquareStack,
       title: "tabs",
-      canSee: tr ? "Acik sekme URL ve basliklarini gorebilir." : "Can see open tab URLs and titles.",
-      decision: tr ? "Sekme yonetimi disinda gerekiyorsa sorgula." : "Question it unless tab management needs it.",
+      canSee: tr ? "Açık sekme URL ve başlıklarını görebilir." : "Can see open tab URLs and titles.",
+      decision: tr ? "Sekme yönetimi dışında gerekiyorsa sorgula." : "Question it unless tab management needs it.",
     },
     cookies: {
       icon: Cookie,
       title: "cookies",
-      canSee: tr ? "Oturum bilgilerine kadar uzanabilecek cookie verilerine erisebilir." : "Can access cookie data that may include session material.",
-      decision: tr ? "Yuksek riskli izin; hassas profilde kacın." : "High-risk permission; avoid in sensitive profiles.",
+      canSee: tr ? "Oturum bilgilerine kadar uzanabilecek cookie verilerine erişebilir." : "Can access cookie data that may include session material.",
+      decision: tr ? "Yüksek riskli izin; hassas profilde kaçın." : "High-risk permission; avoid in sensitive profiles.",
     },
     clipboard: {
       icon: Clipboard,
       title: "clipboard",
-      canSee: tr ? "Panoya kopyalanan veriyi okuyabilir veya degistirebilir." : "Can read or change copied clipboard data.",
-      decision: tr ? "Parola/OTP kopyaliyorsan ozellikle dikkat et." : "Be especially careful if copying passwords or OTPs.",
+      canSee: tr ? "Panoya kopyalanan veriyi okuyabilir veya değiştirebilir." : "Can read or change copied clipboard data.",
+      decision: tr ? "Parola/OTP kopyalıyorsan özellikle dikkat et." : "Be especially careful if copying passwords or OTPs.",
     },
     history: {
       icon: History,
       title: "history",
-      canSee: tr ? "Tarama gecmisinden ilgi, aliskanlik ve kurum bilgisi cikarabilir." : "Can infer interests, habits, and workplace info from browsing history.",
-      decision: tr ? "Gerekmiyorsa verme; kullanmadigin eklentiyi kaldir." : "Do not grant unless needed; remove unused extensions.",
+      canSee: tr ? "Tarama geçmişinden ilgi, alışkanlık ve kurum bilgisi çıkarabilir." : "Can infer interests, habits, and workplace info from browsing history.",
+      decision: tr ? "Gerekmiyorsa verme; kullanmadığın eklentiyi kaldır." : "Do not grant unless needed; remove unused extensions.",
     },
   };
   const active = permissions[activePermission];
@@ -42,7 +42,7 @@ export function BrowserExtensionsRisksNote({ lang }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Izin Risk Denetleyicisi" : "Permission Risk Inspector"}>
+      <NoteSection title={tr ? "İzin Risk Denetleyicisi" : "Permission Risk Inspector"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-5 lg:grid-cols-2">
             {Object.entries(permissions).map(([id, permission]) => {
@@ -68,7 +68,7 @@ export function BrowserExtensionsRisksNote({ lang }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Izin" : "Permission"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "İzin" : "Permission"}</p>
                 <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -79,7 +79,7 @@ export function BrowserExtensionsRisksNote({ lang }) {
             <div className="mt-5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
               <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                 <ShieldCheck size={14} />
-                {tr ? "Kurulum karari" : "Install decision"}
+                {tr ? "Kurulum kararı" : "Install decision"}
               </div>
               <p className="text-sm font-semibold">{active.decision}</p>
             </div>
@@ -87,13 +87,13 @@ export function BrowserExtensionsRisksNote({ lang }) {
         </div>
       </NoteSection>
 
-      <NoteSection title={tr ? "Eklentiler Nasil Calisir?" : "How Extensions Work"}>
+      <NoteSection title={tr ? "Eklentiler Nasıl Çalışır?" : "How Extensions Work"}>
         <NoteList
           items={
             tr
               ? [
-                  "Bir tarayici eklentisi, manifest.json dosyasinda tanimlanan izinler (permissions) cercevesinde tarayici API'lerine erisir.",
-                  "Kurulum sirasinda tarayici istenen izinleri gosterir — ama cogu kullanici bu listeyi okumadan kurar.",
+                  "Bir tarayıcı eklentisi, manifest.json dosyasında tanımlanan izinler (permissions) çerçevesinde tarayıcı API'lerine erişir.",
+                  "Kurulum sırasında tarayıcı istenen izinleri gösterir; ancak çoğu kullanıcı bu listeyi okumadan kurar.",
                 ]
               : [
                   "A browser extension accesses browser APIs within the permissions declared in its manifest.json.",
@@ -103,34 +103,34 @@ export function BrowserExtensionsRisksNote({ lang }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Yaygin Izin Turleri" : "Common Permission Types"}>
+      <NoteSection title={tr ? "Yaygın İzin Türleri" : "Common Permission Types"}>
         <NoteTable
-          headers={tr ? ["Izin", "Ne Anlama Gelir"] : ["Permission", "What It Means"]}
+          headers={tr ? ["İzin", "Ne anlama gelir"] : ["Permission", "What It Means"]}
           rows={[
             [
-              tr ? "Tum verilerinizi okuma/degistirme" : "Read and change all your data on all websites",
-              tr ? "Ziyaret edilen her sayfanin tum icerigini okuyabilir/degistirebilir." : "Can read/modify the full content of every page you visit.",
+              tr ? "Tüm verilerinizi okuma/değiştirme" : "Read and change all your data on all websites",
+              tr ? "Ziyaret edilen her sayfanın tüm içeriğini okuyabilir/değiştirebilir." : "Can read/modify the full content of every page you visit.",
             ],
-            ["tabs", tr ? "Acik sekmelerin URL/basliklarini gorebilir." : "Can see the URLs/titles of your open tabs."],
-            ["cookies", tr ? "Site cookie'lerine (bazen oturum cookie'leri dahil) erisebilir." : "Can access site cookies, sometimes including session cookies."],
-            ["clipboard", tr ? "Panoya kopyalanan veriyi okuyabilir/degistirebilir." : "Can read/write data copied to the clipboard."],
-            ["history", tr ? "Tarama gecmisini okuyabilir." : "Can read your browsing history."],
+            ["tabs", tr ? "Açık sekmelerin URL/başlıklarını görebilir." : "Can see the URLs/titles of your open tabs."],
+            ["cookies", tr ? "Site cookie'lerine (bazen oturum cookie'leri dahil) erişebilir." : "Can access site cookies, sometimes including session cookies."],
+            ["clipboard", tr ? "Panoya kopyalanan veriyi okuyabilir/değiştirebilir." : "Can read/write data copied to the clipboard."],
+            ["history", tr ? "Tarama geçmişini okuyabilir." : "Can read your browsing history."],
           ]}
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Gercek Dunya Riskleri" : "Real-World Risks"}>
+      <NoteSection title={tr ? "Gerçek Dünya Riskleri" : "Real-World Risks"}>
         <NoteCallout tone="warning">
           {tr
-            ? "El degistiren eklentiler: populer bir eklenti baskasina satilip, sahiplik degisikliginden sonra sessizce zararli kod (reklam enjeksiyonu, veri toplama) icerecek sekilde guncellenebilir. Gercek dunya ornegi: milyonlarca kullanicisi olan 'The Great Suspender' Chrome eklentisi, 2021'de sahiplik degisikligi sonrasi zararli davranis tespit edilince Google tarafindan Chrome Web Store'dan kaldirilmis ve kullanicilarin tarayicilarindan otomatik devre disi birakilmistir."
+            ? "El değiştiren eklentiler: popüler bir eklenti başkasına satılıp, sahiplik değişikliğinden sonra sessizce zararlı kod (reklam enjeksiyonu, veri toplama) içerecek şekilde güncellenebilir. Gerçek dünya örneği: milyonlarca kullanıcısı olan 'The Great Suspender' Chrome eklentisi, 2021'de sahiplik değişikliği sonrası zararlı davranış tespit edilince Google tarafından Chrome Web Store'dan kaldırılmış ve kullanıcıların tarayıcılarından otomatik devre dışı bırakılmıştır."
             : "Extensions changing hands: a popular extension can be sold, then quietly updated with malicious code (ad injection, data harvesting) under new ownership. Real-world example: 'The Great Suspender' Chrome extension, with millions of users, was pulled from the Chrome Web Store and auto-disabled by Google in 2021 after malicious behavior was found following an ownership change."}
         </NoteCallout>
         <NoteList
           items={
             tr
               ? [
-                  "Veri toplayan 'ucretsiz' eklentiler: bazi ucretsiz VPN/ekran goruntusu eklentilerinin, genis izinlerini kullanarak tarama gecmisi/form verisi toplayip ucuncu taraflara sattigi arastirmalarla ortaya cikmistir.",
-                  "Oturum/cookie hirsizligi: genis izinli kotu niyetli bir eklenti, oturum cookie'lerini okuyup disariya gonderebilir, bu da hesap ele gecirmeye kadar gidebilir.",
+                  "Veri toplayan 'ücretsiz' eklentiler: bazı ücretsiz VPN/ekran görüntüsü eklentilerinin, geniş izinlerini kullanarak tarama geçmişi/form verisi toplayıp üçüncü taraflara sattığı araştırmalarla ortaya çıkmıştır.",
+                  "Oturum/cookie hırsızlığı: geniş izinli kötü niyetli bir eklenti, oturum cookie'lerini okuyup dışarıya gönderebilir; bu da hesap ele geçirmeye kadar gidebilir.",
                 ]
               : [
                   "Data-harvesting 'free' extensions: research has repeatedly found free VPN/screenshot extensions using their broad permissions to collect browsing history/form data and sell it to third parties.",
@@ -140,16 +140,16 @@ export function BrowserExtensionsRisksNote({ lang }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Savunma Onerileri" : "Defensive Recommendations"}>
+      <NoteSection title={tr ? "Savunma Önerileri" : "Defensive Recommendations"}>
         <NoteList
           items={
             tr
               ? [
-                  "Sadece gercekten ihtiyac duydugun eklentileri kur, kurulmadan once izinleri oku.",
-                  "Yayimcinin itibarina, yorumlarina ve son guncelleme tarihine bak.",
-                  "Kullanmadigin eklentileri duzenli olarak kaldir (chrome://extensions).",
+                  "Yalnızca gerçekten ihtiyaç duyduğun eklentileri kur, kurmadan önce izinleri oku.",
+                  "Yayımcının itibarına, yorumlarına ve son güncelleme tarihine bak.",
+                  "Kullanmadığın eklentileri düzenli olarak kaldır (chrome://extensions).",
                   "Kurumsal ortamda sadece onaylanan eklentilere izin veren bir politika (allowlist) uygula.",
-                  "Hassas islemlerde (bankacilik, kurumsal giris) gereksiz eklentileri devre disi birak veya ayri bir tarayici profili kullan.",
+                  "Hassas işlemlerde (bankacılık, kurumsal giriş) gereksiz eklentileri devre dışı bırak veya ayrı bir tarayıcı profili kullan.",
                 ]
               : [
                   "Only install extensions you actually need, and read the requested permissions first.",
@@ -164,7 +164,7 @@ export function BrowserExtensionsRisksNote({ lang }) {
 
       <NoteCallout>
         {tr
-          ? "Bu bilgi kullanicilarin kendi guvenligini korumasi icin savunma amaclidir; bir eklentiyi kotuye kullanacak sekilde gelistirmek veya baskalarinin verisini izinsiz toplamak KVKK ve ilgili bilisim suclari mevzuati kapsaminda suctur."
+          ? "Bu bilgi kullanıcıların kendi güvenliğini koruması için savunma amaçlıdır; bir eklentiyi kötüye kullanacak şekilde geliştirmek veya başkalarının verisini izinsiz toplamak KVKK ve ilgili bilişim suçları mevzuatı kapsamında suçtur."
           : "This information is meant for defensive, personal-safety purposes; building an extension to abuse users or collecting others' data without consent is a crime under data-protection and computer-crime law."}
       </NoteCallout>
     </>
