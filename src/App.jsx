@@ -7,12 +7,15 @@ import {
   ArrowUp,
   BarChart3,
   BookOpen,
+  Boxes,
+  BrainCircuit,
   CheckCircle2,
   ChevronDown,
   ClipboardCheck,
   Code2,
   Compass,
   Cpu,
+  Database,
   ClipboardList,
   ExternalLink,
   Fingerprint,
@@ -818,26 +821,40 @@ function IconTextButton({ icon: Icon, label, ariaLabel, onClick }) {
 }
 
 function WorkshopLandingPage({ lang, copy, navigate, openKnowledgeTopic }) {
+  const [notesOpen, setNotesOpen] = useState(false);
+  const arcIcons = [BrainCircuit, Cpu, Code2, ShieldCheck, Database, Boxes];
+
+  const openTopicFromModal = (topicId) => {
+    setNotesOpen(false);
+    openKnowledgeTopic(topicId);
+  };
+
   return (
     <div className="space-y-10 py-6">
       <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
-        <div className="min-w-0 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 shadow-soft sm:p-8 lg:flex lg:min-h-[380px] lg:flex-col lg:justify-center">
+        <div className="min-w-0 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 shadow-soft sm:p-8 lg:flex lg:min-h-[440px] lg:flex-col lg:justify-center">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <p className="text-sm font-semibold uppercase text-[var(--brand)]">{copy.landing.eyebrow}</p>
-            <img
-              src={isuLogoSrc}
-              alt="Istinye University"
-              className="h-11 max-w-[180px] object-contain"
-            />
+            <img src={isuLogoSrc} alt="Istinye University" className="h-11 max-w-[180px] object-contain" />
           </div>
-          <h1 className="mt-4 max-w-3xl break-words text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 max-w-4xl break-words text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
             {copy.landing.title}
           </h1>
-          <p className="mt-5 max-w-2xl break-words text-base leading-7 text-[var(--muted)] sm:text-lg">
+          <p className="mt-5 max-w-3xl break-words text-base leading-7 text-[var(--muted)] sm:text-lg">
             {copy.landing.subtitle}
           </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {copy.landing.topicTags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md border border-[var(--border)] bg-[var(--surface-2)] px-3 py-2 text-xs font-bold uppercase text-[var(--text)]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <PrimaryButton icon={GraduationCap} onClick={() => navigate("knowledge")}>
+            <PrimaryButton icon={GraduationCap} onClick={() => setNotesOpen(true)}>
               {copy.landing.ctaNotes}
             </PrimaryButton>
             <SecondaryButton icon={Compass} onClick={() => navigate("home")}>
@@ -881,45 +898,85 @@ function WorkshopLandingPage({ lang, copy, navigate, openKnowledgeTopic }) {
               {copy.landing.pusulaCta}
             </button>
           </div>
+
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <p className="text-sm font-semibold uppercase text-[var(--brand)]">{copy.landing.accelerationEyebrow}</p>
+            <h2 className="mt-2 text-2xl font-black text-[var(--brand)]">100x+</h2>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{copy.landing.accelerationShort}</p>
+          </div>
         </div>
       </section>
 
       <section>
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             <h2 className="text-2xl font-bold">{copy.landing.notesTitle}</h2>
             <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{copy.landing.notesSubtitle}</p>
           </div>
-          <SecondaryButton icon={GraduationCap} onClick={() => navigate("knowledge")}>
+          <SecondaryButton icon={GraduationCap} onClick={() => setNotesOpen(true)}>
             {copy.landing.notesSeeAll}
           </SecondaryButton>
         </div>
-        <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {knowledgeTopics.map((topicItem) => (
+        <div className="mt-5 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <p className="text-xs font-bold uppercase text-[var(--brand)]">{copy.landing.arcEyebrow}</p>
+            <h3 className="mt-2 text-xl font-bold">{copy.landing.arcTitle}</h3>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{copy.landing.arcSubtitle}</p>
             <button
-              key={topicItem.id}
-              onClick={() => openKnowledgeTopic(topicItem.id)}
-              className="field-card min-h-[188px] rounded-lg border border-[var(--border)] p-5 text-left transition hover:-translate-y-0.5 hover:shadow-soft"
+              className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-[var(--brand)] px-4 text-sm font-bold text-white transition hover:opacity-90"
+              onClick={() => setNotesOpen(true)}
             >
-              <div className="flex items-center justify-between gap-2">
-                <span className={`field-icon field-${topicItem.tone}`}>
-                  <GraduationCap size={20} />
-                </span>
-                <span className="rounded-md bg-[var(--surface-2)] px-2 py-1 text-[10px] font-bold uppercase text-[var(--muted)]">
-                  {topicItem.day === 2 ? copy.knowledge.day2 : copy.knowledge.day1}
-                </span>
-              </div>
-              <h3 className="mt-4 text-base font-bold leading-snug">{topicItem.title[lang]}</h3>
-              <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--muted)]">{topicItem.tagline[lang]}</p>
-              {topicItem.placeholder && (
-                <span className="mt-3 inline-block rounded-md bg-[var(--surface-2)] px-2 py-1 text-[10px] font-bold uppercase text-[var(--muted)]">
-                  {copy.knowledge.placeholderBadge}
-                </span>
-              )}
+              <GraduationCap size={17} />
+              {copy.landing.notesModalCta}
             </button>
-          ))}
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {copy.landing.learningArc.map((item, index) => {
+              const ArcIcon = arcIcons[index % arcIcons.length];
+              return (
+                <article key={item.title} className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+                      <ArcIcon size={20} />
+                    </span>
+                    <h3 className="text-sm font-bold">{item.title}</h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.body}</p>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
+
+      <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
+        <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[var(--brand)]">{copy.landing.accelerationEyebrow}</p>
+            <h2 className="mt-2 text-2xl font-bold">{copy.landing.accelerationTitle}</h2>
+            <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{copy.landing.accelerationBody}</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {copy.landing.accelerationStats.map((stat) => (
+              <div key={stat.label} className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
+                <p className="text-2xl font-black text-[var(--brand)]">{stat.value}</p>
+                <p className="mt-2 text-xs font-bold uppercase text-[var(--muted)]">{stat.label}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--text)]">{stat.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {notesOpen && (
+        <NotesAtlasModal
+          lang={lang}
+          copy={copy}
+          onClose={() => setNotesOpen(false)}
+          onOpenTopic={openTopicFromModal}
+        />
+      )}
 
       <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
@@ -932,6 +989,70 @@ function WorkshopLandingPage({ lang, copy, navigate, openKnowledgeTopic }) {
           </PrimaryButton>
         </div>
       </section>
+    </div>
+  );
+}
+
+function NotesAtlasModal({ lang, copy, onClose, onOpenTopic }) {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-2 sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={copy.landing.notesModalTitle}
+      onClick={onClose}
+    >
+      <div
+        className="flex h-[95vh] w-[90vw] max-w-7xl flex-col overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] shadow-soft"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3 sm:px-5">
+          <div>
+            <p className="text-xs font-bold uppercase text-[var(--brand)]">{copy.landing.notesModalEyebrow}</p>
+            <h2 className="text-lg font-bold">{copy.landing.notesModalTitle}</h2>
+          </div>
+          <button
+            type="button"
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--surface)] transition hover:bg-[var(--surface-2)]"
+            onClick={onClose}
+            aria-label={copy.common.close}
+            title={copy.common.close}
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {knowledgeTopics.map((topicItem) => (
+              <button
+                key={topicItem.id}
+                onClick={() => onOpenTopic(topicItem.id)}
+                className="field-card min-h-[188px] rounded-lg border border-[var(--border)] p-5 text-left transition hover:-translate-y-0.5 hover:shadow-soft"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className={`field-icon field-${topicItem.tone}`}>
+                    <GraduationCap size={20} />
+                  </span>
+                  <span className="rounded-md bg-[var(--surface-2)] px-2 py-1 text-[10px] font-bold uppercase text-[var(--muted)]">
+                    {topicItem.day === 2 ? copy.knowledge.day2 : copy.knowledge.day1}
+                  </span>
+                </div>
+                <h3 className="mt-4 text-base font-bold leading-snug">{topicItem.title[lang]}</h3>
+                <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--muted)]">{topicItem.tagline[lang]}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

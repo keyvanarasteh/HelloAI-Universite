@@ -528,19 +528,65 @@ export const t = {
     },
     landing: {
       eyebrow: "Atolye Ana Sayfasi",
-      title: "Agentic AI ile yazilim gelistirmeyi ogrenen bir atolyeye hos geldin.",
+      title: "Bilgisayar biliminin gercek dunyaya donustugu uygulamali bir AI atolyesi.",
       subtitle:
-        "Bu atolyede hem AI destekli yazilim gelistirmeyi ogreniyoruz hem de bu ogrendiklerimizi canli bir proje olan Bolum Pusulasi'nda uyguluyoruz. Asagidan Atolye Notlarina, projeye ve yapim surecine goz atabilirsin.",
-      ctaNotes: "Atolye Notlarina Git",
+        "Bu atolyede once bilgisayar donanimi, yazilim, veri ve guvenlik temellerini akademik bir zeminle kurduk; sonra yazilim gelistirme, mimari dusunme, prompt engineering ve sistem guvenligi konularina derinlestik. En sonunda her kavrami gercek dunyadaki karsiligina dokunan pratik uygulamalarla, test edilebilir ve deterministik ciktilara donusturduk.",
+      topicTags: [
+        "Computational Thinking",
+        "Hardware Literacy",
+        "Software Architecture",
+        "Data Security",
+        "Secure SDLC",
+        "Prompt Engineering",
+        "Agentic Implementation",
+        "Deterministic Testing",
+      ],
+      ctaNotes: "Not Atlasini Ac",
       ctaPusula: "Bolum Pusulasi'ni Kesfet",
       ctaProcess: "Yapim Surecini Gor",
       ctaInstructor: "Egitmeni Tani",
-      notesTitle: "Atolye Notlari",
-      notesSubtitle: "Islenen her konu icin kisa bir onizleme; devamini Atolye Notlari sayfasinda okuyabilirsin.",
-      notesSeeAll: "Tum notlari gor",
+      notesTitle: "Bilgiden Sisteme: Atolye Haritasi",
+      notesSubtitle:
+        "Not kartlari ana sayfada yer kaplamiyor; tum konu atlasini modal icinde acip istedigin notun detayina geciyorsun.",
+      notesSeeAll: "Not atlasini ac",
+      notesModalCta: "Konu atlasini modalda incele",
+      notesModalEyebrow: "Workshop Knowledge Atlas",
+      notesModalTitle: "Atolye Notlari Atlasi",
+      arcEyebrow: "Akademik Yolculuk",
+      arcTitle: "Temel bilimden gercek sisteme, gercek sistemden guvenli urune.",
+      arcSubtitle:
+        "Dersin omurgasi sadece 'AI ile kod yazmak' degil; bilgisayarin fiziksel gerceginden yazilimin soyut mimarisine, verinin korunmasindan guvenli uygulama tasarimina uzanan tam bir muhendislik cizgisi.",
+      learningArc: [
+        {
+          title: "Bilgisayar Bilimi Temeli",
+          body: "Donanim, isletim sistemi, veri, ag ve yazilim kavramlarini ayni sistemin katmanlari olarak okuduk.",
+        },
+        {
+          title: "Yazilim Gelistirme Derinligi",
+          body: "Git, repo kulturu, dokumantasyon, mimari kararlar, test ve agent denetimini gercek projede uyguladik.",
+        },
+        {
+          title: "Guvenlik ve Savunma Zihniyeti",
+          body: "Web, DNS, WAF, host/VPS, extension riski, Frida ve WebQ konularini izinli ve etik sinirlarla isledik.",
+        },
+        {
+          title: "Agentic AI Uretim Hatti",
+          body: "Prompt engineering, planlama, arac kullanan ajanlar ve insan denetimiyle hizli ama kontrollu implementasyon kurduk.",
+        },
+      ],
+      accelerationEyebrow: "Uygulamali AI Muhendisligi",
+      accelerationTitle: "100x+ hiz, testli dogruluk ve mimari disiplin ayni hatta.",
+      accelerationShort: "Agentic AI ile normal gelistirme ritminin cok otesinde, ama denetimli ve testlenebilir uretim.",
+      accelerationBody:
+        "Amac hizli demo degil: gercek dunya olaylarini modelleyen, olculebilir, tekrar uretilebilir ve dogrulanabilir implementasyonlar. Agentic AI burada sadece kod yazan bir asistan degil; prompt, mimari, test ve guvenlik refleksleriyle calisan bir uretim orkestrasyonu.",
+      accelerationStats: [
+        { value: "100x+", label: "Uretim ivmesi", body: "Normal insan ritmine gore cok daha hizli prototip, yine de commit, build ve test disipliniyle." },
+        { value: "0-100", label: "Mimari hat", body: "Fikirden roadmap'e, component'ten dogrulanmis ekrana kadar izlenebilir uygulama." },
+        { value: "TR/EN", label: "Akademik erisim", body: "Konu anlatimi, UI ve notlar iki dilde tasarlandi; kavram kaybi en aza indirildi." },
+      ],
       pusulaTitle: "Proje: Bolum Pusulasi",
       pusulaSubtitle:
-        "Bu atolyede agentic AI araclariyla (Claude Code, Codex) baştan sona kodladigimiz gercek bir web uygulamasi: universite bolum karari icin test, rehber, karsilastirma ve karar gunlugu.",
+        "1. gun projesi: agentic AI araclariyla (Claude Code, Codex) bastan sona kodladigimiz gercek bir web uygulamasi. Universite bolum karari icin test, rehber, karsilastirma ve karar gunlugu sunar.",
       pusulaCta: "Projeyi Ac",
       processTitle: "Nasil Yapildi?",
       processSubtitle:
@@ -799,19 +845,65 @@ export const t = {
     },
     landing: {
       eyebrow: "Workshop Home",
-      title: "Welcome to a workshop about building software with agentic AI.",
+      title: "An applied AI workshop where computer science becomes real software.",
       subtitle:
-        "Here we learn AI-assisted software development and apply it live in a real project, Path Compass (Bolum Pusulasi). Explore the Workshop Notes, the project itself, and how it was actually built.",
-      ctaNotes: "Go to Workshop Notes",
+        "We did not only cover building software with agentic AI. We started with computer hardware, software, data, and security foundations; then went deeper into software development, architecture, prompt engineering, and securing systems. Finally, we turned each concept into practical real-world implementations that can be tested, verified, and made deterministic.",
+      topicTags: [
+        "Computational Thinking",
+        "Hardware Literacy",
+        "Software Architecture",
+        "Data Security",
+        "Secure SDLC",
+        "Prompt Engineering",
+        "Agentic Implementation",
+        "Deterministic Testing",
+      ],
+      ctaNotes: "Open Notes Atlas",
       ctaPusula: "Explore Path Compass",
       ctaProcess: "See the Build Process",
       ctaInstructor: "Meet the Instructor",
-      notesTitle: "Workshop Notes",
-      notesSubtitle: "A quick preview of each topic covered; read the full notes on the Workshop Notes page.",
-      notesSeeAll: "See all notes",
+      notesTitle: "From Knowledge to Systems: Workshop Map",
+      notesSubtitle:
+        "Note cards no longer occupy the homepage; open the topic atlas in a modal and jump into any detailed note from there.",
+      notesSeeAll: "Open notes atlas",
+      notesModalCta: "Explore the topic atlas in a modal",
+      notesModalEyebrow: "Workshop Knowledge Atlas",
+      notesModalTitle: "Workshop Notes Atlas",
+      arcEyebrow: "Academic Journey",
+      arcTitle: "From foundations to real systems, from real systems to secure products.",
+      arcSubtitle:
+        "The spine of the course is not just 'coding with AI'. It is a full engineering line from the physical reality of computers to software architecture, data protection, secure product thinking, and tested implementation.",
+      learningArc: [
+        {
+          title: "Computer Science Grounding",
+          body: "We read hardware, operating systems, data, networks, and software as layers of one living system.",
+        },
+        {
+          title: "Software Development Depth",
+          body: "We practiced Git, repository culture, documentation, architecture decisions, testing, and agent output review inside a real project.",
+        },
+        {
+          title: "Security and Defense Mindset",
+          body: "We covered web, DNS, WAF, host/VPS, extension risk, Frida, and WebQ inside authorized and ethical boundaries.",
+        },
+        {
+          title: "Agentic AI Production Line",
+          body: "We combined prompt engineering, planning, tool-using agents, and human review into fast but controlled implementation.",
+        },
+      ],
+      accelerationEyebrow: "Applied AI Engineering",
+      accelerationTitle: "100x+ speed, tested accuracy, and architectural discipline on the same line.",
+      accelerationShort: "Agentic AI moves far beyond ordinary development rhythm, but remains reviewed, tested, and measurable.",
+      accelerationBody:
+        "The target is not a fast demo. The target is implementation that models real-world occurrences, can be measured, reproduced, verified, and improved. Agentic AI here is not merely a code assistant; it is production orchestration across prompts, architecture, tests, and security reflexes.",
+      accelerationStats: [
+        { value: "100x+", label: "Production acceleration", body: "Much faster prototyping than normal human rhythm, still shaped by commits, builds, and tests." },
+        { value: "0-100", label: "Architecture line", body: "Traceable implementation from idea to roadmap, component, and verified screen." },
+        { value: "TR/EN", label: "Academic access", body: "Concepts, UI, and notes are designed bilingually to reduce meaning loss." },
+      ],
       pusulaTitle: "Project: Path Compass",
       pusulaSubtitle:
-        "A real web app built end-to-end in this workshop with agentic AI tools (Claude Code, Codex): a test, guide, comparison tool, and decision journal for choosing a university major.",
+        "Day 1 project: a real web app built end-to-end in this workshop with agentic AI tools (Claude Code, Codex): a test, guide, comparison tool, and decision journal for choosing a university major.",
       pusulaCta: "Open the Project",
       processTitle: "How Was It Built?",
       processSubtitle:
