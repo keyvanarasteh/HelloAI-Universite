@@ -166,19 +166,29 @@ export function GitGithubNote({ lang, theme }) {
       <NoteSection title={tr ? "Terminalde Ilk Kurulum ve Branch Akisi" : "First-Time Setup & Branch Flow in the Terminal"}>
         <TerminalBlock
           caption={tr ? "Global ayar (bir kere)" : "Global setup (once)"}
-          lines={[
-            'git config --global user.name "Adin Soyadin"',
-            'git config --global user.email "eposta@ornek.com"',
-          ]}
+          lines={
+            tr
+              ? ['git config --global user.name "Adin Soyadin"', 'git config --global user.email "eposta@ornek.com"']
+              : ['git config --global user.name "Your Name"', 'git config --global user.email "email@example.com"']
+          }
         />
         <TerminalBlock
           caption={tr ? "Gunluk branch akisi" : "Everyday branch flow"}
-          lines={[
-            "git checkout -b feature/yeni-ozellik",
-            "git add .",
-            'git commit -m "yeni ozellik: kisa aciklama"',
-            "git push origin feature/yeni-ozellik",
-          ]}
+          lines={
+            tr
+              ? [
+                  "git checkout -b feature/yeni-ozellik",
+                  "git add .",
+                  'git commit -m "yeni ozellik: kisa aciklama"',
+                  "git push origin feature/yeni-ozellik",
+                ]
+              : [
+                  "git checkout -b feature/new-feature",
+                  "git add .",
+                  'git commit -m "new feature: short description"',
+                  "git push origin feature/new-feature",
+                ]
+          }
         />
       </NoteSection>
 

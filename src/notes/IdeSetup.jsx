@@ -110,12 +110,21 @@ export function IdeSetupNote({ lang }) {
       <NoteSection title={tr ? "Global Git Ayarlari (Tum Platformlar)" : "Global Git Config (All Platforms)"}>
         <TerminalBlock
           caption={tr ? "Terminalde (Windows/macOS/Linux)" : "In the terminal (Windows/macOS/Linux)"}
-          lines={[
-            "git --version",
-            'git config --global user.name "Adin Soyadin"',
-            'git config --global user.email "eposta@ornek.com"',
-            "git config --global --list",
-          ]}
+          lines={
+            tr
+              ? [
+                  "git --version",
+                  'git config --global user.name "Adin Soyadin"',
+                  'git config --global user.email "eposta@ornek.com"',
+                  "git config --global --list",
+                ]
+              : [
+                  "git --version",
+                  'git config --global user.name "Your Name"',
+                  'git config --global user.email "email@example.com"',
+                  "git config --global --list",
+                ]
+          }
         />
       </NoteSection>
     </>

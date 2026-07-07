@@ -2,22 +2,22 @@ import { useState } from "react";
 import { Bot, Code2, Database, MessageSquare, Monitor, Server, Wrench } from "lucide-react";
 import { Mermaid, NoteCallout, NoteSection, NoteTable } from "../components/NoteKit.jsx";
 
-const architectureDiagram = `flowchart LR
-  U["User / Kullanici"] --> F["FrontEnd\n(HTML, CSS, JS, React)"]
-  F <--> B["BackEnd\n(API, is mantigi)"]
-  B <--> D[("Database")]
+const architectureDiagram = (tr) => `flowchart LR
+  U["${tr ? "Kullanici" : "User"}"] --> F["FrontEnd\\n(HTML, CSS, JS, React)"]
+  F <--> B["BackEnd\\n(${tr ? "API, is mantigi" : "API, business logic"})"]
+  B <--> D[("${tr ? "Veritabani" : "Database"}")]
 `;
 
-const agentDiagram = `flowchart TB
+const agentDiagram = (tr) => `flowchart TB
   subgraph chat[LLM Chat]
     direction LR
-    Q1["Soru"] --> M1["Model"] --> A1["Metin cevap"]
+    Q1["${tr ? "Soru" : "Question"}"] --> M1["Model"] --> A1["${tr ? "Metin cevap" : "Text answer"}"]
   end
   subgraph agent[Agentic AI]
     direction LR
-    Q2["Gorev"] --> M2["Model"] --> T["Arac cagir\n(dosya, komut, arama)"]
+    Q2["${tr ? "Gorev" : "Task"}"] --> M2["Model"] --> T["${tr ? "Arac cagir\\n(dosya, komut, arama)" : "Call tools\\n(files, commands, search)"}"]
     T --> M2
-    M2 --> A2["Eylem + sonuc"]
+    M2 --> A2["${tr ? "Eylem + sonuc" : "Action + result"}"]
   end
 `;
 
@@ -130,7 +130,7 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
       </NoteSection>
 
       <NoteSection title={tr ? "FrontEnd vs BackEnd" : "FrontEnd vs BackEnd"}>
-        <Mermaid theme={theme} chart={architectureDiagram} />
+        <Mermaid theme={theme} chart={architectureDiagram(tr)} />
         <NoteTable
           headers={tr ? ["Katman", "Ne yapar", "Bu projedeki hali"] : ["Layer", "What it does", "In this project"]}
           rows={[
@@ -194,7 +194,7 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
             </div>
           </div>
         </div>
-        <Mermaid theme={theme} chart={agentDiagram} />
+        <Mermaid theme={theme} chart={agentDiagram(tr)} />
         <NoteCallout>
           {tr
             ? "LLM Chat: soru sorulur, model metinle cevap verir. Agentic AI: model arac kullanarak dosya okuma/yazma, komut calistirma gibi eylemleri zincirler (Claude Code, Codex). Fark: chat modeli \"soyler\", agent \"yapar\"."

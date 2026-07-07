@@ -2,14 +2,14 @@ import { useState } from "react";
 import { CheckCircle2, ClipboardCheck, FileText, GitCommit, ListChecks, Scale, Split, Target } from "lucide-react";
 import { Mermaid, NoteCallout, NoteSection, NoteSteps } from "../components/NoteKit.jsx";
 
-const processDiagram = `flowchart TD
-  A["1. Problemi tanimla\n(idea.txt)"] --> B["2. Cozum yollarini listele"]
-  B --> C["3. Karsilastir"]
-  C --> D["4. En iyisini sec"]
-  D --> E["5. 0-100 uygulama plani"]
-  E --> F["6. Checklist: STEPS.md"]
-  F --> G["7. Isaretle + commit/push"]
-  G -->|yeni is| B
+const processDiagram = (tr) => `flowchart TD
+  A["${tr ? "1. Problemi tanimla\\n(idea.txt)" : "1. Define the problem\\n(idea.txt)"}"] --> B["${tr ? "2. Cozum yollarini listele" : "2. List possible solutions"}"]
+  B --> C["${tr ? "3. Karsilastir" : "3. Compare"}"]
+  C --> D["${tr ? "4. En iyisini sec" : "4. Choose the best one"}"]
+  D --> E["${tr ? "5. 0-100 uygulama plani" : "5. 0-100 implementation plan"}"]
+  E --> F["${tr ? "6. Checklist: STEPS.md" : "6. Checklist: STEPS.md"}"]
+  F --> G["${tr ? "7. Isaretle + commit/push" : "7. Check off + commit/push"}"]
+  G -->|${tr ? "yeni is" : "new task"}| B
 `;
 
 export function ProblemSolvingNote({ lang, theme }) {
@@ -83,7 +83,7 @@ export function ProblemSolvingNote({ lang, theme }) {
       </NoteSection>
 
       <NoteSection title={tr ? "0-100 Sureci" : "The 0-100 Process"}>
-        <Mermaid theme={theme} chart={processDiagram} />
+        <Mermaid theme={theme} chart={processDiagram(tr)} />
       </NoteSection>
 
       <NoteSection title={tr ? "7 Adim" : "7 Steps"}>
