@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Activity,
   ArrowDown,
   ArrowLeft,
   ArrowRight,
@@ -14,6 +15,7 @@ import {
   Cpu,
   ClipboardList,
   ExternalLink,
+  Fingerprint,
   FlaskConical,
   Github,
   GitCommit,
@@ -27,15 +29,21 @@ import {
   Menu,
   MessageSquare,
   Moon,
+  Network,
   NotebookPen,
   PanelsTopLeft,
   Plus,
+  Puzzle,
+  Radar,
   RotateCcw,
   Rocket,
   Save,
+  Search,
+  Server,
   ShieldCheck,
   Shuffle,
   Sun,
+  TerminalSquare,
   Trash2,
   University,
   UserRound,
@@ -79,9 +87,289 @@ const pusulaPages = [
   { id: "resources", icon: ExternalLink },
 ];
 
+const project2Features = [
+  {
+    id: "project2ScopeRecon",
+    icon: Radar,
+    componentName: "ScopeReconPlanner",
+    noteIds: ["pentest-methodology-enumeration"],
+    title: { tr: "Kapsam ve Kesif Planlayici", en: "Scope & Recon Planner" },
+    subtitle: {
+      tr: "Izinli hedef, kapsam, pasif kesif ve aktif enumeration adimlarini tek bir kontrol panelinde tasarlar.",
+      en: "Designs authorized target scope, passive recon, and active enumeration steps in one planning panel.",
+    },
+    functionality: {
+      tr: [
+        "Rules of Engagement kapsam karti ve izin durumu.",
+        "Pasif/aktif kesif ayrimi ile gorev listesi.",
+        "Bulgu tipine gore savunma aksiyon onerileri.",
+      ],
+      en: [
+        "Rules of Engagement scope card and authorization status.",
+        "Task list separated into passive and active recon.",
+        "Defense action suggestions by finding type.",
+      ],
+    },
+  },
+  {
+    id: "project2ExploitLab",
+    icon: TerminalSquare,
+    componentName: "ExploitFlowSandbox",
+    noteIds: ["exploitation-post-exploitation"],
+    title: { tr: "Exploit ve Payload Akis Lab'i", en: "Exploit & Payload Flow Lab" },
+    subtitle: {
+      tr: "Exploit, payload, bind shell, reverse shell ve post-exploitation kavramlarini guvenli simule eder.",
+      en: "Safely simulates exploit, payload, bind shell, reverse shell, and post-exploitation concepts.",
+    },
+    functionality: {
+      tr: [
+        "Exploit zincirinin asamalarini zararsiz model olarak gosterir.",
+        "Shell turlerini inbound/outbound baglanti mantigiyla ayirir.",
+        "Her adimda etik ve izin sinirini vurgular.",
+      ],
+      en: [
+        "Shows exploit-chain stages as a harmless model.",
+        "Separates shell types by inbound/outbound connection logic.",
+        "Highlights ethical and authorization boundaries at each step.",
+      ],
+    },
+  },
+  {
+    id: "project2DnsExplorer",
+    icon: Network,
+    componentName: "DnsRecordExplorer",
+    noteIds: ["dns-definition-enumeration"],
+    title: { tr: "DNS Kayit Gezgini", en: "DNS Record Explorer" },
+    subtitle: {
+      tr: "A, AAAA, CNAME, MX, TXT, NS ve DNS hiyerarsisini egitim odakli bir kayit panelinde anlatir.",
+      en: "Explains A, AAAA, CNAME, MX, TXT, NS, and DNS hierarchy in an educational record panel.",
+    },
+    functionality: {
+      tr: [
+        "Kayit turlerine gore filtrelenebilir DNS kartlari.",
+        "Resolver, root, TLD ve authoritative sunucu akisi.",
+        "Mail guvenligi icin SPF/DKIM/DMARC hatirlaticilari.",
+      ],
+      en: [
+        "Filterable DNS cards by record type.",
+        "Resolver, root, TLD, and authoritative server flow.",
+        "SPF/DKIM/DMARC reminders for mail security.",
+      ],
+    },
+  },
+  {
+    id: "project2WafSignals",
+    icon: ShieldCheck,
+    componentName: "WafSignalBoard",
+    noteIds: ["waf-definition-enumeration"],
+    title: { tr: "WAF Sinyal Panosu", en: "WAF Signal Board" },
+    subtitle: {
+      tr: "Header, cookie, blok sayfasi ve zararsiz test sinyallerini raporlanabilir kanitlara cevirir.",
+      en: "Turns headers, cookies, block pages, and harmless test signals into reportable evidence.",
+    },
+    functionality: {
+      tr: [
+        "WAF tespit sinyali kartlari ve kanit notlari.",
+        "Vendor tahmini yerine kanit odakli raporlama.",
+        "Sadece izinli ortam icin test kapsam uyarilari.",
+      ],
+      en: [
+        "WAF detection signal cards and evidence notes.",
+        "Evidence-first reporting instead of vendor guessing.",
+        "Testing-scope reminders for authorized environments only.",
+      ],
+    },
+  },
+  {
+    id: "project2HostMap",
+    icon: Server,
+    componentName: "HostVpsTopologyMap",
+    noteIds: ["host-vps-enumeration"],
+    title: { tr: "Host/VPS Topoloji Haritasi", en: "Host/VPS Topology Map" },
+    subtitle: {
+      tr: "Shared hosting, VPS, cloud instance, CDN origin ve ASN gorunurlugunu savunma bakisiyla gorsellestirir.",
+      en: "Visualizes shared hosting, VPS, cloud instance, CDN origin, and ASN visibility from a defensive view.",
+    },
+    functionality: {
+      tr: [
+        "Altyapi turu secimi ve gorunen risk ozeti.",
+        "Origin IP ve CDN yanlis yapilandirma kontrol listesi.",
+        "Varlik envanteri icin not alanlari.",
+      ],
+      en: [
+        "Infrastructure type selector and visible-risk summary.",
+        "Origin IP and CDN misconfiguration checklist.",
+        "Notes for asset inventory work.",
+      ],
+    },
+  },
+  {
+    id: "project2TechFingerprint",
+    icon: Fingerprint,
+    componentName: "TechFingerprintLens",
+    noteIds: ["wappalyzer-tech-fingerprinting"],
+    title: { tr: "Teknoloji Parmak Izi Mercegi", en: "Technology Fingerprint Lens" },
+    subtitle: {
+      tr: "Wappalyzer mantigiyla CMS, framework, header, cookie ve CDN izlerini pasif sekilde siniflandirir.",
+      en: "Classifies CMS, framework, header, cookie, and CDN traces passively using Wappalyzer-style logic.",
+    },
+    functionality: {
+      tr: [
+        "Pasif imza kaynaklarini kartlarla aciklar.",
+        "Kendi sitende gereksiz bilgi sizintisini azaltma onerileri.",
+        "Benzer araclar ve kullanim senaryolari.",
+      ],
+      en: [
+        "Explains passive signature sources with cards.",
+        "Suggestions to reduce unnecessary information exposure on your own site.",
+        "Similar tools and usage scenarios.",
+      ],
+    },
+  },
+  {
+    id: "project2ExtensionAudit",
+    icon: Puzzle,
+    componentName: "ExtensionPermissionAudit",
+    noteIds: ["browser-extensions-permissions-risks"],
+    title: { tr: "Eklenti Izin Denetimi", en: "Extension Permission Audit" },
+    subtitle: {
+      tr: "Tarayici eklentilerinin izinlerini, veri erisim risklerini ve kurumsal allowlist politikasini gosterir.",
+      en: "Shows browser extension permissions, data-access risks, and enterprise allowlist policy ideas.",
+    },
+    functionality: {
+      tr: [
+        "Manifest izinlerini dusuk/orta/yuksek risk olarak ayirir.",
+        "Hangi veriye erisilebilecegini kullanici dostu dille anlatir.",
+        "Allowlist ve duzenli gozden gecirme akisi sunar.",
+      ],
+      en: [
+        "Separates manifest permissions into low/medium/high risk.",
+        "Explains accessible data in user-friendly language.",
+        "Offers an allowlist and recurring review flow.",
+      ],
+    },
+  },
+  {
+    id: "project2FridaWorkbench",
+    icon: Code2,
+    componentName: "FridaReverseWorkbench",
+    noteIds: ["reverse-engineering-frida"],
+    title: { tr: "Frida Tersine Muhendislik Tezgahi", en: "Frida Reverse Engineering Workbench" },
+    subtitle: {
+      tr: "ADB, logcat, root tespiti, Frida attach/spawn ve JS hook mantigini guvenli egitim akisi olarak sunar.",
+      en: "Presents ADB, logcat, root detection, Frida attach/spawn, and JS hook logic as a safe learning flow.",
+    },
+    functionality: {
+      tr: [
+        "Android test ortami hazirlik adimlari.",
+        "Frida kavramlarini gercek cihaza zarar vermeden simule eder.",
+        "Yasal/etik sinir uyarilarini her panelde tutar.",
+      ],
+      en: [
+        "Android test-environment preparation steps.",
+        "Simulates Frida concepts without touching a real device.",
+        "Keeps legal/ethical boundary reminders in every panel.",
+      ],
+    },
+  },
+  {
+    id: "project2WebQDashboard",
+    icon: Search,
+    componentName: "WebQReconDashboard",
+    noteIds: ["web-security-webq"],
+    title: { tr: "WebQ Kesif Dashboard'u", en: "WebQ Recon Dashboard" },
+    subtitle: {
+      tr: "Domain insight, teknoloji parmak izi, subdomain kesfi, secret kontrolu ve guvenlik skorunu tek ekranda planlar.",
+      en: "Plans domain insight, tech fingerprinting, subdomain discovery, secret checks, and security score in one screen.",
+    },
+    functionality: {
+      tr: [
+        "WebQ modul kartlari ve beklenen ciktilar.",
+        "Bulgu -> savunma iyilestirmesi donusum akisi.",
+        "Gelecek entegrasyonlar icin API/CLI placeholder alanlari.",
+      ],
+      en: [
+        "WebQ module cards and expected outputs.",
+        "Finding -> defensive improvement conversion flow.",
+        "API/CLI placeholder areas for future integrations.",
+      ],
+    },
+  },
+];
+
+const project2Pages = [
+  { id: "project2Build", icon: GitCommit },
+  ...project2Features.map(({ id, icon }) => ({ id, icon })),
+];
+
+const project2BuildTimeline = [
+  {
+    id: "p2-001",
+    date: "Day 2",
+    message: {
+      tr: "Proje 2 kapsam karari: Bolum Pusulasi, 1. gun projesi olarak ayrildi; 2. gun icin guvenlik odakli yeni modul eklendi.",
+      en: "Project 2 scope decision: Path Compass is separated as the Day 1 project; a security-focused module is added for Day 2.",
+    },
+    files: {
+      tr: "Yeni nav grubu, Proje 2 build timeline'i ve ozellik sayfasi kabuklari.",
+      en: "New nav group, Project 2 build timeline, and feature-page shells.",
+    },
+    lesson: {
+      tr: "Ayni repo icinde ikinci proje, notlarla birebir izlenebilir sekilde buyutulur.",
+      en: "A second project can grow inside the same repo while staying traceable to the notes.",
+    },
+    relatedTopics: ["pentest-methodology-enumeration"],
+  },
+  {
+    id: "p2-002",
+    date: "Day 2",
+    message: {
+      tr: "Enumeration tabanli ozellik haritasi cikarildi.",
+      en: "The enumeration-based feature map was drafted.",
+    },
+    files: {
+      tr: "DNS, WAF, host/VPS, teknoloji parmak izi ve WebQ placeholder sayfalari.",
+      en: "DNS, WAF, host/VPS, tech fingerprinting, and WebQ placeholder pages.",
+    },
+    lesson: {
+      tr: "Guvenlik araclari once egitimli, izinli ve savunma odakli arayuzler olarak modellenmeli.",
+      en: "Security tools should first be modeled as educational, authorized, defense-focused interfaces.",
+    },
+    relatedTopics: [
+      "dns-definition-enumeration",
+      "waf-definition-enumeration",
+      "host-vps-enumeration",
+      "wappalyzer-tech-fingerprinting",
+      "web-security-webq",
+    ],
+  },
+  {
+    id: "p2-003",
+    date: "Day 2",
+    message: {
+      tr: "Exploit, eklenti riski ve Frida bolumleri guvenli lab placeholder'lari olarak ayrildi.",
+      en: "Exploit, extension-risk, and Frida sections were separated as safe lab placeholders.",
+    },
+    files: {
+      tr: "Exploit flow, browser extension audit ve Frida reverse workbench sayfalari.",
+      en: "Exploit flow, browser extension audit, and Frida reverse workbench pages.",
+    },
+    lesson: {
+      tr: "Tehlikeli kavramlar uygulama icinde zararsiz simule edilir; gercek hedefe dokunma yoktur.",
+      en: "Sensitive concepts are simulated harmlessly in the app; no real target is touched.",
+    },
+    relatedTopics: [
+      "exploitation-post-exploitation",
+      "browser-extensions-permissions-risks",
+      "reverse-engineering-frida",
+    ],
+  },
+];
+
 const navGroups = [
   { id: "workshop", icon: GraduationCap, children: workshopNav },
   { id: "pusula", icon: Compass, children: pusulaPages },
+  { id: "project2", icon: Activity, children: project2Pages },
 ];
 
 const instructorNavItem = { id: "instructor", icon: UserRound };
@@ -185,6 +473,7 @@ function App() {
   const [shortlist, setShortlist] = useStoredState("bp_shortlist", []);
   const [journal, setJournal] = useStoredState("bp_journal", emptyJournal);
   const [pendingKnowledgeTopic, setPendingKnowledgeTopic] = useState(null);
+  const [modalNoteIds, setModalNoteIds] = useState([]);
 
   const copy = t[lang] || t.tr;
 
@@ -204,6 +493,13 @@ function App() {
     navigate("knowledge");
   };
 
+  const openRelatedNotes = (noteIds) => {
+    const ids = Array.isArray(noteIds) ? noteIds : [noteIds];
+    setModalNoteIds(ids.filter(Boolean));
+  };
+
+  const closeRelatedNotes = () => setModalNoteIds([]);
+
   const toggleLanguage = () => setLang((current) => (current === "tr" ? "en" : "tr"));
   const toggleTheme = () => setTheme((current) => (current === "light" ? "dark" : "light"));
 
@@ -214,6 +510,7 @@ function App() {
     copy,
     navigate,
     openKnowledgeTopic,
+    openRelatedNotes,
     answers,
     setAnswers,
     result,
@@ -260,8 +557,20 @@ function App() {
         {page === "glossary" && <GlossaryPage {...shared} />}
         {page === "feedback" && <FeedbackPage {...shared} />}
         {page === "buildProcess" && <BuildProcessPage {...shared} />}
+        {page === "project2Build" && <Project2BuildProcessPage {...shared} />}
+        {project2Features.map((feature) =>
+          page === feature.id ? <Project2FeaturePage key={feature.id} feature={feature} {...shared} /> : null
+        )}
         {page === "instructor" && <InstructorPage {...shared} />}
       </main>
+
+      <RelatedNotesModal
+        noteIds={modalNoteIds}
+        lang={lang}
+        theme={theme}
+        copy={copy}
+        onClose={closeRelatedNotes}
+      />
 
       <footer className="border-t border-[var(--border)] px-4 py-8 text-center text-sm text-[var(--muted)]">
         <p>
@@ -421,7 +730,7 @@ function NavGroupDropdown({ group, copy, page, navigate }) {
       </button>
 
       {open && (
-        <div className="absolute left-1/2 top-full z-40 mt-2 grid w-56 -translate-x-1/2 gap-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 shadow-soft">
+        <div className="absolute left-1/2 top-full z-40 mt-2 grid max-h-[min(72vh,34rem)] w-60 -translate-x-1/2 gap-1 overflow-y-auto rounded-lg border border-[var(--border)] bg-[var(--surface)] p-2 shadow-soft">
           {group.children.map((item) => (
             <NavButton
               key={item.id}
@@ -1753,6 +2062,232 @@ function BuildProcessPage({ lang, copy, openKnowledgeTopic }) {
         </article>
       </div>
     </PageFrame>
+  );
+}
+
+function Project2BuildProcessPage({ lang, copy, openRelatedNotes }) {
+  return (
+    <PageFrame title={copy.project2.buildTitle} subtitle={copy.project2.buildSubtitle}>
+      <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase text-[var(--brand)]">{copy.project2.kicker}</p>
+            <h2 className="mt-2 text-2xl font-bold">{copy.project2.name}</h2>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{copy.project2.buildIntro}</p>
+          </div>
+          <span className="inline-flex w-fit items-center gap-2 rounded-md bg-[var(--brand-soft)] px-3 py-2 text-xs font-bold uppercase text-[var(--brand)]">
+            <Activity size={15} />
+            {copy.project2.day2Badge}
+          </span>
+        </div>
+      </section>
+
+      <div className="relative grid gap-6 pl-7 sm:pl-9">
+        <div className="absolute bottom-2 left-[11px] top-2 w-px bg-[var(--border)] sm:left-[15px]" />
+
+        {project2BuildTimeline.map((entry, index) => (
+          <article key={entry.id} className="relative rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <span className="absolute -left-7 top-6 flex h-6 w-6 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--brand-soft)] text-[var(--brand)] sm:-left-9">
+              <GitCommit size={14} />
+            </span>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="rounded-md bg-[var(--surface-2)] px-2 py-1 font-mono text-xs font-bold text-[var(--text)]">
+                  {entry.id}
+                </span>
+                <span className="text-xs font-semibold text-[var(--muted)]">{entry.date}</span>
+              </div>
+              <span className="text-xs font-semibold uppercase text-[var(--muted)]">
+                {copy.buildProcess.commitLabel} {index + 1}/{project2BuildTimeline.length}
+              </span>
+            </div>
+            <h3 className="mt-3 text-lg font-bold leading-snug">{entry.message[lang]}</h3>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{copy.buildProcess.filesTitle}</p>
+                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{entry.files[lang]}</p>
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{copy.buildProcess.lessonTitle}</p>
+                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{entry.lesson[lang]}</p>
+              </div>
+            </div>
+            <div className="mt-4">
+              <RelatedNotesButton noteIds={entry.relatedTopics} copy={copy} onOpen={openRelatedNotes} />
+            </div>
+          </article>
+        ))}
+      </div>
+    </PageFrame>
+  );
+}
+
+function Project2FeaturePage({ feature, lang, copy, openRelatedNotes }) {
+  const Icon = feature.icon;
+  const relatedTopics = feature.noteIds
+    .map((id) => knowledgeTopics.find((topic) => topic.id === id))
+    .filter(Boolean);
+
+  return (
+    <PageFrame title={feature.title[lang]} subtitle={feature.subtitle[lang]}>
+      <section className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+          <div className="flex items-start justify-between gap-4">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
+              <Icon size={24} />
+            </span>
+            <span className="rounded-md bg-[var(--surface-2)] px-2 py-1 text-xs font-bold uppercase text-[var(--muted)]">
+              {copy.project2.placeholderBadge}
+            </span>
+          </div>
+          <h2 className="mt-5 text-xl font-bold">{feature.componentName}</h2>
+          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{copy.project2.componentShell}</p>
+          <div className="mt-5">
+            <RelatedNotesButton noteIds={feature.noteIds} copy={copy} onOpen={openRelatedNotes} />
+          </div>
+        </div>
+
+        <div className="grid gap-5">
+          <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+            <h2 className="text-xl font-bold">{copy.project2.functionalityTitle}</h2>
+            <ul className="mt-4 grid gap-3 text-sm leading-6 text-[var(--muted)]">
+              {feature.functionality[lang].map((item) => (
+                <li key={item} className="flex gap-2">
+                  <CheckCircle2 className="mt-1 shrink-0 text-[var(--ok)]" size={16} />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="grid gap-4 sm:grid-cols-3">
+            {copy.project2.placeholderBlocks.map((block) => (
+              <div key={block.title} className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{block.title}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--text)]">{block.body}</p>
+              </div>
+            ))}
+          </section>
+
+          <section className="rounded-lg border border-dashed border-[var(--brand)] bg-[var(--brand-soft)] p-5">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <h2 className="text-lg font-bold">{copy.project2.relatedNotesTitle}</h2>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{copy.project2.relatedNotesBody}</p>
+              </div>
+              <RelatedNotesButton noteIds={feature.noteIds} copy={copy} onOpen={openRelatedNotes} compact />
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {relatedTopics.map((topic) => (
+                <span
+                  key={topic.id}
+                  className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-2 py-1 text-xs font-semibold text-[var(--text)]"
+                >
+                  {topic.title[lang]}
+                </span>
+              ))}
+            </div>
+          </section>
+        </div>
+      </section>
+    </PageFrame>
+  );
+}
+
+function RelatedNotesButton({ noteIds, copy, onOpen, compact = false }) {
+  const ids = Array.isArray(noteIds) ? noteIds : [noteIds];
+  return (
+    <button
+      type="button"
+      className={[
+        "inline-flex items-center justify-center gap-2 rounded-md border border-[var(--border)] bg-[var(--surface)] font-semibold text-[var(--text)] transition hover:bg-[var(--surface-2)]",
+        compact ? "h-10 w-10" : "min-h-11 px-4 py-2 text-sm",
+      ].join(" ")}
+      onClick={() => onOpen(ids)}
+      title={copy.project2.openRelatedNotes}
+      aria-label={copy.project2.openRelatedNotes}
+    >
+      <GraduationCap size={compact ? 18 : 16} />
+      {!compact && (
+        <span>
+          {copy.project2.relatedNotesButton} ({ids.length})
+        </span>
+      )}
+    </button>
+  );
+}
+
+function RelatedNotesModal({ noteIds, lang, theme, copy, onClose }) {
+  const topics = useMemo(
+    () => noteIds.map((id) => knowledgeTopics.find((topic) => topic.id === id)).filter(Boolean),
+    [noteIds]
+  );
+
+  useEffect(() => {
+    if (noteIds.length === 0) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [noteIds.length, onClose]);
+
+  if (noteIds.length === 0) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/55 p-2 sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={copy.project2.modalTitle}
+      onClick={onClose}
+    >
+      <div
+        className="flex h-[95vh] w-[90vw] max-w-6xl flex-col overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] shadow-soft"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3 sm:px-5">
+          <div>
+            <p className="text-xs font-bold uppercase text-[var(--brand)]">{copy.project2.modalEyebrow}</p>
+            <h2 className="text-lg font-bold">{copy.project2.modalTitle}</h2>
+          </div>
+          <button
+            type="button"
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--surface)] transition hover:bg-[var(--surface-2)]"
+            onClick={onClose}
+            aria-label={copy.common.close}
+            title={copy.common.close}
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5">
+          <div className="grid gap-6">
+            {topics.map((topic) => (
+              <article key={topic.id} className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 sm:p-5">
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-bold uppercase text-[var(--muted)]">{copy.knowledge.day2}</p>
+                    <h3 className="mt-1 text-xl font-bold">{topic.title[lang]}</h3>
+                  </div>
+                  <span className={`field-icon field-${topic.tone}`}>
+                    <GraduationCap size={20} />
+                  </span>
+                </div>
+                {topic.Component ? (
+                  <div className="grid gap-6">
+                    <topic.Component lang={lang} theme={theme} />
+                  </div>
+                ) : (
+                  <CompactKnowledgeTopic topic={topic} lang={lang} copy={copy} />
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
