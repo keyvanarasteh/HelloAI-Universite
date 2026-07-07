@@ -8,9 +8,9 @@ const flowDiagram = (tr) => `flowchart LR
   C --> D["Commit"]
   D --> E["Push"]
   E --> F["Pull Request"]
-  F -->|${tr ? "inceleme" : "review"}| G{"${tr ? "Onaylandi mi?" : "Approved?"}"}
+  F -->|${tr ? "inceleme" : "review"}| G{"${tr ? "Onaylandı mı?" : "Approved?"}"}
   G -->|${tr ? "evet" : "yes"}| H["Merge"]
-  G -->|${tr ? "degisiklik iste" : "request changes"}| C
+  G -->|${tr ? "değişiklik iste" : "request changes"}| C
 `;
 
 export function OpenSourceContributionNote({ lang, theme }) {
@@ -18,14 +18,14 @@ export function OpenSourceContributionNote({ lang, theme }) {
   const [activeStep, setActiveStep] = useState(0);
   const pipeline = tr
     ? [
-        { icon: Download, title: "Fork", purpose: "Projeyi kendi Github hesabina kopyalarsin.", action: "Orijinal repoda Fork butonuna bas." },
-        { icon: Download, title: "Clone", purpose: "Kendi kopyani bilgisayarina indirirsin.", action: "git clone ile lokal calisma alani ac." },
-        { icon: GitBranch, title: "Branch", purpose: "Ana koddan ayrilan guvenli bir calisma dali acarsin.", action: "Degisikligi bu dalda yap." },
-        { icon: GitCommit, title: "Commit", purpose: "Kucuk ve anlamli degisikligi kayda gecirirsin.", action: "Mesaji kisa, net ve gercek yap." },
-        { icon: Upload, title: "Push", purpose: "Degisikligi Github'daki fork'una gonderirsin.", action: "Branch'i origin'e push et." },
-        { icon: GitPullRequest, title: "Pull Request", purpose: "Degisikligini ana projeye onerirsin.", action: "Ne yaptigini ve nasil test ettigini yaz." },
-        { icon: MessageSquare, title: "Review", purpose: "Bakimci yorum yapar, gerekirse duzenleme ister.", action: "Yorumu sakin oku, branch'te duzelt." },
-        { icon: GitMerge, title: "Merge", purpose: "Onaylanan katkı ana koda girer.", action: "Katkin artik projenin parcasidir." },
+        { icon: Download, title: "Fork", purpose: "Projeyi kendi GitHub hesabına kopyalarsın.", action: "Orijinal repoda Fork butonuna bas." },
+        { icon: Download, title: "Clone", purpose: "Kendi kopyanı bilgisayarına indirirsin.", action: "git clone ile lokal çalışma alanı aç." },
+        { icon: GitBranch, title: "Branch", purpose: "Ana koddan ayrılan güvenli bir çalışma dalı açarsın.", action: "Değişikliği bu dalda yap." },
+        { icon: GitCommit, title: "Commit", purpose: "Küçük ve anlamlı değişikliği kayda geçirirsin.", action: "Mesajı kısa, net ve gerçek yap." },
+        { icon: Upload, title: "Push", purpose: "Değişikliği GitHub'daki fork'una gönderirsin.", action: "Branch'i origin'e push et." },
+        { icon: GitPullRequest, title: "Pull Request", purpose: "Değişikliğini ana projeye önerirsin.", action: "Ne yaptığını ve nasıl test ettiğini yaz." },
+        { icon: MessageSquare, title: "Review", purpose: "Bakımcı yorum yapar, gerekirse düzenleme ister.", action: "Yorumu sakin oku, branch'te düzelt." },
+        { icon: GitMerge, title: "Merge", purpose: "Onaylanan katkı ana koda girer.", action: "Katkın artık projenin parçasıdır." },
       ]
     : [
         { icon: Download, title: "Fork", purpose: "Copy the project into your own Github account.", action: "Press Fork on the original repository." },
@@ -42,7 +42,7 @@ export function OpenSourceContributionNote({ lang, theme }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Katki Pipeline'i" : "Contribution Pipeline"}>
+      <NoteSection title={tr ? "Katkı Pipeline'ı" : "Contribution Pipeline"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[1fr_1fr]">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {pipeline.map((step, index) => {
@@ -68,7 +68,7 @@ export function OpenSourceContributionNote({ lang, theme }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Aktif asama" : "Active stage"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Aktif aşama" : "Active stage"}</p>
                 <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -86,16 +86,16 @@ export function OpenSourceContributionNote({ lang, theme }) {
 
       <NoteSection title={tr ? "Terimler" : "Terms"}>
         <NoteTable
-          headers={tr ? ["Terim", "Anlami"] : ["Term", "Meaning"]}
+          headers={tr ? ["Terim", "Anlamı"] : ["Term", "Meaning"]}
           rows={[
-            ["Fork", tr ? "Bir reponun kendi hesabina kopyasini olusturma." : "Creating a copy of someone else's repo under your own account."],
-            ["PR (Pull Request)", tr ? "Degisikligini orijinal projeye onerme." : "Proposing your change to the original project."],
-            ["Merge", tr ? "Onaylanan degisikligin ana koda birlestirilmesi." : "Integrating an approved change into the main code."],
+            ["Fork", tr ? "Bir reponun kendi hesabına kopyasını oluşturma." : "Creating a copy of someone else's repo under your own account."],
+            ["PR (Pull Request)", tr ? "Değişikliğini orijinal projeye önerme." : "Proposing your change to the original project."],
+            ["Merge", tr ? "Onaylanan değişikliğin ana koda birleştirilmesi." : "Integrating an approved change into the main code."],
           ]}
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Fork'tan Merge'e Akis" : "Fork-to-Merge Flow"}>
+      <NoteSection title={tr ? "Fork'tan Merge'e Akış" : "Fork-to-Merge Flow"}>
         <Mermaid theme={theme} chart={flowDiagram(tr)} />
         <TerminalBlock
           caption={tr ? "Fork'tan PR'a" : "From fork to PR"}
@@ -105,11 +105,11 @@ export function OpenSourceContributionNote({ lang, theme }) {
                   "git clone https://github.com/<kullanici-adin>/<repo>.git",
                   "cd <repo>",
                   "git checkout -b duzeltme/kisa-aciklama",
-                  { comment: true, text: "# ... degisikligi yap ve test et ..." },
+                  { comment: true, text: "# ... değişikliği yap ve test et ..." },
                   "git add .",
                   'git commit -m "kisa ve net aciklama"',
                   "git push origin duzeltme/kisa-aciklama",
-                  { comment: true, text: "# Github'da 'Compare & pull request' butonuna tikla" },
+                  { comment: true, text: "# GitHub'da 'Compare & pull request' butonuna tıkla" },
                 ]
               : [
                   "git clone https://github.com/<your-username>/<repo>.git",

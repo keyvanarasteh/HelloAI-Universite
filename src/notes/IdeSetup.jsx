@@ -7,11 +7,11 @@ export function IdeSetupNote({ lang }) {
   const [activeStep, setActiveStep] = useState(0);
   const setupSteps = tr
     ? [
-        { icon: PackageCheck, title: "VSCode kur", detail: "Editor, terminal, git paneli ve extension sistemi tek yerde hazir olur.", check: "code --version" },
-        { icon: Search, title: "Eklenti bul", detail: "Extensions panelinde Codex veya Claude Code icin resmi eklentiyi ara.", check: "Yayinci adini kontrol et" },
-        { icon: KeyRound, title: "Hesapla giris yap", detail: "Agent'in proje baglaminda calisabilmesi icin gerekli hesaba baglan.", check: "Oturum acik mi?" },
-        { icon: GitBranch, title: "Git kimligini ayarla", detail: "Commit'lerin dogru isim ve e-posta ile kaydedilmesini sagla.", check: "git config --global --list" },
-        { icon: Play, title: "Komut paletinden baslat", detail: "Cmd/Ctrl+Shift+P ile agent komutunu ac ve projede dene.", check: "Ilk gorevi kucuk tut" },
+        { icon: PackageCheck, title: "VSCode kur", detail: "Editör, terminal, Git paneli ve extension sistemi tek yerde hazır olur.", check: "code --version" },
+        { icon: Search, title: "Eklenti bul", detail: "Extensions panelinde Codex veya Claude Code için resmi eklentiyi ara.", check: "Yayıncı adını kontrol et" },
+        { icon: KeyRound, title: "Hesapla giriş yap", detail: "Agent'in proje bağlamında çalışabilmesi için gerekli hesaba bağlan.", check: "Oturum açık mı?" },
+        { icon: GitBranch, title: "Git kimliğini ayarla", detail: "Commit'lerin doğru isim ve e-posta ile kaydedilmesini sağla.", check: "git config --global --list" },
+        { icon: Play, title: "Komut paletinden başlat", detail: "Cmd/Ctrl+Shift+P ile agent komutunu aç ve projede dene.", check: "İlk görevi küçük tut" },
       ]
     : [
         { icon: PackageCheck, title: "Install VSCode", detail: "Editor, terminal, git panel, and extension system are ready in one place.", check: "code --version" },
@@ -25,7 +25,7 @@ export function IdeSetupNote({ lang }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Kurulum Rotasi" : "Setup Route"}>
+      <NoteSection title={tr ? "Kurulum Rotası" : "Setup Route"}>
         <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
           <div className="grid gap-2 sm:grid-cols-5">
             {setupSteps.map((step, index) => {
@@ -51,7 +51,7 @@ export function IdeSetupNote({ lang }) {
           <div className="mt-4 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Aktif kurulum adimi" : "Active setup step"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Aktif kurulum adımı" : "Active setup step"}</p>
                 <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -72,9 +72,9 @@ export function IdeSetupNote({ lang }) {
           items={
             tr
               ? [
-                  "Ucretsiz, acik kaynak, genis eklenti (extension) destegi.",
-                  "Git entegrasyonu, terminal ve hata ayiklama araclari hazir gelir.",
-                  "Codex ve Claude Code icin resmi eklentileri mevcut.",
+                  "Ücretsizdir, açık kaynaktır ve geniş eklenti (extension) desteği sunar.",
+                  "Git entegrasyonu, terminal ve hata ayıklama araçları hazır gelir.",
+                  "Codex ve Claude Code için resmi eklentileri vardır.",
                 ]
               : [
                   "Free, open source, wide extension support.",
@@ -90,11 +90,11 @@ export function IdeSetupNote({ lang }) {
           steps={
             tr
               ? [
-                  "VSCode'u ac, sol menuden Extensions sekmesine git.",
+                  "VSCode'u aç, sol menüden Extensions sekmesine git.",
                   "Arama kutusuna 'Codex' veya 'Claude Code' yaz.",
-                  "Resmi eklentiyi bul ve Install butonuna tikla.",
-                  "Istenirse OpenAI/Anthropic hesabinla giris yap.",
-                  "Komut paletinden (Cmd/Ctrl+Shift+P) agent'i acarak kullanmaya basla.",
+                  "Resmi eklentiyi bul ve Install butonuna tıkla.",
+                  "İstenirse OpenAI/Anthropic hesabınla giriş yap.",
+                  "Komut paletinden (Cmd/Ctrl+Shift+P) agent'i açarak kullanmaya başla.",
                 ]
               : [
                   "Open VSCode, go to the Extensions tab on the left.",
@@ -107,14 +107,14 @@ export function IdeSetupNote({ lang }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Global Git Ayarlari (Tum Platformlar)" : "Global Git Config (All Platforms)"}>
+      <NoteSection title={tr ? "Global Git Ayarları (Tüm Platformlar)" : "Global Git Config (All Platforms)"}>
         <TerminalBlock
           caption={tr ? "Terminalde (Windows/macOS/Linux)" : "In the terminal (Windows/macOS/Linux)"}
           lines={
             tr
               ? [
                   "git --version",
-                  'git config --global user.name "Adin Soyadin"',
+                  'git config --global user.name "Adın Soyadın"',
                   'git config --global user.email "eposta@ornek.com"',
                   "git config --global --list",
                 ]

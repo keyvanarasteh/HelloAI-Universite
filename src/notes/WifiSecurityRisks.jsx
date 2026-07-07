@@ -3,13 +3,13 @@ import { Eye, Gavel, KeyRound, LockKeyhole, Router, ShieldCheck } from "lucide-r
 import { Mermaid, NoteCallout, NoteList, NoteSection, NoteTable } from "../components/NoteKit.jsx";
 
 const isolationDiagram = (tr) => `flowchart LR
-  subgraph Insecure[${tr ? "Izole Edilmemis" : "Not Isolated"}]
-    G1["${tr ? "Misafir Cihaz" : "Guest Device"}"] --> N1["${tr ? "Guest Wifi" : "Guest Wifi"}"]
-    N1 --> I1["${tr ? "Kurumsal Ic Ag" : "Internal Network"}"]
+  subgraph Insecure[${tr ? "İzole Edilmemiş" : "Not Isolated"}]
+    G1["${tr ? "Misafir Cihaz" : "Guest Device"}"] --> N1["${tr ? "Guest Wi-Fi" : "Guest Wi-Fi"}"]
+    N1 --> I1["${tr ? "Kurumsal İç Ağ" : "Internal Network"}"]
   end
-  subgraph Secure[${tr ? "VLAN ile Izole" : "VLAN-Isolated"}]
-    G2["${tr ? "Misafir Cihaz" : "Guest Device"}"] --> N2["${tr ? "Guest Wifi (VLAN)" : "Guest Wifi (VLAN)"}"]
-    N2 --> W2["${tr ? "Sadece Internet" : "Internet Only"}"]
+  subgraph Secure[${tr ? "VLAN ile İzole" : "VLAN-Isolated"}]
+    G2["${tr ? "Misafir Cihaz" : "Guest Device"}"] --> N2["${tr ? "Guest Wi-Fi (VLAN)" : "Guest Wi-Fi (VLAN)"}"]
+    N2 --> W2["${tr ? "Sadece İnternet" : "Internet Only"}"]
   end
 `;
 
@@ -19,27 +19,27 @@ export function WifiSecurityRisksNote({ lang, theme }) {
   const risks = {
     isolation: {
       icon: Router,
-      title: tr ? "Ag izolasyonu" : "Network isolation",
-      problem: tr ? "Guest ag ana kurumsal aga ulasabiliyorsa risk buyur." : "Risk grows if the guest network can reach the internal network.",
-      defense: tr ? "VLAN ile ayir, sadece Internet cikisi ver." : "Separate with VLAN and allow Internet-only access.",
+      title: tr ? "Ağ izolasyonu" : "Network isolation",
+      problem: tr ? "Guest ağ ana kurumsal ağa ulaşabiliyorsa risk büyür." : "Risk grows if the guest network can reach the internal network.",
+      defense: tr ? "VLAN ile ayır, yalnızca İnternet çıkışı ver." : "Separate with VLAN and allow Internet-only access.",
     },
     plaintext: {
       icon: Eye,
-      title: tr ? "Duz metin trafik" : "Plaintext traffic",
-      problem: tr ? "HTTP veya zayif portal formlari agda okunabilir hale gelebilir." : "HTTP or weak portal forms can become readable on the network.",
-      defense: tr ? "HTTPS/HSTS zorla, hassas formlari guvenli kanala tasi." : "Enforce HTTPS/HSTS and move sensitive forms to secure channels.",
+      title: tr ? "Düz metin trafik" : "Plaintext traffic",
+      problem: tr ? "HTTP veya zayıf portal formları ağda okunabilir hale gelebilir." : "HTTP or weak portal forms can become readable on the network.",
+      defense: tr ? "HTTPS/HSTS zorla, hassas formları güvenli kanala taşı." : "Enforce HTTPS/HSTS and move sensitive forms to secure channels.",
     },
     otp: {
       icon: KeyRound,
       title: "OTP / Kod",
-      problem: tr ? "Dogrulama kodu gorulurse hesap ele gecirme zinciri baslayabilir." : "If verification codes are exposed, account takeover can begin.",
-      defense: tr ? "Kodlari asla HTTP/guvensiz portalda tasima; sure ve oran limitleri ekle." : "Never transmit codes over HTTP/unsafe portals; add expiry and rate limits.",
+      problem: tr ? "Doğrulama kodu görünürse hesap ele geçirme zinciri başlayabilir." : "If verification codes are exposed, account takeover can begin.",
+      defense: tr ? "Kodları asla HTTP veya güvensiz portalda taşıma; süre ve oran limitleri ekle." : "Never transmit codes over HTTP/unsafe portals; add expiry and rate limits.",
     },
     legal: {
       icon: Gavel,
-      title: tr ? "Yasal sinir" : "Legal boundary",
-      problem: tr ? "Gercek kullanici verisini izinsiz hedeflemek suctur." : "Targeting real user data without authorization is a crime.",
-      defense: tr ? "Sadece yazili izinli, kapsamli ve izole lab testleri yap." : "Test only with written authorization, clear scope, and isolated labs.",
+      title: tr ? "Yasal sınır" : "Legal boundary",
+      problem: tr ? "Gerçek kullanıcı verisini izinsiz hedeflemek suçtur." : "Targeting real user data without authorization is a crime.",
+      defense: tr ? "Yalnızca yazılı izinli, kapsamı net ve izole lab testleri yap." : "Test only with written authorization, clear scope, and isolated labs.",
     },
   };
   const active = risks[activeRisk];
@@ -47,7 +47,7 @@ export function WifiSecurityRisksNote({ lang, theme }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Guest Wifi Risk Konsolu" : "Guest Wifi Risk Console"}>
+      <NoteSection title={tr ? "Guest Wi-Fi Risk Konsolu" : "Guest Wi-Fi Risk Console"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(risks).map(([id, risk]) => {
@@ -100,14 +100,14 @@ export function WifiSecurityRisksNote({ lang, theme }) {
         </div>
       </NoteSection>
 
-      <NoteSection title={tr ? "Guest Wifi Neden Riskli Olabilir?" : "Why Guest Wifi Can Be Risky"}>
+      <NoteSection title={tr ? "Guest Wi-Fi Neden Riskli Olabilir?" : "Why Guest Wi-Fi Can Be Risky"}>
         <NoteList
           items={
             tr
               ? [
-                  "Misafir aglari genelde hizli kurulum icin basit yapilandirilir; bazen ana kurumsal agdan yeterince izole edilmez.",
-                  "Ag savunmasiz kalirsa, sifrelenmemis (HTTP) trafik veya zayif giris ekranlari izlenebilir hale gelebilir.",
-                  "Gorulebilecek hassas veri ornekleri: kimlik numarasi (TC kimlik no), telefon numarasi, SMS/e-posta dogrulama kodu (OTP).",
+                  "Misafir ağları genellikle hızlı kurulum için basit yapılandırılır; bazen ana kurumsal ağdan yeterince izole edilmez.",
+                  "Ağ savunmasız kalırsa, şifrelenmemiş (HTTP) trafik veya zayıf giriş ekranları izlenebilir hale gelebilir.",
+                  "Görülebilecek hassas veri örnekleri: kimlik numarası (TC kimlik no), telefon numarası, SMS/e-posta doğrulama kodu (OTP).",
                 ]
               : [
                   "Guest networks are often set up quickly with minimal configuration and may not be well isolated from the internal network.",
@@ -119,22 +119,22 @@ export function WifiSecurityRisksNote({ lang, theme }) {
         <Mermaid theme={theme} chart={isolationDiagram(tr)} />
       </NoteSection>
 
-      <NoteSection title={tr ? "Sonuclari" : "Consequences"}>
+      <NoteSection title={tr ? "Sonuçları" : "Consequences"}>
         <NoteTable
-          headers={tr ? ["Risk", "Aciklama"] : ["Risk", "Description"]}
+          headers={tr ? ["Risk", "Açıklama"] : ["Risk", "Description"]}
           rows={[
             [
-              tr ? "Kimlik hirsizligi" : "Identity theft",
-              tr ? "Kimlik numarasi gibi bilgilerle sahte basvuru/islem yapilabilir." : "Stolen ID numbers can be used for fraudulent applications/transactions.",
+              tr ? "Kimlik hırsızlığı" : "Identity theft",
+              tr ? "Kimlik numarası gibi bilgilerle sahte başvuru veya işlem yapılabilir." : "Stolen ID numbers can be used for fraudulent applications/transactions.",
             ],
             [
-              tr ? "Hesap ele gecirme" : "Account takeover",
-              tr ? "OTP/dogrulama kodu calinirsa oturum veya hesap devralinabilir." : "A stolen OTP/verification code can let an attacker hijack a session or account.",
+              tr ? "Hesap ele geçirme" : "Account takeover",
+              tr ? "OTP/doğrulama kodu çalınırsa oturum veya hesap devralınabilir." : "A stolen OTP/verification code can let an attacker hijack a session or account.",
             ],
             [
-              tr ? "Kimlige burunme" : "Impersonation",
+              tr ? "Kimliğe bürünme" : "Impersonation",
               tr
-                ? "Ele gecirilen kimlikle mağdur, islemedigi bir sucla iliskilendirilebilir."
+                ? "Ele geçirilen kimlikle mağdur, işlemediği bir suçla ilişkilendirilebilir."
                 : "Using a stolen identity, the victim can end up linked to a crime they didn't commit.",
             ],
           ]}
@@ -143,19 +143,19 @@ export function WifiSecurityRisksNote({ lang, theme }) {
 
       <NoteCallout tone="warning">
         {tr
-          ? "KVKK ve hukuki boyut: TC kimlik no ve iletisim bilgisi KVKK kapsaminda kisisel veridir. Yetkisiz ele gecirme, TCK'nin bilisim suclarina iliskin maddeleri kapsaminda suctur. Bu tur testler sadece yazili izinli, kapsami net pentest anlasmalari icinde ve izole lab ortamlarinda yapilabilir — gercek kullanicilarin verisi asla izinsiz hedef alinmamalidir."
+          ? "KVKK ve hukuki boyut: TC kimlik no ve iletişim bilgisi KVKK kapsamında kişisel veridir. Yetkisiz ele geçirme, TCK'nin bilişim suçlarına ilişkin maddeleri kapsamında suçtur. Bu tür testler yalnızca yazılı izinli, kapsamı net pentest anlaşmaları içinde ve izole lab ortamlarında yapılabilir; gerçek kullanıcıların verisi asla izinsiz hedef alınmamalıdır."
           : "KVKK / legal angle: national ID numbers and contact info are personal data under Turkish law (KVKK), and unauthorized capture is a crime under the penal code's computer-crime articles. This kind of testing may only happen under a written, scoped pentest agreement in an isolated lab — never against real users' data without authorization."}
       </NoteCallout>
 
-      <NoteSection title={tr ? "Savunma Onerileri" : "Defensive Recommendations"}>
+      <NoteSection title={tr ? "Savunma Önerileri" : "Defensive Recommendations"}>
         <NoteList
           items={
             tr
               ? [
-                  "Guest agi ana agdan VLAN ile izole et.",
-                  "Guest agda zorunlu HTTPS/HSTS kullan.",
-                  "WPA2/3-Enterprise gibi guclu kimlik dogrulama tercih et.",
-                  "Ag izleme ve anormal trafik tespiti (IDS) kullan.",
+                  "Guest ağı ana ağdan VLAN ile izole et.",
+                  "Guest ağda zorunlu HTTPS/HSTS kullan.",
+                  "WPA2/3-Enterprise gibi güçlü kimlik doğrulama tercih et.",
+                  "Ağ izleme ve anormal trafik tespiti (IDS) kullan.",
                 ]
               : [
                   "Isolate the guest network from the internal network with a VLAN.",

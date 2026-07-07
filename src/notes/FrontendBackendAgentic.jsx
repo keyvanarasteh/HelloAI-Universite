@@ -3,9 +3,9 @@ import { Bot, Code2, Database, MessageSquare, Monitor, Server, Wrench } from "lu
 import { Mermaid, NoteCallout, NoteSection, NoteTable } from "../components/NoteKit.jsx";
 
 const architectureDiagram = (tr) => `flowchart LR
-  U["${tr ? "Kullanici" : "User"}"] --> F["FrontEnd\\n(HTML, CSS, JS, React)"]
-  F <--> B["BackEnd\\n(${tr ? "API, is mantigi" : "API, business logic"})"]
-  B <--> D[("${tr ? "Veritabani" : "Database"}")]
+  U["${tr ? "Kullanıcı" : "User"}"] --> F["FrontEnd\\n(HTML, CSS, JS, React)"]
+  F <--> B["BackEnd\\n(${tr ? "API, iş mantığı" : "API, business logic"})"]
+  B <--> D[("${tr ? "Veritabanı" : "Database"}")]
 `;
 
 const agentDiagram = (tr) => `flowchart TB
@@ -15,9 +15,9 @@ const agentDiagram = (tr) => `flowchart TB
   end
   subgraph agent[Agentic AI]
     direction LR
-    Q2["${tr ? "Gorev" : "Task"}"] --> M2["Model"] --> T["${tr ? "Arac cagir\\n(dosya, komut, arama)" : "Call tools\\n(files, commands, search)"}"]
+    Q2["${tr ? "Görev" : "Task"}"] --> M2["Model"] --> T["${tr ? "Araç çağır\\n(dosya, komut, arama)" : "Call tools\\n(files, commands, search)"}"]
     T --> M2
-    M2 --> A2["${tr ? "Eylem + sonuc" : "Action + result"}"]
+    M2 --> A2["${tr ? "Eylem + sonuç" : "Action + result"}"]
   end
 `;
 
@@ -31,9 +31,9 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
       id: "frontend",
       icon: Monitor,
       title: "FrontEnd",
-      short: tr ? "Kullanicinin gordugu ekran" : "The screen the user sees",
+      short: tr ? "Kullanıcının gördüğü ekran" : "The screen the user sees",
       detail: tr
-        ? "Butonlar, formlar, renkler, sayfa gecisleri ve kullanici etkilesimi burada yasiyor."
+        ? "Butonlar, formlar, renkler, sayfa geçişleri ve kullanıcı etkileşimi burada yaşar."
         : "Buttons, forms, colors, page transitions, and user interaction live here.",
       tech: "HTML + CSS + JavaScript + React",
     },
@@ -41,9 +41,9 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
       id: "backend",
       icon: Server,
       title: "BackEnd",
-      short: tr ? "Is mantigi ve API katmani" : "Business logic and API layer",
+      short: tr ? "İş mantığı ve API katmanı" : "Business logic and API layer",
       detail: tr
-        ? "Yetkilendirme, veri dogrulama, hesaplama ve kalici sistem kurallari genelde burada calisir."
+        ? "Yetkilendirme, veri doğrulama, hesaplama ve kalıcı sistem kuralları genellikle burada çalışır."
         : "Authorization, validation, calculations, and persistent system rules usually run here.",
       tech: tr ? "Bu projede yok" : "Not used in this project",
     },
@@ -51,9 +51,9 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
       id: "database",
       icon: Database,
       title: tr ? "Veri" : "Data",
-      short: tr ? "Bilginin saklandigi yer" : "Where information persists",
+      short: tr ? "Bilginin saklandığı yer" : "Where information persists",
       detail: tr
-        ? "Gercek uygulamalarda veritabani olur; bu projede tercih ve cevaplar tarayicinin localStorage alaninda tutulur."
+        ? "Gerçek uygulamalarda veritabanı olur; bu projede tercih ve cevaplar tarayıcının localStorage alanında tutulur."
         : "Real apps often use a database; this project keeps choices and answers in browser localStorage.",
       tech: "localStorage",
     },
@@ -63,15 +63,15 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
     chat: {
       icon: MessageSquare,
       title: "LLM Chat",
-      prompt: tr ? "Bu hatayi nasil cozerim?" : "How do I fix this bug?",
-      result: tr ? "Metinle aciklar, ornek verir, yonlendirir." : "Explains in text, gives examples, guides you.",
-      action: tr ? "Soyler" : "Tells",
+      prompt: tr ? "Bu hatayı nasıl çözerim?" : "How do I fix this bug?",
+      result: tr ? "Metinle açıklar, örnek verir ve yönlendirir." : "Explains in text, gives examples, guides you.",
+      action: tr ? "Söyler" : "Tells",
     },
     agent: {
       icon: Bot,
       title: "Agentic AI",
-      prompt: tr ? "Projede hatayi bul, duzelt, test et." : "Find the bug in the project, fix it, test it.",
-      result: tr ? "Dosya okur, kod yazar, komut calistirir ve sonucu raporlar." : "Reads files, edits code, runs commands, and reports the result.",
+      prompt: tr ? "Projede hatayı bul, düzelt, test et." : "Find the bug in the project, fix it, test it.",
+      result: tr ? "Dosya okur, kod yazar, komut çalıştırır ve sonucu raporlar." : "Reads files, edits code, runs commands, and reports the result.",
       action: tr ? "Yapar" : "Acts",
     },
   };
@@ -82,7 +82,7 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Canli Mimari Katmanlari" : "Live Architecture Layers"}>
+      <NoteSection title={tr ? "Canlı Mimari Katmanları" : "Live Architecture Layers"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="grid gap-2">
             {layers.map((item) => {
@@ -113,7 +113,7 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Secilen katman" : "Selected layer"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Seçilen katman" : "Selected layer"}</p>
                 <h3 className="mt-2 text-xl font-bold">{layer.title}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -136,12 +136,12 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
           rows={[
             [
               "FrontEnd",
-              tr ? "Kullanicinin tarayicida gordugu ve etkilesime gectigi kisim." : "What the user sees and interacts with in the browser.",
+              tr ? "Kullanıcının tarayıcıda gördüğü ve etkileşime geçtiği kısım." : "What the user sees and interacts with in the browser.",
               "React + Vite + Tailwind CSS",
             ],
             [
               "BackEnd",
-              tr ? "Verinin islendigi, saklandigi, is mantiginin calistigi sunucu tarafi." : "The server side where data is processed, stored, business logic runs.",
+              tr ? "Verinin işlendiği, saklandığı ve iş mantığının çalıştığı sunucu tarafı." : "The server side where data is processed, stored, and business logic runs.",
               tr ? "Yok — bu proje sadece FrontEnd, veriler localStorage'da" : "None — this project is FrontEnd-only, data lives in localStorage",
             ],
           ]}
@@ -181,13 +181,13 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
             </div>
             <div className="mt-5 grid gap-3">
               <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Gorev" : "Task"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Görev" : "Task"}</p>
                 <p className="mt-2 text-sm leading-6">{selectedAi.prompt}</p>
               </div>
               <div className="rounded-lg border border-[var(--border)] p-4">
                 <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                   <Wrench size={14} />
-                  {tr ? "Cikti davranisi" : "Output behavior"}
+                  {tr ? "Çıktı davranışı" : "Output behavior"}
                 </div>
                 <p className="text-sm leading-6 text-[var(--muted)]">{selectedAi.result}</p>
               </div>
@@ -197,7 +197,7 @@ export function FrontendBackendAgenticNote({ lang, theme }) {
         <Mermaid theme={theme} chart={agentDiagram(tr)} />
         <NoteCallout>
           {tr
-            ? "LLM Chat: soru sorulur, model metinle cevap verir. Agentic AI: model arac kullanarak dosya okuma/yazma, komut calistirma gibi eylemleri zincirler (Claude Code, Codex). Fark: chat modeli \"soyler\", agent \"yapar\"."
+            ? "LLM Chat: soru sorulur, model metinle cevap verir. Agentic AI: model araç kullanarak dosya okuma/yazma ve komut çalıştırma gibi eylemleri zincirler (Claude Code, Codex). Fark: chat modeli \"söyler\", agent \"yapar\"."
             : "LLM Chat: you ask a question, the model replies with text. Agentic AI: the model chains actions using tools — reading/writing files, running commands (Claude Code, Codex). The difference: a chat model \"tells\", an agent \"does\"."}
         </NoteCallout>
       </NoteSection>

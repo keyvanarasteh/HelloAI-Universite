@@ -21,31 +21,31 @@ export function GitGithubNote({ lang, theme }) {
     ? [
         {
           icon: GitBranch,
-          title: "Branch ac",
-          body: "Ana kodu bozmadan yeni fikir icin ayri bir calisma alani baslat.",
+          title: "Branch aç",
+          body: "Ana kodu bozmadan yeni fikir için ayrı bir çalışma alanı başlat.",
           command: "git checkout -b feature/yeni-ozellik",
           signal: "Risk izole olur",
         },
         {
           icon: GitCommit,
-          title: "Kucuk commit yap",
-          body: "Her commit tek bir anlamli degisikligi anlatir; gelecekte ne oldugunu okumak kolaylasir.",
-          command: 'git commit -m "ozellik: kisa aciklama"',
-          signal: "Gecmis okunur",
+          title: "Küçük commit yap",
+          body: "Her commit tek bir anlamlı değişikliği anlatır; gelecekte ne olduğunu okumak kolaylaşır.",
+          command: 'git commit -m "ozellik: kisa-aciklama"',
+          signal: "Geçmiş okunur",
         },
         {
           icon: GitPullRequest,
           title: "Push ve PR",
-          body: "Degisikligi paylas, ekipten yorum al ve kodun ana projeye girmeden once kontrol edilmesini sagla.",
+          body: "Değişikliği paylaş, ekipten yorum al ve kodun ana projeye girmeden önce kontrol edilmesini sağla.",
           command: "git push origin feature/yeni-ozellik",
-          signal: "Ekip gorur",
+          signal: "Ekip görür",
         },
         {
           icon: GitMerge,
           title: "Merge et",
-          body: "Onaylanan degisikligi ana koda birlestir; proje gecmisi temiz ve izlenebilir kalir.",
+          body: "Onaylanan değişikliği ana koda birleştir; proje geçmişi temiz ve izlenebilir kalır.",
           command: "git merge feature/yeni-ozellik",
-          signal: "Urun ilerler",
+          signal: "Ürün ilerler",
         },
       ]
     : [
@@ -116,7 +116,7 @@ export function GitGithubNote({ lang, theme }) {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-xs font-bold uppercase text-[var(--muted)]">
-                  {tr ? "Aktif adim" : "Active step"} {activeStep + 1}
+                  {tr ? "Aktif adım" : "Active step"} {activeStep + 1}
                 </p>
                 <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
               </div>
@@ -144,10 +144,10 @@ export function GitGithubNote({ lang, theme }) {
           items={
             tr
               ? [
-                  "Github hesabin, senin yazilim CV'in gibi calisir — issverenler ve is ortaklari commit gecmisine bakar.",
-                  "Branch: ana koddan (main) ayrilan, uzerinde bagimsiz calisilan bir dal.",
-                  "Changelog: commit mesajlarinin degisiklikleri anlasilir sekilde ozetlemesi.",
-                  "Teamwork: birden fazla kisi ayni projede coakisma yasamadan branch'ler ile calisir.",
+                  "GitHub hesabın, yazılım CV'in gibi çalışır; işverenler ve iş ortakları commit geçmişine bakar.",
+                  "Branch: ana koddan (main) ayrılan, üzerinde bağımsız çalışılan bir dal.",
+                  "Changelog: commit mesajlarının değişiklikleri anlaşılır şekilde özetlemesi.",
+                  "Teamwork: birden fazla kişinin aynı projede çakışma yaşamadan branch'ler ile çalışması.",
                 ]
               : [
                   "Your Github account works like your software CV — employers and collaborators look at your commit history.",
@@ -159,27 +159,27 @@ export function GitGithubNote({ lang, theme }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Bir Branch'in Hayat Dongusu" : "A Branch's Lifecycle"}>
+      <NoteSection title={tr ? "Bir Branch'in Hayat Döngüsü" : "A Branch's Lifecycle"}>
         <Mermaid theme={theme} chart={branchDiagram} />
       </NoteSection>
 
-      <NoteSection title={tr ? "Terminalde Ilk Kurulum ve Branch Akisi" : "First-Time Setup & Branch Flow in the Terminal"}>
+      <NoteSection title={tr ? "Terminalde İlk Kurulum ve Branch Akışı" : "First-Time Setup & Branch Flow in the Terminal"}>
         <TerminalBlock
           caption={tr ? "Global ayar (bir kere)" : "Global setup (once)"}
           lines={
             tr
-              ? ['git config --global user.name "Adin Soyadin"', 'git config --global user.email "eposta@ornek.com"']
+              ? ['git config --global user.name "Adın Soyadın"', 'git config --global user.email "eposta@ornek.com"']
               : ['git config --global user.name "Your Name"', 'git config --global user.email "email@example.com"']
           }
         />
         <TerminalBlock
-          caption={tr ? "Gunluk branch akisi" : "Everyday branch flow"}
+          caption={tr ? "Günlük branch akışı" : "Everyday branch flow"}
           lines={
             tr
               ? [
                   "git checkout -b feature/yeni-ozellik",
                   "git add .",
-                  'git commit -m "yeni ozellik: kisa aciklama"',
+                  'git commit -m "yeni ozellik: kisa-aciklama"',
                   "git push origin feature/yeni-ozellik",
                 ]
               : [
@@ -192,10 +192,10 @@ export function GitGithubNote({ lang, theme }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Kirmizi Cizgi" : "The Red Line"}>
+      <NoteSection title={tr ? "Kırmızı Çizgi" : "The Red Line"}>
         <NoteCallout tone="warning">
           {tr
-            ? "Fake commit atmak (commit tarihini/sayisini yapay olarak sisirmek) teknik olarak mumkundur ama algilanabilir: bos commit'ler, anormal commit yogunlugu ve tutarsiz gecmis fark edilir. Sahte katki gecmisi asla yapilmamali — fark edildiginde guven kaybina yol acar."
+            ? "Fake commit atmak (commit tarihini veya sayısını yapay olarak şişirmek) teknik olarak mümkündür ama algılanabilir: boş commit'ler, anormal commit yoğunluğu ve tutarsız geçmiş fark edilir. Sahte katkı geçmişi asla oluşturulmamalı; fark edildiğinde güven kaybına yol açar."
             : "Faking commits (artificially inflating commit dates/counts) is technically possible but detectable: empty commits, unnatural commit density, and inconsistent history stand out. Never fake your contribution history — it destroys trust when discovered."}
         </NoteCallout>
       </NoteSection>

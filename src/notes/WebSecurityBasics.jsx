@@ -3,21 +3,21 @@ import { Code2, Eye, LockKeyhole, Router, ShieldCheck, Unlock } from "lucide-rea
 import { Mermaid, NoteCallout, NoteList, NoteSection } from "../components/NoteKit.jsx";
 
 const httpDiagram = (tr) => `sequenceDiagram
-  participant B as ${tr ? "Tarayici" : "Browser"}
-  participant E as ${tr ? "Ag Dinleyen" : "Network Eavesdropper"}
+  participant B as ${tr ? "Tarayıcı" : "Browser"}
+  participant E as ${tr ? "Ağ Dinleyen" : "Network Eavesdropper"}
   participant S as ${tr ? "Sunucu" : "Server"}
-  B->>S: HTTP ${tr ? "istek (duz metin)" : "request (plain text)"}
-  Note over E: ${tr ? "Trafigi okuyabilir" : "Can read the traffic"}
-  S->>B: HTTP ${tr ? "cevap (duz metin)" : "response (plain text)"}
+  B->>S: HTTP ${tr ? "istek (düz metin)" : "request (plain text)"}
+  Note over E: ${tr ? "Trafiği okuyabilir" : "Can read the traffic"}
+  S->>B: HTTP ${tr ? "cevap (düz metin)" : "response (plain text)"}
 `;
 
 const httpsDiagram = (tr) => `sequenceDiagram
-  participant B as ${tr ? "Tarayici" : "Browser"}
-  participant E as ${tr ? "Ag Dinleyen" : "Network Eavesdropper"}
+  participant B as ${tr ? "Tarayıcı" : "Browser"}
+  participant E as ${tr ? "Ağ Dinleyen" : "Network Eavesdropper"}
   participant S as ${tr ? "Sunucu" : "Server"}
-  B->>S: HTTPS ${tr ? "istek (TLS ile sifreli)" : "request (TLS-encrypted)"}
-  Note over E: ${tr ? "Sadece sifreli veri gorur" : "Only sees encrypted data"}
-  S->>B: HTTPS ${tr ? "cevap (TLS ile sifreli)" : "response (TLS-encrypted)"}
+  B->>S: HTTPS ${tr ? "istek (TLS ile şifreli)" : "request (TLS-encrypted)"}
+  Note over E: ${tr ? "Sadece şifreli veri görür" : "Only sees encrypted data"}
+  S->>B: HTTPS ${tr ? "cevap (TLS ile şifreli)" : "response (TLS-encrypted)"}
 `;
 
 export function WebSecurityBasicsNote({ lang, theme }) {
@@ -27,26 +27,26 @@ export function WebSecurityBasicsNote({ lang, theme }) {
     web: {
       icon: Code2,
       title: "HTML / CSS / JS",
-      visible: tr ? "Tarayicinin calistirdigi yapi, gorunum ve davranis dosyalari." : "Structure, styling, and behavior files executed by the browser.",
-      habit: tr ? "Bir sayfayi incelerken once hangi dosya ne is yapiyor ayir." : "When inspecting a page, first separate which file does what.",
+      visible: tr ? "Tarayıcının çalıştırdığı yapı, görünüm ve davranış dosyaları." : "Structure, styling, and behavior files executed by the browser.",
+      habit: tr ? "Bir sayfayı incelerken önce hangi dosyanın ne yaptığını ayır." : "When inspecting a page, first separate which file does what.",
     },
     http: {
       icon: Unlock,
       title: "HTTP",
-      visible: tr ? "Istek ve cevap duz metin olabilir; agdaki biri icerigi okuyabilir." : "Requests and responses can be plain text; someone on the network may read content.",
-      habit: tr ? "Sifre, form ve hassas veri icin HTTP kullanma." : "Do not use HTTP for passwords, forms, or sensitive data.",
+      visible: tr ? "İstek ve cevap düz metin olabilir; ağdaki biri içeriği okuyabilir." : "Requests and responses can be plain text; someone on the network may read content.",
+      habit: tr ? "Şifre, form ve hassas veri için HTTP kullanma." : "Do not use HTTP for passwords, forms, or sensitive data.",
     },
     https: {
       icon: LockKeyhole,
       title: "HTTPS",
-      visible: tr ? "Icerik TLS ile sifrelenir; ag dinleyen kisi icerigi okuyamaz." : "Content is encrypted with TLS; a network observer cannot read it.",
-      habit: tr ? "Adres cubugunda HTTPS/kilit kontrolunu refleks haline getir." : "Make checking HTTPS/padlock in the address bar a reflex.",
+      visible: tr ? "İçerik TLS ile şifrelenir; ağı dinleyen kişi içeriği okuyamaz." : "Content is encrypted with TLS; a network observer cannot read it.",
+      habit: tr ? "Adres çubuğunda HTTPS/kilit kontrolünü refleks haline getir." : "Make checking HTTPS/padlock in the address bar a reflex.",
     },
     guest: {
       icon: Router,
       title: tr ? "Guest Wi-Fi" : "Guest Wi-Fi",
-      visible: tr ? "Baglanti metaverisi, DNS/SNI ve zaman/IP loglari gorulebilir." : "Connection metadata, DNS/SNI, and time/IP logs may be visible.",
-      habit: tr ? "Hassas islemleri guvenmedigin agda yapma; gerekiyorsa VPN kullan." : "Avoid sensitive actions on untrusted networks; use VPN when needed.",
+      visible: tr ? "Bağlantı metaverisi, DNS/SNI ve zaman/IP logları görülebilir." : "Connection metadata, DNS/SNI, and time/IP logs may be visible.",
+      habit: tr ? "Hassas işlemleri güvenmediğin ağda yapma; gerekiyorsa VPN kullan." : "Avoid sensitive actions on untrusted networks; use VPN when needed.",
     },
   };
   const active = lenses[activeLens];
@@ -54,7 +54,7 @@ export function WebSecurityBasicsNote({ lang, theme }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Web Guvenlik Mercegi" : "Web Security Lens"}>
+      <NoteSection title={tr ? "Web Güvenlik Merceği" : "Web Security Lens"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(lenses).map(([id, lens]) => {
@@ -80,7 +80,7 @@ export function WebSecurityBasicsNote({ lang, theme }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Ne gorunur?" : "What is visible?"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Ne görünür?" : "What is visible?"}</p>
                 <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -91,14 +91,14 @@ export function WebSecurityBasicsNote({ lang, theme }) {
               <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
                 <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                   <Eye size={14} />
-                  {tr ? "Gorunen alan" : "Visible surface"}
+                  {tr ? "Görünen alan" : "Visible surface"}
                 </div>
                 <p className="text-sm leading-6">{active.visible}</p>
               </div>
               <div className="rounded-lg border border-[var(--border)] p-4">
                 <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                   <ShieldCheck size={14} />
-                  {tr ? "Guvenli refleks" : "Safe reflex"}
+                  {tr ? "Güvenli refleks" : "Safe reflex"}
                 </div>
                 <p className="text-sm leading-6 text-[var(--muted)]">{active.habit}</p>
               </div>
@@ -112,8 +112,8 @@ export function WebSecurityBasicsNote({ lang, theme }) {
           items={
             tr
               ? [
-                  "Her website, tarayiciya gonderilen HTML (yapi), CSS (gorunum), JS (davranis) dosyalarindan olusur.",
-                  "Adres cubugundaki kilit simgesi HTTPS kullanildigini gosterir.",
+                  "Her web sitesi, tarayıcıya gönderilen HTML (yapı), CSS (görünüm) ve JS (davranış) dosyalarından oluşur.",
+                  "Adres çubuğundaki kilit simgesi HTTPS kullanıldığını gösterir.",
                 ]
               : [
                   "Every website is made of HTML (structure), CSS (look), and JS (behavior) sent to the browser.",
@@ -133,14 +133,14 @@ export function WebSecurityBasicsNote({ lang, theme }) {
         </div>
       </NoteSection>
 
-      <NoteSection title={tr ? "Guest Wifi Guvenligi" : "Guest Wifi Security"}>
+      <NoteSection title={tr ? "Guest Wi-Fi Güvenliği" : "Guest Wi-Fi Security"}>
         <NoteList
           items={
             tr
               ? [
-                  "Kafe/okul gibi guest aglarda trafik sifreli olmayabilir.",
-                  "HTTPS siteler yine sifreli kalir; ama hangi siteye baglanildigi (DNS/SNI) gorulebilir.",
-                  "Ag saglayicisi genelde baglanti loglarini (kim, ne zaman, hangi IP) tutar.",
+                  "Kafe veya okul gibi guest ağlarda trafik her zaman güvenli olmayabilir.",
+                  "HTTPS siteler şifreli kalır; ancak hangi siteye bağlanıldığına dair DNS/SNI bilgileri görülebilir.",
+                  "Ağ sağlayıcısı genellikle bağlantı loglarını (kim, ne zaman, hangi IP) tutar.",
                 ]
               : [
                   "On guest networks like cafes/schools, traffic may not be encrypted.",
@@ -151,7 +151,7 @@ export function WebSecurityBasicsNote({ lang, theme }) {
         />
         <NoteCallout tone="warning">
           {tr
-            ? "Pratik oneri: hassas islemleri (banka, sifre girisi) bilinmeyen/guvensiz aglarda yapmaktan kacin, mumkunse HTTPS'e ve gerekiyorsa VPN'e guven."
+            ? "Pratik öneri: hassas işlemleri (banka, şifre girişi) bilinmeyen veya güvensiz ağlarda yapmaktan kaçın; mümkünse HTTPS'e ve gerekiyorsa VPN'e güven."
             : "Practical tip: avoid sensitive actions (banking, entering passwords) on unknown/untrusted networks; rely on HTTPS and a VPN when needed."}
         </NoteCallout>
       </NoteSection>

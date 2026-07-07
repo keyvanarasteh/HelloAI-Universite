@@ -8,27 +8,27 @@ export function CybersecurityFoundationNote({ lang }) {
   const foundations = {
     logic: {
       icon: BrainCircuit,
-      title: tr ? "Normal davranis" : "Normal behavior",
-      unlocks: tr ? "Anomali, bug ve zafiyet ayrimini yaparsin." : "You can separate anomaly, bug, and vulnerability.",
-      example: tr ? "Bir login akisinda ne olmali ki bypass'i fark edesin?" : "What should happen in login so you can notice a bypass?",
+      title: tr ? "Normal davranış" : "Normal behavior",
+      unlocks: tr ? "Anomali, bug ve zafiyet ayrımını yaparsın." : "You can separate anomaly, bug, and vulnerability.",
+      example: tr ? "Bir login akışında ne olmalı ki bypass'ı fark edesin?" : "What should happen in login so you can notice a bypass?",
     },
     data: {
       icon: DatabaseZap,
-      title: tr ? "Veri akisi" : "Data flow",
-      unlocks: tr ? "SQL injection, XSS ve yetki kontrolu gibi konular netlesir." : "SQL injection, XSS, and authorization checks become clearer.",
-      example: tr ? "Kullanici girdisi nereden geliyor, nereye gidiyor?" : "Where does user input come from, and where does it go?",
+      title: tr ? "Veri akışı" : "Data flow",
+      unlocks: tr ? "SQL injection, XSS ve yetki kontrolü gibi konular netleşir." : "SQL injection, XSS, and authorization checks become clearer.",
+      example: tr ? "Kullanıcı girdisi nereden geliyor, nereye gidiyor?" : "Where does user input come from, and where does it go?",
     },
     memory: {
       icon: MemoryStick,
-      title: tr ? "Bellek mantigi" : "Memory logic",
-      unlocks: tr ? "Buffer overflow ve dusuk seviye exploit mantigini anlarsin." : "You understand buffer overflow and low-level exploit logic.",
-      example: tr ? "Veri ayrilan alani asarsa ne olur?" : "What happens when data exceeds allocated space?",
+      title: tr ? "Bellek mantığı" : "Memory logic",
+      unlocks: tr ? "Buffer overflow ve düşük seviye exploit mantığını anlarsın." : "You understand buffer overflow and low-level exploit logic.",
+      example: tr ? "Veri ayrılan alanı aşarsa ne olur?" : "What happens when data exceeds allocated space?",
     },
     tools: {
       icon: Wrench,
-      title: tr ? "Arac mantigi" : "Tool logic",
-      unlocks: tr ? "Hazir araci kor kullanmak yerine ciktisini yorumlarsin." : "You interpret tool output instead of using tools blindly.",
-      example: tr ? "Nmap sonucu hangi servis riskini isaret ediyor?" : "Which service risk does the Nmap result point to?",
+      title: tr ? "Araç mantığı" : "Tool logic",
+      unlocks: tr ? "Hazır aracı kör kullanmak yerine çıktısını yorumlarsın." : "You interpret tool output instead of using tools blindly.",
+      example: tr ? "Nmap sonucu hangi servis riskini işaret ediyor?" : "Which service risk does the Nmap result point to?",
     },
   };
   const active = foundations[activeFoundation];
@@ -36,7 +36,7 @@ export function CybersecurityFoundationNote({ lang }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Siber Guvenlik Temel Haritasi" : "Cybersecurity Foundation Map"}>
+      <NoteSection title={tr ? "Siber Güvenlik Temel Haritası" : "Cybersecurity Foundation Map"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(foundations).map(([id, item]) => {
@@ -73,14 +73,14 @@ export function CybersecurityFoundationNote({ lang }) {
               <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
                 <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                   <ShieldCheck size={14} />
-                  {tr ? "Actigi guvenlik konusu" : "Security concept unlocked"}
+                  {tr ? "Açtığı güvenlik konusu" : "Security concept unlocked"}
                 </div>
                 <p className="text-sm leading-6">{active.unlocks}</p>
               </div>
               <div className="rounded-lg border border-[var(--border)] p-4">
                 <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                   <Binary size={14} />
-                  {tr ? "Dusunme sorusu" : "Thinking question"}
+                  {tr ? "Düşünme sorusu" : "Thinking question"}
                 </div>
                 <p className="text-sm leading-6 text-[var(--muted)]">{active.example}</p>
               </div>
@@ -89,14 +89,14 @@ export function CybersecurityFoundationNote({ lang }) {
         </div>
       </NoteSection>
 
-      <NoteSection title={tr ? "Neden Algoritma ve Yazilim Mantigi?" : "Why Algorithm & Software Logic?"}>
+      <NoteSection title={tr ? "Neden Algoritma ve Yazılım Mantığı?" : "Why Algorithm & Software Logic?"}>
         <NoteList
           items={
             tr
               ? [
-                  "Bir sistemin normalde nasil davranmasi gerektigini bilmeden, sapmalari fark edemezsin.",
-                  "Ornek: SQL injection'i anlamak icin once SQL sorgularinin nasil calistigini bilmek gerekir.",
-                  "Bir bufer tasmasini anlamak icin bellek yonetimini ve dusuk seviye programlamayi bilmek gerekir.",
+                  "Bir sistemin normalde nasıl davranması gerektiğini bilmeden, sapmaları fark edemezsin.",
+                  "Örnek: SQL injection'ı anlamak için önce SQL sorgularının nasıl çalıştığını bilmek gerekir.",
+                  "Bir buffer overflow'u anlamak için bellek yönetimini ve düşük seviye programlamayı bilmek gerekir.",
                 ]
               : [
                   "You cannot spot deviations without knowing how a system is supposed to behave normally.",
@@ -109,7 +109,7 @@ export function CybersecurityFoundationNote({ lang }) {
 
       <NoteCallout tone="ok">
         {tr
-          ? "Siber guvenlik, sadece hazir araclari calistirmak degildir; araclarin arkasindaki mantigi anlamak gerekir. Once saglam bir programlama ve algoritma temeli kurulmali, guvenlik bilgisi bu temelin uzerine insa edilmelidir."
+          ? "Siber güvenlik, yalnızca hazır araçları çalıştırmak değildir; araçların arkasındaki mantığı anlamak gerekir. Önce sağlam bir programlama ve algoritma temeli kurulmalı, güvenlik bilgisi bu temelin üzerine inşa edilmelidir."
           : "Cybersecurity isn't just running ready-made tools — it's understanding the logic behind them. A solid programming and algorithm foundation should come first; security knowledge is built on top of it."}
       </NoteCallout>
     </>

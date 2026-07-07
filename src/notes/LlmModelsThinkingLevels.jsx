@@ -3,10 +3,10 @@ import { Brain, Gauge, Rocket, ShieldCheck, Zap } from "lucide-react";
 import { Mermaid, NoteCallout, NoteList, NoteSection, NoteTable } from "../components/NoteKit.jsx";
 
 const tierDiagram = (tr) => `flowchart LR
-  T["${tr ? "Gorev" : "Task"}"] --> D{"${tr ? "Ne kadar zor?" : "How hard is it?"}"}
+  T["${tr ? "Görev" : "Task"}"] --> D{"${tr ? "Ne kadar zor?" : "How hard is it?"}"}
   D -->|${tr ? "basit, net talimat" : "simple, clear instructions"}| M["${tr ? "Mini / Base model" : "Mini / Base model"}"]
-  D -->|${tr ? "orta karmasiklik" : "medium complexity"}| F["${tr ? "Full model" : "Full model"}"]
-  D -->|${tr ? "cok adimli, mantik agirlikli" : "multi-step, logic-heavy"}| R["${tr ? "Extra thinking / Reasoning" : "Extra thinking / Reasoning"}"]
+  D -->|${tr ? "orta karmaşıklık" : "medium complexity"}| F["${tr ? "Full model" : "Full model"}"]
+  D -->|${tr ? "çok adımlı, mantık ağırlıklı" : "multi-step, logic-heavy"}| R["${tr ? "Extra thinking / Reasoning" : "Extra thinking / Reasoning"}"]
 `;
 
 export function LlmModelsThinkingLevelsNote({ lang, theme }) {
@@ -15,31 +15,31 @@ export function LlmModelsThinkingLevelsNote({ lang, theme }) {
   const scenarios = {
     simple: {
       icon: Zap,
-      title: tr ? "Basit ve hizli" : "Simple and fast",
+      title: tr ? "Basit ve hızlı" : "Simple and fast",
       model: tr ? "Mini / base model" : "Mini / base model",
-      reason: tr ? "Talimat net, risk dusuk, cikti kolay kontrol edilir." : "Instructions are clear, risk is low, output is easy to check.",
-      verify: tr ? "Sonucu hizlica oku ve uygulamada dene." : "Read the result quickly and try it in the app.",
+      reason: tr ? "Talimat net, risk düşük, çıktı kolay kontrol edilir." : "Instructions are clear, risk is low, output is easy to check.",
+      verify: tr ? "Sonucu hızlıca oku ve uygulamada dene." : "Read the result quickly and try it in the app.",
     },
     balanced: {
       icon: Gauge,
-      title: tr ? "Dengeli is" : "Balanced task",
+      title: tr ? "Dengeli iş" : "Balanced task",
       model: tr ? "Full model" : "Full model",
-      reason: tr ? "Biraz belirsizlik veya birden fazla dosya/karar vardir." : "There is some ambiguity or more than one file/decision.",
-      verify: tr ? "Build/test calistir, mantigi gozden gecir." : "Run build/tests and review the logic.",
+      reason: tr ? "Biraz belirsizlik veya birden fazla dosya/karar vardır." : "There is some ambiguity or more than one file/decision.",
+      verify: tr ? "Build/test çalıştır, mantığı gözden geçir." : "Run build/tests and review the logic.",
     },
     complex: {
       icon: Brain,
-      title: tr ? "Cok adimli mantik" : "Multi-step logic",
+      title: tr ? "Çok adımlı mantık" : "Multi-step logic",
       model: tr ? "Extra thinking / reasoning" : "Extra thinking / reasoning",
-      reason: tr ? "Planlama, karsilastirma, hata ayiklama veya guvenlik muhakemesi gerekir." : "Planning, comparison, debugging, or security reasoning is needed.",
-      verify: tr ? "Ara adimlari oku, test kapsamını genislet." : "Read intermediate steps and broaden test coverage.",
+      reason: tr ? "Planlama, karşılaştırma, hata ayıklama veya güvenlik muhakemesi gerekir." : "Planning, comparison, debugging, or security reasoning is needed.",
+      verify: tr ? "Ara adımları oku, test kapsamını genişlet." : "Read intermediate steps and broaden test coverage.",
     },
     critical: {
       icon: ShieldCheck,
       title: tr ? "Kritik karar" : "Critical decision",
-      model: tr ? "En guclu model + insan denetimi" : "Strongest model + human review",
-      reason: tr ? "Hata maliyeti yuksekse model secimi yetmez; denetim zorunludur." : "If the cost of error is high, model choice is not enough; review is required.",
-      verify: tr ? "Kaynak, test, ikinci goz ve gercek ortam kontrolu yap." : "Check sources, tests, second review, and real environment behavior.",
+      model: tr ? "En güçlü model + insan denetimi" : "Strongest model + human review",
+      reason: tr ? "Hata maliyeti yüksekse model seçimi yetmez; denetim zorunludur." : "If the cost of error is high, model choice is not enough; review is required.",
+      verify: tr ? "Kaynak, test, ikinci göz ve gerçek ortam kontrolü yap." : "Check sources, tests, second review, and real environment behavior.",
     },
   };
   const active = scenarios[activeScenario];
@@ -47,7 +47,7 @@ export function LlmModelsThinkingLevelsNote({ lang, theme }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Model Secim Mikseri" : "Model Choice Mixer"}>
+      <NoteSection title={tr ? "Model Seçim Mikseri" : "Model Choice Mixer"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(scenarios).map(([id, scenario]) => {
@@ -73,7 +73,7 @@ export function LlmModelsThinkingLevelsNote({ lang, theme }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Onerilen seviye" : "Recommended level"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Önerilen seviye" : "Recommended level"}</p>
                 <h3 className="mt-2 text-xl font-bold">{active.model}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -84,7 +84,7 @@ export function LlmModelsThinkingLevelsNote({ lang, theme }) {
             <div className="mt-5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
               <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                 <Rocket size={14} />
-                {tr ? "Dogrulama refleksi" : "Verification reflex"}
+                {tr ? "Doğrulama refleksi" : "Verification reflex"}
               </div>
               <p className="text-sm font-semibold">{active.verify}</p>
             </div>
@@ -92,15 +92,15 @@ export function LlmModelsThinkingLevelsNote({ lang, theme }) {
         </div>
       </NoteSection>
 
-      <NoteSection title={tr ? "Egitim Verisi ve Sinir Agi" : "Training Data & Neural Networks"}>
+      <NoteSection title={tr ? "Eğitim Verisi ve Sinir Ağı" : "Training Data & Neural Networks"}>
         <NoteList
           items={
             tr
               ? [
-                  "Model, devasa metin verisinden kelimeler arasi oruntuleri ogrenir; ezber degil, oruntu ogrenimi yapar.",
-                  "Egitim verisinin kalitesi, modelin kalitesini dogrudan belirler.",
-                  "Sinir aglari, insan beynindeki noron-sinaps mantigindan esinlenir ama birebir ayni degildir.",
-                  "Claude gibi modellerin zor gorevlerdeki gucu, buyuk olcude kaliteli/secilmis egitim verisinden gelir.",
+                  "Model, devasa metin verilerinden kelimeler arasındaki örüntüleri öğrenir; yaptığı şey ezber değil, örüntü öğrenimidir.",
+                  "Eğitim verisinin kalitesi, modelin kalitesini doğrudan belirler.",
+                  "Sinir ağları, insan beynindeki nöron-sinaps mantığından esinlenir; ancak birebir aynı değildir.",
+                  "Claude gibi modellerin zor görevlerdeki gücü, büyük ölçüde kaliteli ve iyi seçilmiş eğitim verilerinden gelir.",
                 ]
               : [
                   "A model learns patterns between words from huge amounts of text — pattern learning, not memorization.",
@@ -112,16 +112,16 @@ export function LlmModelsThinkingLevelsNote({ lang, theme }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Ise Gore Model/Dusunme Seviyesi Secimi" : "Picking a Model/Thinking Level for the Job"}>
+      <NoteSection title={tr ? "İşe Göre Model/Düşünme Seviyesi Seçimi" : "Picking a Model/Thinking Level for the Job"}>
         <Mermaid theme={theme} chart={tierDiagram(tr)} />
         <NoteTable
-          headers={tr ? ["Seviye", "Ne zaman kullanilir"] : ["Level", "When to use it"]}
+          headers={tr ? ["Seviye", "Ne zaman kullanılır"] : ["Level", "When to use it"]}
           rows={[
-            [tr ? "Base / mini" : "Base / mini", tr ? "Basit, hizli, net talimatli isler." : "Simple, fast, clearly instructed tasks."],
-            [tr ? "Full" : "Full", tr ? "Orta-yuksek karmasiklikta dengeli secim." : "A balanced choice for medium-to-high complexity."],
+            [tr ? "Base / mini" : "Base / mini", tr ? "Basit, hızlı, net talimatlı işler." : "Simple, fast, clearly instructed tasks."],
+            [tr ? "Full" : "Full", tr ? "Orta ve yüksek karmaşıklıkta dengeli seçim." : "A balanced choice for medium-to-high complexity."],
             [
               tr ? "Extra thinking / reasoning" : "Extra thinking / reasoning",
-              tr ? "Karmasik, cok adimli, mantik gerektiren isler." : "Complex, multi-step, logic-heavy work.",
+              tr ? "Karmaşık, çok adımlı, mantık gerektiren işler." : "Complex, multi-step, logic-heavy work.",
             ],
           ]}
         />
@@ -129,7 +129,7 @@ export function LlmModelsThinkingLevelsNote({ lang, theme }) {
 
       <NoteCallout>
         {tr
-          ? "Yeni bir model cikinca ilk 1-2 ay genelde en yuksek performansi verir; guncel modele gecmek mantiklidir. Yine de kritik islerde hicbir modele korukorune guvenilmemeli — ciktiyi denetlemek gerekir."
+          ? "Yeni bir model çıktığında ilk 1-2 ay genellikle en yüksek performansı verir; güncel modele geçmek çoğu zaman mantıklıdır. Yine de kritik işlerde hiçbir modele körü körüne güvenilmemeli; çıktı mutlaka denetlenmelidir."
           : "A newly released model usually performs best in its first 1-2 months; switching to it early is often worthwhile. Still, no model should be trusted blindly on critical work — always verify the output."}
       </NoteCallout>
     </>

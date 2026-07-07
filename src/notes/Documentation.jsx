@@ -10,29 +10,29 @@ export function DocumentationNote({ lang }) {
       icon: BookOpen,
       file: "README.md",
       audience: tr ? "Yeni gelen herkes" : "Everyone new",
-      job: tr ? "Projenin ne oldugunu, nasil acildigini ve nereden baslanacagini anlatir." : "Explains what the project is, how to run it, and where to start.",
-      trigger: tr ? "Kurulum veya proje amaci degisince" : "When setup or project purpose changes",
+      job: tr ? "Projenin ne olduğunu, nasıl açıldığını ve nereden başlanacağını anlatır." : "Explains what the project is, how to run it, and where to start.",
+      trigger: tr ? "Kurulum veya proje amacı değişince" : "When setup or project purpose changes",
     },
     roadmap: {
       icon: Route,
       file: "ROADMAP.md",
-      audience: tr ? "Urunu planlayan ekip" : "The team planning the product",
-      job: tr ? "Fikirden calisan urune giden ana yolu ve oncelikleri gosterir." : "Shows the main path and priorities from idea to working product.",
-      trigger: tr ? "Yon veya kapsam degisince" : "When direction or scope changes",
+      audience: tr ? "Ürünü planlayan ekip" : "The team planning the product",
+      job: tr ? "Fikirden çalışan ürüne giden ana yolu ve öncelikleri gösterir." : "Shows the main path and priorities from idea to working product.",
+      trigger: tr ? "Yön veya kapsam değişince" : "When direction or scope changes",
     },
     steps: {
       icon: ClipboardList,
       file: "ADIMLAR.md",
-      audience: tr ? "Uygulayan kisi" : "The person executing",
-      job: tr ? "Yapilacaklari isaretlenebilir, takip edilebilir gorevlere boler." : "Breaks work into checkable, trackable tasks.",
-      trigger: tr ? "Yeni is parcalari cikinca" : "When new work items appear",
+      audience: tr ? "Uygulayan kişi" : "The person executing",
+      job: tr ? "Yapılacakları işaretlenebilir ve takip edilebilir görevlere böler." : "Breaks work into checkable, trackable tasks.",
+      trigger: tr ? "Yeni iş parçaları çıkınca" : "When new work items appear",
     },
     decisions: {
       icon: History,
       file: "docs/*.md",
       audience: tr ? "Gelecekteki ekip" : "The future team",
-      job: tr ? "Neden bu karar verildi sorusunun cevabini hafizada degil dosyada tutar." : "Keeps the answer to why this decision was made in files, not memory.",
-      trigger: tr ? "Teknik/mimari karar alinca" : "When a technical or architecture decision is made",
+      job: tr ? "Neden bu karar verildi sorusunun cevabını hafızada değil dosyada tutar." : "Keeps the answer to why this decision was made in files, not memory.",
+      trigger: tr ? "Teknik veya mimari karar alınca" : "When a technical or architecture decision is made",
     },
   };
   const active = docs[activeDoc];
@@ -40,7 +40,7 @@ export function DocumentationNote({ lang }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Dokumantasyon Haritasi" : "Documentation Map"}>
+      <NoteSection title={tr ? "Dokümantasyon Haritası" : "Documentation Map"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(docs).map(([id, doc]) => {
@@ -66,7 +66,7 @@ export function DocumentationNote({ lang }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Dosyanin isi" : "File job"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Dosyanın işi" : "File job"}</p>
                 <h3 className="mt-2 font-mono text-xl font-bold">{active.file}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -85,7 +85,7 @@ export function DocumentationNote({ lang }) {
               <div className="rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4">
                 <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase text-[var(--muted)]">
                   <FileText size={14} />
-                  {tr ? "Ne zaman guncelle?" : "When to update?"}
+                  {tr ? "Ne zaman güncelle?" : "When to update?"}
                 </div>
                 <p className="text-sm font-semibold">{active.trigger}</p>
               </div>
@@ -94,14 +94,14 @@ export function DocumentationNote({ lang }) {
         </div>
       </NoteSection>
 
-      <NoteSection title={tr ? "Kullanim ve Format" : "Usage and Format"}>
+      <NoteSection title={tr ? "Kullanım ve Format" : "Usage and Format"}>
         <NoteList
           items={
             tr
               ? [
-                  "Onemli kararlar ve is akislari docs/*.md dosyalarinda Markdown ile yazilir.",
-                  "Markdown basit, okunakli ve Github/Gitlab gibi platformlarda otomatik guzel gorunur.",
-                  "Bu projede ayni mantikla README.md, ROADMAP.md, ADIMLAR.md, ODEV.md kullanildi.",
+                  "Önemli kararlar ve iş akışları docs/*.md dosyalarında Markdown ile yazılır.",
+                  "Markdown basit, okunaklıdır ve GitHub/GitLab gibi platformlarda otomatik olarak düzgün görünür.",
+                  "Bu projede aynı mantıkla README.md, ROADMAP.md, ADIMLAR.md ve ODEV.md kullanıldı.",
                 ]
               : [
                   "Important decisions and workflows are written in docs/*.md files using Markdown.",
@@ -112,26 +112,26 @@ export function DocumentationNote({ lang }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Neden Onemli?" : "Why It Matters"}>
+      <NoteSection title={tr ? "Neden Önemli?" : "Why It Matters"}>
         <div className="grid gap-3 sm:grid-cols-2">
           <NoteCallout>
             {tr
-              ? "6 ay sonra hatirlama: bir kod tabanina donduğunde kararlarin nedenini dokumantasyon hatirlatir."
+              ? "6 ay sonra hatırlama: bir kod tabanına döndüğünde kararların nedenini dokümantasyon hatırlatır."
               : "Recall after 6 months: documentation reminds you why decisions were made when you return to the codebase."}
           </NoteCallout>
           <NoteCallout>
             {tr
-              ? "Baskasinin kodunu anlama: +100.000 satir okumadan projenin mantigini kavrayabilirsin."
+              ? "Başkasının kodunu anlama: +100.000 satır okumadan projenin mantığını kavrayabilirsin."
               : "Understanding someone else's code: you can grasp the project's logic without reading 100,000+ lines."}
           </NoteCallout>
           <NoteCallout>
             {tr
-              ? "Onboarding hizi: iyi dokumante edilmis bir proje, yeni katkida bulunanlarin ise baslama suresini kisaltir."
+              ? "Onboarding hızı: iyi dokümante edilmiş bir proje, yeni katkıda bulunanların işe başlama süresini kısaltır."
               : "Onboarding speed: a well-documented project shortens the time it takes new contributors to get started."}
           </NoteCallout>
           <NoteCallout>
             {tr
-              ? "Karar gecmisi: neden bu teknoloji/mimari secildi sorusunun cevabi dokumantasyonda saklanir."
+              ? "Karar geçmişi: neden bu teknoloji/mimari seçildi sorusunun cevabı dokümantasyonda saklanır."
               : "Decision history: the answer to \"why this tech/architecture\" lives in the docs, not in someone's memory."}
           </NoteCallout>
         </div>

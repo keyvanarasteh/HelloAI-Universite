@@ -96,16 +96,16 @@ const project2Features = [
     icon: Radar,
     componentName: "ScopeReconPlanner",
     noteIds: ["pentest-methodology-enumeration"],
-    title: { tr: "Kapsam ve Kesif Planlayici", en: "Scope & Recon Planner" },
+    title: { tr: "Kapsam ve Keşif Planlayıcı", en: "Scope & Recon Planner" },
     subtitle: {
-      tr: "Izinli hedef, kapsam, pasif kesif ve aktif enumeration adimlarini tek bir kontrol panelinde tasarlar.",
-      en: "Designs authorized target scope, passive recon, and active enumeration steps in one planning panel.",
+      tr: "İzinli hedef, kapsam, pasif keşif ve aktif enumeration adımlarını tek bir kontrol panelinde planlar.",
+      en: "Plans authorized target scope, passive recon, and active enumeration steps in one control panel.",
     },
     functionality: {
       tr: [
-        "Rules of Engagement kapsam karti ve izin durumu.",
-        "Pasif/aktif kesif ayrimi ile gorev listesi.",
-        "Bulgu tipine gore savunma aksiyon onerileri.",
+        "Rules of Engagement kapsam kartı ve izin durumu.",
+        "Pasif/aktif keşif ayrımıyla görev listesi.",
+        "Bulgu tipine göre savunma aksiyonu önerileri.",
       ],
       en: [
         "Rules of Engagement scope card and authorization status.",
@@ -119,16 +119,16 @@ const project2Features = [
     icon: TerminalSquare,
     componentName: "ExploitFlowSandbox",
     noteIds: ["exploitation-post-exploitation"],
-    title: { tr: "Exploit ve Payload Akis Lab'i", en: "Exploit & Payload Flow Lab" },
+    title: { tr: "Exploit ve Payload Akış Lab'i", en: "Exploit & Payload Flow Lab" },
     subtitle: {
-      tr: "Exploit, payload, bind shell, reverse shell ve post-exploitation kavramlarini guvenli simule eder.",
+      tr: "Exploit, payload, bind shell, reverse shell ve post-exploitation kavramlarını güvenli biçimde simüle eder.",
       en: "Safely simulates exploit, payload, bind shell, reverse shell, and post-exploitation concepts.",
     },
     functionality: {
       tr: [
-        "Exploit zincirinin asamalarini zararsiz model olarak gosterir.",
-        "Shell turlerini inbound/outbound baglanti mantigiyla ayirir.",
-        "Her adimda etik ve izin sinirini vurgular.",
+        "Exploit zincirinin aşamalarını zararsız bir model olarak gösterir.",
+        "Shell türlerini inbound/outbound bağlantı mantığıyla ayırır.",
+        "Her adımda etik ve izin sınırını vurgular.",
       ],
       en: [
         "Shows exploit-chain stages as a harmless model.",
@@ -142,16 +142,16 @@ const project2Features = [
     icon: Network,
     componentName: "DnsRecordExplorer",
     noteIds: ["dns-definition-enumeration"],
-    title: { tr: "DNS Kayit Gezgini", en: "DNS Record Explorer" },
+    title: { tr: "DNS Kayıt Gezgini", en: "DNS Record Explorer" },
     subtitle: {
-      tr: "A, AAAA, CNAME, MX, TXT, NS ve DNS hiyerarsisini egitim odakli bir kayit panelinde anlatir.",
+      tr: "A, AAAA, CNAME, MX, TXT, NS ve DNS hiyerarşisini eğitim odaklı bir kayıt panelinde anlatır.",
       en: "Explains A, AAAA, CNAME, MX, TXT, NS, and DNS hierarchy in an educational record panel.",
     },
     functionality: {
       tr: [
-        "Kayit turlerine gore filtrelenebilir DNS kartlari.",
-        "Resolver, root, TLD ve authoritative sunucu akisi.",
-        "Mail guvenligi icin SPF/DKIM/DMARC hatirlaticilari.",
+        "Kayıt türlerine göre filtrelenebilir DNS kartları.",
+        "Resolver, root, TLD ve authoritative sunucu akışı.",
+        "Mail güvenliği için SPF/DKIM/DMARC hatırlatıcıları.",
       ],
       en: [
         "Filterable DNS cards by record type.",
@@ -167,14 +167,14 @@ const project2Features = [
     noteIds: ["waf-definition-enumeration"],
     title: { tr: "WAF Sinyal Panosu", en: "WAF Signal Board" },
     subtitle: {
-      tr: "Header, cookie, blok sayfasi ve zararsiz test sinyallerini raporlanabilir kanitlara cevirir.",
+      tr: "Header, cookie, blok sayfası ve zararsız test sinyallerini raporlanabilir kanıtlara çevirir.",
       en: "Turns headers, cookies, block pages, and harmless test signals into reportable evidence.",
     },
     functionality: {
       tr: [
-        "WAF tespit sinyali kartlari ve kanit notlari.",
-        "Vendor tahmini yerine kanit odakli raporlama.",
-        "Sadece izinli ortam icin test kapsam uyarilari.",
+        "WAF tespit sinyali kartları ve kanıt notları.",
+        "Vendor tahmini yerine kanıt odaklı raporlama.",
+        "Yalnızca izinli ortamlar için test kapsamı uyarıları.",
       ],
       en: [
         "WAF detection signal cards and evidence notes.",
@@ -188,16 +188,16 @@ const project2Features = [
     icon: Server,
     componentName: "HostVpsTopologyMap",
     noteIds: ["host-vps-enumeration"],
-    title: { tr: "Host/VPS Topoloji Haritasi", en: "Host/VPS Topology Map" },
+    title: { tr: "Host/VPS Topoloji Haritası", en: "Host/VPS Topology Map" },
     subtitle: {
-      tr: "Shared hosting, VPS, cloud instance, CDN origin ve ASN gorunurlugunu savunma bakisiyla gorsellestirir.",
+      tr: "Shared hosting, VPS, cloud instance, CDN origin ve ASN görünürlüğünü savunma bakışıyla görselleştirir.",
       en: "Visualizes shared hosting, VPS, cloud instance, CDN origin, and ASN visibility from a defensive view.",
     },
     functionality: {
       tr: [
-        "Altyapi turu secimi ve gorunen risk ozeti.",
-        "Origin IP ve CDN yanlis yapilandirma kontrol listesi.",
-        "Varlik envanteri icin not alanlari.",
+        "Altyapı türü seçimi ve görünen risk özeti.",
+        "Origin IP ve CDN yanlış yapılandırma kontrol listesi.",
+        "Varlık envanteri için not alanları.",
       ],
       en: [
         "Infrastructure type selector and visible-risk summary.",
@@ -211,16 +211,16 @@ const project2Features = [
     icon: Fingerprint,
     componentName: "TechFingerprintLens",
     noteIds: ["wappalyzer-tech-fingerprinting"],
-    title: { tr: "Teknoloji Parmak Izi Mercegi", en: "Technology Fingerprint Lens" },
+    title: { tr: "Teknoloji Parmak İzi Merceği", en: "Technology Fingerprint Lens" },
     subtitle: {
-      tr: "Wappalyzer mantigiyla CMS, framework, header, cookie ve CDN izlerini pasif sekilde siniflandirir.",
+      tr: "Wappalyzer mantığıyla CMS, framework, header, cookie ve CDN izlerini pasif şekilde sınıflandırır.",
       en: "Classifies CMS, framework, header, cookie, and CDN traces passively using Wappalyzer-style logic.",
     },
     functionality: {
       tr: [
-        "Pasif imza kaynaklarini kartlarla aciklar.",
-        "Kendi sitende gereksiz bilgi sizintisini azaltma onerileri.",
-        "Benzer araclar ve kullanim senaryolari.",
+        "Pasif imza kaynaklarını kartlarla açıklar.",
+        "Kendi sitende gereksiz bilgi sızıntısını azaltma önerileri.",
+        "Benzer araçlar ve kullanım senaryoları.",
       ],
       en: [
         "Explains passive signature sources with cards.",
@@ -234,16 +234,16 @@ const project2Features = [
     icon: Puzzle,
     componentName: "ExtensionPermissionAudit",
     noteIds: ["browser-extensions-permissions-risks"],
-    title: { tr: "Eklenti Izin Denetimi", en: "Extension Permission Audit" },
+    title: { tr: "Eklenti İzin Denetimi", en: "Extension Permission Audit" },
     subtitle: {
-      tr: "Tarayici eklentilerinin izinlerini, veri erisim risklerini ve kurumsal allowlist politikasini gosterir.",
+      tr: "Tarayıcı eklentilerinin izinlerini, veri erişim risklerini ve kurumsal allowlist politikasını gösterir.",
       en: "Shows browser extension permissions, data-access risks, and enterprise allowlist policy ideas.",
     },
     functionality: {
       tr: [
-        "Manifest izinlerini dusuk/orta/yuksek risk olarak ayirir.",
-        "Hangi veriye erisilebilecegini kullanici dostu dille anlatir.",
-        "Allowlist ve duzenli gozden gecirme akisi sunar.",
+        "Manifest izinlerini düşük/orta/yüksek risk olarak ayırır.",
+        "Hangi veriye erişilebileceğini kullanıcı dostu dille anlatır.",
+        "Allowlist ve düzenli gözden geçirme akışı sunar.",
       ],
       en: [
         "Separates manifest permissions into low/medium/high risk.",
@@ -257,16 +257,16 @@ const project2Features = [
     icon: Code2,
     componentName: "FridaReverseWorkbench",
     noteIds: ["reverse-engineering-frida"],
-    title: { tr: "Frida Tersine Muhendislik Tezgahi", en: "Frida Reverse Engineering Workbench" },
+    title: { tr: "Frida Tersine Mühendislik Tezgâhı", en: "Frida Reverse Engineering Workbench" },
     subtitle: {
-      tr: "ADB, logcat, root tespiti, Frida attach/spawn ve JS hook mantigini guvenli egitim akisi olarak sunar.",
+      tr: "ADB, logcat, root tespiti, Frida attach/spawn ve JS hook mantığını güvenli eğitim akışı olarak sunar.",
       en: "Presents ADB, logcat, root detection, Frida attach/spawn, and JS hook logic as a safe learning flow.",
     },
     functionality: {
       tr: [
-        "Android test ortami hazirlik adimlari.",
-        "Frida kavramlarini gercek cihaza zarar vermeden simule eder.",
-        "Yasal/etik sinir uyarilarini her panelde tutar.",
+        "Android test ortamı hazırlık adımları.",
+        "Frida kavramlarını gerçek cihaza zarar vermeden simüle eder.",
+        "Yasal/etik sınır uyarılarını her panelde tutar.",
       ],
       en: [
         "Android test-environment preparation steps.",
@@ -280,21 +280,21 @@ const project2Features = [
     icon: Search,
     componentName: "WebQReconDashboard",
     noteIds: ["web-security-webq"],
-    title: { tr: "WebQ Kesif Dashboard'u", en: "WebQ Recon Dashboard" },
+    title: { tr: "WebQ Keşif Dashboard'u", en: "WebQ Recon Dashboard" },
     subtitle: {
-      tr: "Domain insight, teknoloji parmak izi, subdomain kesfi, secret kontrolu ve guvenlik skorunu tek ekranda planlar.",
+      tr: "Domain insight, teknoloji parmak izi, subdomain keşfi, secret kontrolü ve güvenlik skorunu tek ekranda planlar.",
       en: "Plans domain insight, tech fingerprinting, subdomain discovery, secret checks, and security score in one screen.",
     },
     functionality: {
       tr: [
-        "WebQ modul kartlari ve beklenen ciktilar.",
-        "Bulgu -> savunma iyilestirmesi donusum akisi.",
-        "Gelecek entegrasyonlar icin API/CLI placeholder alanlari.",
+        "WebQ modül kartları ve beklenen çıktılar.",
+        "Bulgu -> savunma iyileştirmesi dönüşüm akışı.",
+        "Gelecek entegrasyonlar için API/CLI taslak alanları.",
       ],
       en: [
         "WebQ module cards and expected outputs.",
         "Finding -> defensive improvement conversion flow.",
-        "API/CLI placeholder areas for future integrations.",
+        "API/CLI draft areas for future integrations.",
       ],
     },
   },
@@ -310,15 +310,15 @@ const project2BuildTimeline = [
     id: "p2-001",
     date: "Day 2",
     message: {
-      tr: "Proje 2 kapsam karari: Bolum Pusulasi, 1. gun projesi olarak ayrildi; 2. gun icin guvenlik odakli yeni modul eklendi.",
+      tr: "Proje 2 kapsam kararı: Bölüm Pusulası 1. gün projesi olarak ayrıldı; 2. gün için güvenlik odaklı yeni modül eklendi.",
       en: "Project 2 scope decision: Path Compass is separated as the Day 1 project; a security-focused module is added for Day 2.",
     },
     files: {
-      tr: "Yeni nav grubu, Proje 2 build timeline'i ve ozellik sayfasi kabuklari.",
+      tr: "Yeni navigasyon grubu, Proje 2 yapım çizelgesi ve özellik sayfası kabukları.",
       en: "New nav group, Project 2 build timeline, and feature-page shells.",
     },
     lesson: {
-      tr: "Ayni repo icinde ikinci proje, notlarla birebir izlenebilir sekilde buyutulur.",
+      tr: "Aynı repo içinde ikinci proje, notlarla birebir izlenebilir şekilde büyütülür.",
       en: "A second project can grow inside the same repo while staying traceable to the notes.",
     },
     relatedTopics: ["pentest-methodology-enumeration"],
@@ -327,15 +327,15 @@ const project2BuildTimeline = [
     id: "p2-002",
     date: "Day 2",
     message: {
-      tr: "Enumeration tabanli ozellik haritasi cikarildi.",
+      tr: "Enumeration tabanlı özellik haritası çıkarıldı.",
       en: "The enumeration-based feature map was drafted.",
     },
     files: {
-      tr: "DNS, WAF, host/VPS, teknoloji parmak izi ve WebQ placeholder sayfalari.",
-      en: "DNS, WAF, host/VPS, tech fingerprinting, and WebQ placeholder pages.",
+      tr: "DNS, WAF, host/VPS, teknoloji parmak izi ve WebQ taslak sayfaları.",
+      en: "DNS, WAF, host/VPS, tech fingerprinting, and WebQ draft pages.",
     },
     lesson: {
-      tr: "Guvenlik araclari once egitimli, izinli ve savunma odakli arayuzler olarak modellenmeli.",
+      tr: "Güvenlik araçları önce eğitimli, izinli ve savunma odaklı arayüzler olarak modellenmeli.",
       en: "Security tools should first be modeled as educational, authorized, defense-focused interfaces.",
     },
     relatedTopics: [
@@ -350,15 +350,15 @@ const project2BuildTimeline = [
     id: "p2-003",
     date: "Day 2",
     message: {
-      tr: "Exploit, eklenti riski ve Frida bolumleri guvenli lab placeholder'lari olarak ayrildi.",
-      en: "Exploit, extension-risk, and Frida sections were separated as safe lab placeholders.",
+      tr: "Exploit, eklenti riski ve Frida bölümleri güvenli lab taslakları olarak ayrıldı.",
+      en: "Exploit, extension-risk, and Frida sections were separated as safe lab drafts.",
     },
     files: {
-      tr: "Exploit flow, browser extension audit ve Frida reverse workbench sayfalari.",
+      tr: "Exploit flow, browser extension audit ve Frida reverse workbench sayfaları.",
       en: "Exploit flow, browser extension audit, and Frida reverse workbench pages.",
     },
     lesson: {
-      tr: "Tehlikeli kavramlar uygulama icinde zararsiz simule edilir; gercek hedefe dokunma yoktur.",
+      tr: "Riskli kavramlar uygulama içinde zararsız biçimde simüle edilir; gerçek hedefe dokunma yoktur.",
       en: "Sensitive concepts are simulated harmlessly in the app; no real target is touched.",
     },
     relatedTopics: [

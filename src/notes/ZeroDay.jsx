@@ -3,12 +3,12 @@ import { Bug, EyeOff, HandCoins, Megaphone, ShieldCheck, Wrench } from "lucide-r
 import { Mermaid, NoteCallout, NoteList, NoteSection } from "../components/NoteKit.jsx";
 
 const timelineDiagram = (tr) => `flowchart TD
-  V["${tr ? "Zafiyet var (bilinmiyor)" : "Vulnerability exists (unknown)"}"] --> F["${tr ? "Bir arastirmaci/saldirgan bulur" : "A researcher/attacker discovers it"}"]
-  F --> R{"${tr ? "Ne yapilir?" : "What happens next?"}"}
+  V["${tr ? "Zafiyet var (bilinmiyor)" : "Vulnerability exists (unknown)"}"] --> F["${tr ? "Bir araştırmacı/saldırgan bulur" : "A researcher/attacker discovers it"}"]
+  F --> R{"${tr ? "Ne yapılır?" : "What happens next?"}"}
   R -->|${tr ? "sorumlu bildirim" : "responsible disclosure"}| B["${tr ? "Bug bounty / ureticiye bildirim" : "Bug bounty / vendor notified"}"]
-  R -->|${tr ? "kara/gri pazar" : "black/gray market"}| S["${tr ? "En yuksek teklife satilir" : "Sold to the highest bidder"}"]
-  B --> P["${tr ? "Yama yayinlanir" : "Patch released"}"]
-  S --> E["${tr ? "Sessizce/hedefli kullanilir" : "Used quietly / in targeted attacks"}"]
+  R -->|${tr ? "kara/gri pazar" : "black/gray market"}| S["${tr ? "En yüksek teklife satılır" : "Sold to the highest bidder"}"]
+  B --> P["${tr ? "Yama yayınlanır" : "Patch released"}"]
+  S --> E["${tr ? "Sessizce/hedefli kullanılır" : "Used quietly / in targeted attacks"}"]
   E -.->|${tr ? "sonunda fark edilir" : "eventually discovered"}| P
 `;
 
@@ -18,33 +18,33 @@ export function ZeroDayNote({ lang, theme }) {
   const stages = {
     unknown: {
       icon: EyeOff,
-      title: tr ? "Bilinmeyen acik" : "Unknown flaw",
-      meaning: tr ? "Uretici ve savunma sistemleri aciktan habersizdir." : "The vendor and defense systems do not know about the flaw.",
-      defense: tr ? "Saldiri yuzeyini kucult, az yetki uygula." : "Reduce attack surface and apply least privilege.",
+      title: tr ? "Bilinmeyen açık" : "Unknown flaw",
+      meaning: tr ? "Üretici ve savunma sistemleri açıktan habersizdir." : "The vendor and defense systems do not know about the flaw.",
+      defense: tr ? "Saldırı yüzeyini küçült, az yetki ilkesini uygula." : "Reduce attack surface and apply least privilege.",
     },
     discover: {
       icon: Bug,
-      title: tr ? "Kesif" : "Discovery",
-      meaning: tr ? "Arastirmaci veya saldirgan hatayi bulur." : "A researcher or attacker finds the bug.",
-      defense: tr ? "Bug bounty ve guvenli bildirim kanali kur." : "Maintain bug bounty and safe reporting channels.",
+      title: tr ? "Keşif" : "Discovery",
+      meaning: tr ? "Araştırmacı veya saldırgan hatayı bulur." : "A researcher or attacker finds the bug.",
+      defense: tr ? "Bug bounty ve güvenli bildirim kanalı kur." : "Maintain bug bounty and safe reporting channels.",
     },
     disclose: {
       icon: Megaphone,
       title: tr ? "Sorumlu bildirim" : "Responsible disclosure",
-      meaning: tr ? "Acik ureticiye bildirilir, yama icin zaman taninir." : "The flaw is reported to the vendor, giving time to patch.",
-      defense: tr ? "Bildirim surecini hizli ve saygili yonet." : "Run the reporting process quickly and respectfully.",
+      meaning: tr ? "Açık üreticiye bildirilir, yama için zaman tanınır." : "The flaw is reported to the vendor, giving time to patch.",
+      defense: tr ? "Bildirim sürecini hızlı ve saygılı yönet." : "Run the reporting process quickly and respectfully.",
     },
     market: {
       icon: HandCoins,
       title: tr ? "Kara/gri pazar" : "Black/gray market",
-      meaning: tr ? "Acik gizlice satilir veya hedefli saldirida saklanir." : "The flaw is sold quietly or kept for targeted attacks.",
-      defense: tr ? "EDR, segmentasyon ve anomali izleme ile hasari sinirla." : "Limit damage with EDR, segmentation, and anomaly monitoring.",
+      meaning: tr ? "Açık gizlice satılır veya hedefli saldırılar için saklanır." : "The flaw is sold quietly or kept for targeted attacks.",
+      defense: tr ? "EDR, segmentasyon ve anomali izleme ile hasarı sınırla." : "Limit damage with EDR, segmentation, and anomaly monitoring.",
     },
     patch: {
       icon: Wrench,
       title: tr ? "Yama" : "Patch",
-      meaning: tr ? "Uretici duzeltme yayinlar; artik hizli dagitim kritiktir." : "The vendor releases a fix; fast deployment becomes critical.",
-      defense: tr ? "Yama yonetimi ve varlik envanterini hazir tut." : "Keep patch management and asset inventory ready.",
+      meaning: tr ? "Üretici düzeltme yayınlar; artık hızlı dağıtım kritiktir." : "The vendor releases a fix; fast deployment becomes critical.",
+      defense: tr ? "Yama yönetimi ve varlık envanterini hazır tut." : "Keep patch management and asset inventory ready.",
     },
   };
   const active = stages[activeStage];
@@ -52,7 +52,7 @@ export function ZeroDayNote({ lang, theme }) {
 
   return (
     <>
-      <NoteSection title={tr ? "0-Day Yasam Dongusu" : "0-Day Lifecycle"}>
+      <NoteSection title={tr ? "0-Day Yaşam Döngüsü" : "0-Day Lifecycle"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-5 lg:grid-cols-2">
             {Object.entries(stages).map(([id, stage]) => {
@@ -78,7 +78,7 @@ export function ZeroDayNote({ lang, theme }) {
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Asama" : "Stage"}</p>
+                <p className="text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Aşama" : "Stage"}</p>
                 <h3 className="mt-2 text-xl font-bold">{active.title}</h3>
               </div>
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand)]">
@@ -97,14 +97,14 @@ export function ZeroDayNote({ lang, theme }) {
         </div>
       </NoteSection>
 
-      <NoteSection title={tr ? "Tanim" : "Definition"}>
+      <NoteSection title={tr ? "Tanım" : "Definition"}>
         <NoteList
           items={
             tr
               ? [
-                  "0-day: ureticinin henuz haberdar olmadigi veya henuz yama yayinlamadigi guvenlik acigi.",
-                  "Isim buradan gelir: uretici acigi ogrendiginde yamayi cikarmak icin '0 gunu' vardir — acik zaten aktif kullanimda olabilir.",
-                  "0-day exploit: bu aciktan faydalanan, henuz savunmasi olmayan saldiri kodu/teknigi.",
+                  "0-day: üreticinin henüz haberdar olmadığı veya henüz yama yayınlamadığı güvenlik açığı.",
+                  "İsim buradan gelir: üretici açığı öğrendiğinde yamayı çıkarmak için '0 günü' vardır; açık zaten aktif kullanımda olabilir.",
+                  "0-day exploit: bu açıktan faydalanan, henüz savunması olmayan saldırı kodu veya tekniği.",
                 ]
               : [
                   "0-day: a security flaw the vendor doesn't yet know about, or hasn't patched yet.",
@@ -115,26 +115,26 @@ export function ZeroDayNote({ lang, theme }) {
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Kesiften Yamaya Giden Yol" : "From Discovery to Patch"}>
+      <NoteSection title={tr ? "Keşiften Yamaya Giden Yol" : "From Discovery to Patch"}>
         <Mermaid theme={theme} chart={timelineDiagram(tr)} />
       </NoteSection>
 
       <NoteCallout tone="warning">
         {tr
-          ? "Neden tehlikeli: henuz imza/yama olmadigi icin klasik antivirus/IDS tarafindan yakalanmasi zordur; kritik sistemlerde (kamu, saglik, enerji, bankacilik) kullanilirsa buyuk hasar verebilir; APT gruplari hedefli saldirilarda sessizce saklar."
+          ? "Neden tehlikeli: henüz imza veya yama olmadığı için klasik antivirus/IDS tarafından yakalanması zordur; kritik sistemlerde (kamu, sağlık, enerji, bankacılık) kullanılırsa büyük hasar verebilir; APT grupları hedefli saldırılarda sessizce saklayabilir."
           : "Why it's dangerous: with no signature or patch yet, classic antivirus/IDS struggle to catch it; used against critical systems (government, health, energy, banking) it can cause major damage; APT groups stockpile them quietly for targeted attacks."}
       </NoteCallout>
 
-      <NoteSection title={tr ? "Savunma Yaklasimlari" : "Defensive Approaches"}>
+      <NoteSection title={tr ? "Savunma Yaklaşımları" : "Defensive Approaches"}>
         <NoteList
           items={
             tr
               ? [
-                  "Duzenli ve hizli yama yonetimi.",
-                  "Katmanli guvenlik (defense-in-depth).",
-                  "Davranissal/anomali tabanli tespit (EDR).",
+                  "Düzenli ve hızlı yama yönetimi.",
+                  "Katmanlı güvenlik (defense-in-depth).",
+                  "Davranışsal/anomali tabanlı tespit (EDR).",
                   "Az yetki ilkesi (least privilege).",
-                  "Kurumsal bug bounty programlarina destek.",
+                  "Kurumsal bug bounty programlarına destek.",
                 ]
               : [
                   "Regular, fast patch management.",

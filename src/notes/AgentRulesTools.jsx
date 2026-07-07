@@ -11,47 +11,47 @@ export function AgentRulesToolsNote({ lang }) {
       icon: Bot,
       name: "Codex",
       file: "AGENTS.md",
-      behavior: tr ? "Repo kurallarini, komut tercihlerini ve kod stili sinirlarini takip eder." : "Follows repo rules, command preferences, and code style boundaries.",
+      behavior: tr ? "Repo kurallarını, komut tercihlerini ve kod stili sınırlarını takip eder." : "Follows repo rules, command preferences, and code style boundaries.",
     },
     claude: {
       icon: Brain,
       name: "Claude Code",
       file: "CLAUDE.md",
-      behavior: tr ? "Claude'a ozel proje talimatlarini ve calisma beklentilerini tasir." : "Carries Claude-specific project instructions and working expectations.",
+      behavior: tr ? "Claude'a özel proje talimatlarını ve çalışma beklentilerini taşır." : "Carries Claude-specific project instructions and working expectations.",
     },
     gemini: {
       icon: Cpu,
       name: "Gemini",
       file: "GEMINI.md",
-      behavior: tr ? "Gemini tabanli araclara ayni proje baglamini verir." : "Gives Gemini-based tools the same project context.",
+      behavior: tr ? "Gemini tabanlı araçlara aynı proje bağlamını verir." : "Gives Gemini-based tools the same project context.",
     },
     vscode: {
       icon: Settings2,
       name: "VSCode Chat",
-      file: tr ? "Editor ayarlari" : "Editor settings",
-      behavior: tr ? "IDE icindeki sohbet ve tamamlama davranisini ayarlarla yonlendirir." : "Steers IDE chat and completion behavior through settings.",
+      file: tr ? "Editör ayarları" : "Editor settings",
+      behavior: tr ? "IDE içindeki sohbet ve tamamlama davranışını ayarlarla yönlendirir." : "Steers IDE chat and completion behavior through settings.",
     },
   };
   const capabilities = {
     tools: {
       icon: Wrench,
       title: "Tools",
-      when: tr ? "Somut eylem gerektiğinde: dosya oku/yaz, komut calistir, web ara." : "When concrete action is needed: read/write files, run commands, search the web.",
+      when: tr ? "Somut eylem gerektiğinde: dosya oku/yaz, komut çalıştır, web ara." : "When concrete action is needed: read/write files, run commands, search the web.",
     },
     skills: {
       icon: PlugZap,
       title: "Skills",
-      when: tr ? "Tekrar eden bir is akisini ayni kaliteyle uygulamak istediginde." : "When you want to repeat a workflow with consistent quality.",
+      when: tr ? "Tekrar eden bir iş akışını aynı kaliteyle uygulamak istediğinde." : "When you want to repeat a workflow with consistent quality.",
     },
     plugins: {
       icon: Package,
       title: "Plugins",
-      when: tr ? "Agent'in yetenek setine yeni bir paket veya entegrasyon eklemek istediginde." : "When you want to add a package or integration to the agent's capability set.",
+      when: tr ? "Agent'in yetenek setine yeni bir paket veya entegrasyon eklemek istediğinde." : "When you want to add a package or integration to the agent's capability set.",
     },
     thinking: {
       icon: Gauge,
       title: tr ? "Reasoning / Mini / Extra" : "Reasoning / Mini / Extra",
-      when: tr ? "Isin zorlugu ve maliyet/hiz ihtiyacina gore model dusunme butcesini ayarladiginda." : "When you tune model thinking budget based on task difficulty and speed/cost needs.",
+      when: tr ? "İşin zorluğu ve maliyet/hız ihtiyacına göre model düşünme bütçesini ayarladığında." : "When you tune model thinking budget based on task difficulty and speed/cost needs.",
     },
   };
   const selectedTool = tools[activeTool];
@@ -64,7 +64,7 @@ export function AgentRulesToolsNote({ lang }) {
       <NoteSection title={tr ? "Agent Kontrol Paneli" : "Agent Control Panel"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 xl:grid-cols-2">
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
-            <p className="mb-3 text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Araci sec" : "Choose tool"}</p>
+            <p className="mb-3 text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Aracı seç" : "Choose tool"}</p>
             <div className="grid grid-cols-2 gap-2">
               {Object.entries(tools).map(([id, tool]) => {
                 const Icon = tool.icon;
@@ -102,7 +102,7 @@ export function AgentRulesToolsNote({ lang }) {
           </div>
 
           <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
-            <p className="mb-3 text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Yetenek modunu sec" : "Choose capability mode"}</p>
+            <p className="mb-3 text-xs font-bold uppercase text-[var(--muted)]">{tr ? "Yetenek modunu seç" : "Choose capability mode"}</p>
             <div className="grid grid-cols-2 gap-2">
               {Object.entries(capabilities).map(([id, capability]) => {
                 const Icon = capability.icon;
@@ -140,38 +140,38 @@ export function AgentRulesToolsNote({ lang }) {
         </div>
       </NoteSection>
 
-      <NoteSection title={tr ? "Ajan Araclari ve Proje Kural Dosyalari" : "Agent Tools & Project Rule Files"}>
+      <NoteSection title={tr ? "Agent Araçları ve Proje Kural Dosyaları" : "Agent Tools & Project Rule Files"}>
         <NoteTable
-          headers={tr ? ["Arac", "Kural dosyasi"] : ["Tool", "Rule file"]}
+          headers={tr ? ["Araç", "Kural dosyası"] : ["Tool", "Rule file"]}
           rows={[
             ["Codex", "AGENTS.md"],
             ["Claude Code", "CLAUDE.md"],
             ["Gemini", "GEMINI.md"],
-            ["VSCode Chat", tr ? "— (editor ayarlari)" : "— (editor settings)"],
+            ["VSCode Chat", tr ? "- (editör ayarları)" : "- (editor settings)"],
           ]}
         />
         <NoteCallout>
           {tr
-            ? "Bu dosyalar sayesinde agent, proje ozelinde nasil davranmasi gerektigini (kod stili, hangi komutlarin calistirilabilecegi, hangi islemlerin onay gerektirdigi) onceden bilir."
+            ? "Bu dosyalar sayesinde agent, proje özelinde nasıl davranması gerektiğini (kod stili, hangi komutların çalıştırılabileceği, hangi işlemlerin onay gerektirdiği) önceden bilir."
             : "These files let an agent know in advance how it should behave in a given project — code style, which commands it may run, which actions need approval."}
         </NoteCallout>
       </NoteSection>
 
-      <NoteSection title={tr ? "Kullanim Alanlari" : "Use Cases"}>
+      <NoteSection title={tr ? "Kullanım Alanları" : "Use Cases"}>
         <NoteTable
-          headers={tr ? ["Mod", "Ne zaman kullanilir"] : ["Mode", "When to use it"]}
+          headers={tr ? ["Mod", "Ne zaman kullanılır"] : ["Mode", "When to use it"]}
           rows={[
             [
               tr ? "Reasoning" : "Reasoning",
-              tr ? "Karmasik, cok adimli problemlerde daha derin dusunme modu." : "A deeper-thinking mode for complex, multi-step problems.",
+              tr ? "Karmaşık, çok adımlı problemlerde daha derin düşünme modu." : "A deeper-thinking mode for complex, multi-step problems.",
             ],
             [
               tr ? "Mini modeller" : "Mini models",
-              tr ? "Basit, hizli ve dusuk maliyetli islemler icin." : "For simple, fast, low-cost tasks.",
+              tr ? "Basit, hızlı ve düşük maliyetli işlemler için." : "For simple, fast, low-cost tasks.",
             ],
             [
               tr ? "Extra thinking" : "Extra thinking",
-              tr ? "Zor problemlerde modele daha fazla dusunme butcesi tanimak." : "Giving the model more thinking budget on hard problems.",
+              tr ? "Zor problemlerde modele daha fazla düşünme bütçesi tanımak." : "Giving the model more thinking budget on hard problems.",
             ],
           ]}
         />
@@ -179,24 +179,24 @@ export function AgentRulesToolsNote({ lang }) {
 
       <NoteSection title={tr ? "Skills, Plugins, Tools" : "Skills, Plugins, Tools"}>
         <NoteTable
-          headers={tr ? ["Kavram", "Aciklama"] : ["Concept", "Description"]}
+          headers={tr ? ["Kavram", "Açıklama"] : ["Concept", "Description"]}
           rows={[
             [
               "Tools",
               tr
-                ? "Agent'in dosya okuma/yazma, komut calistirma, web arama gibi somut eylemleri gerceklestirmesini saglayan yetenekler."
+                ? "Agent'in dosya okuma/yazma, komut çalıştırma ve web arama gibi somut eylemleri gerçekleştirmesini sağlayan yetenekler."
                 : "Concrete capabilities letting an agent act — read/write files, run commands, search the web.",
             ],
             [
               "Skills",
               tr
-                ? "Belirli bir gorev turu icin onceden tanimlanmis, tekrar kullanilabilir talimat/is akislari."
+                ? "Belirli bir görev türü için önceden tanımlanmış, tekrar kullanılabilir talimat ve iş akışları."
                 : "Predefined, reusable instructions/workflows for a specific kind of task.",
             ],
             [
               "Plugins",
               tr
-                ? "Agent'in yeteneklerini genisleten, disaridan eklenebilen paketler."
+                ? "Agent'in yeteneklerini genişleten, dışarıdan eklenebilen paketler."
                 : "Externally added packages that extend an agent's capabilities.",
             ],
           ]}

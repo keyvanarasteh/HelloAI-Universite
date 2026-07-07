@@ -3,11 +3,11 @@ import { AlertTriangle, ArchiveX, Eye, FlaskConical, Rocket, ShieldCheck, Wrench
 import { Mermaid, NoteCallout, NoteList, NoteSection } from "../components/NoteKit.jsx";
 
 const windowDiagram = (tr) => `flowchart LR
-  A["${tr ? "Yama yayinlanir" : "Patch released"}"] --> B["${tr ? "Yama notlari/CVE kamuya acik olur" : "Patch notes/CVE become public"}"]
-  B --> C["${tr ? "Saldirganlar tersine muhendislik yapar" : "Attackers reverse-engineer it"}"]
-  C --> D{"${tr ? "Sistem guncellendi mi?" : "Was the system updated?"}"}
-  D -->|${tr ? "evet" : "yes"}| E["${tr ? "Guvende" : "Safe"}"]
-  D -->|${tr ? "hayir (N-day)" : "no (N-day)"}| F["${tr ? "Kolay hedef" : "Easy target"}"]
+  A["${tr ? "Yama yayınlanır" : "Patch released"}"] --> B["${tr ? "Yama notları/CVE kamuya açık olur" : "Patch notes/CVE become public"}"]
+  B --> C["${tr ? "Saldırganlar tersine mühendislik yapar" : "Attackers reverse-engineer it"}"]
+  C --> D{"${tr ? "Sistem güncellendi mi?" : "Was the system updated?"}"}
+  D -->|${tr ? "evet" : "yes"}| E["${tr ? "Güvende" : "Safe"}"]
+  D -->|${tr ? "hayır (N-day)" : "no (N-day)"}| F["${tr ? "Kolay hedef" : "Easy target"}"]
 `;
 
 export function PatchManagementNote({ lang, theme }) {
@@ -16,39 +16,39 @@ export function PatchManagementNote({ lang, theme }) {
   const states = {
     cve: {
       icon: Eye,
-      title: tr ? "CVE kamuya acik" : "CVE is public",
-      risk: tr ? "Acigin varligi artik herkes tarafindan bilinir." : "The flaw's existence is now known by everyone.",
-      action: tr ? "Etkilenen varliklari envanterde bul." : "Find affected assets in the inventory.",
+      title: tr ? "CVE kamuya açık" : "CVE is public",
+      risk: tr ? "Açığın varlığı artık herkes tarafından bilinir." : "The flaw's existence is now known by everyone.",
+      action: tr ? "Etkilenen varlıkları envanterde bul." : "Find affected assets in the inventory.",
     },
     reverse: {
       icon: AlertTriangle,
-      title: tr ? "Tersine muhendislik" : "Reverse engineering",
-      risk: tr ? "Saldirganlar yamadan exploit mantigini cikarabilir." : "Attackers can derive exploit logic from the patch.",
-      action: tr ? "Riskli sistemlere oncelik ver." : "Prioritize risky systems.",
+      title: tr ? "Tersine mühendislik" : "Reverse engineering",
+      risk: tr ? "Saldırganlar yamadan exploit mantığını çıkarabilir." : "Attackers can derive exploit logic from the patch.",
+      action: tr ? "Riskli sistemlere öncelik ver." : "Prioritize risky systems.",
     },
     exposed: {
       icon: ShieldCheck,
-      title: tr ? "Acik sistem" : "Exposed system",
-      risk: tr ? "Internete acik ve yamalanmamis sistem kolay hedef olur." : "Internet-facing, unpatched systems become easy targets.",
-      action: tr ? "Yamayi hizlandir veya gecici azaltici onlem al." : "Accelerate patching or add temporary mitigation.",
+      title: tr ? "Açık sistem" : "Exposed system",
+      risk: tr ? "İnternete açık ve yamalanmamış sistem kolay hedef olur." : "Internet-facing, unpatched systems become easy targets.",
+      action: tr ? "Yamayı hızlandır veya geçici azaltıcı önlem al." : "Accelerate patching or add temporary mitigation.",
     },
     staging: {
       icon: FlaskConical,
       title: "Staging",
-      risk: tr ? "Kontrolsuz yama uretim sistemini bozabilir." : "Uncontrolled patching may break production.",
-      action: tr ? "Once test ortaminda calistir." : "Run it in a test environment first.",
+      risk: tr ? "Kontrolsüz yama üretim sistemini bozabilir." : "Uncontrolled patching may break production.",
+      action: tr ? "Önce test ortamında çalıştır." : "Run it in a test environment first.",
     },
     rollout: {
       icon: Rocket,
-      title: tr ? "Canli yayilim" : "Production rollout",
-      risk: tr ? "Yayilim izlenmezse basarisiz makineler gozden kacar." : "Without monitoring, failed machines are missed.",
-      action: tr ? "Yama durumunu raporla ve dogrula." : "Report and verify patch status.",
+      title: tr ? "Canlı yayılım" : "Production rollout",
+      risk: tr ? "Yayılım izlenmezse başarısız makineler gözden kaçar." : "Without monitoring, failed machines are missed.",
+      action: tr ? "Yama durumunu raporla ve doğrula." : "Report and verify patch status.",
     },
     eol: {
       icon: ArchiveX,
       title: "End-of-Life",
-      risk: tr ? "Destegi biten yazilim artik guvenlik yamasi almaz." : "End-of-life software no longer gets security patches.",
-      action: tr ? "Planli gecis veya izolasyon yap." : "Plan migration or isolate it.",
+      risk: tr ? "Desteği biten yazılım artık güvenlik yaması almaz." : "End-of-life software no longer gets security patches.",
+      action: tr ? "Planlı geçiş veya izolasyon yap." : "Plan migration or isolate it.",
     },
   };
   const active = states[activeState];
@@ -56,7 +56,7 @@ export function PatchManagementNote({ lang, theme }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Yama Oncelik Panosu" : "Patch Priority Board"}>
+      <NoteSection title={tr ? "Yama Öncelik Panosu" : "Patch Priority Board"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
             {Object.entries(states).map(([id, state]) => {
@@ -111,8 +111,8 @@ export function PatchManagementNote({ lang, theme }) {
           items={
             tr
               ? [
-                  "Uretici firmalar, bulunan guvenlik aciklarini duzelten guncellemeleri yama (patch) olarak yayinlar.",
-                  "Yama yayinlandigi an, acigin varligi da (changelog/CVE notlariyla) kamuya acik hale gelir.",
+                  "Üretici firmalar, bulunan güvenlik açıklarını düzelten güncellemeleri yama (patch) olarak yayınlar.",
+                  "Yama yayınlandığı an, açığın varlığı da changelog/CVE notlarıyla kamuya açık hale gelir.",
                 ]
               : [
                   "Vendors release updates that fix known security flaws as patches.",
@@ -126,20 +126,20 @@ export function PatchManagementNote({ lang, theme }) {
         <Mermaid theme={theme} chart={windowDiagram(tr)} />
         <NoteCallout tone="warning">
           {tr
-            ? "Gercek dunya ornegi: WannaCry fidye yazilimi, Microsoft'un aylar once yayinladigi ama pek cok kurumun uygulamadigi bir Windows aciğini (EternalBlue/MS17-010) kullanarak dunya capinda hizla yayilmisti."
+            ? "Gerçek dünya örneği: WannaCry fidye yazılımı, Microsoft'un aylar önce yayınladığı fakat pek çok kurumun uygulamadığı bir Windows açığını (EternalBlue/MS17-010) kullanarak dünya çapında hızla yayılmıştı."
             : "Real-world example: the WannaCry ransomware spread rapidly worldwide by exploiting a Windows flaw (EternalBlue/MS17-010) that Microsoft had patched months earlier — but many organizations hadn't applied it."}
         </NoteCallout>
       </NoteSection>
 
-      <NoteSection title={tr ? "Iyi Pratikler" : "Good Practices"}>
+      <NoteSection title={tr ? "İyi Pratikler" : "Good Practices"}>
         <NoteList
           items={
             tr
               ? [
-                  "Otomatik guncellemeleri acik tut (ozellikle isletim sistemi ve tarayici).",
-                  "Guvenlik siniflandirmali yamalari once, digerlerini test ettikten sonra uygula.",
-                  "Uretimde once test/staging ortaminda dene, sonra canliya al.",
-                  "Destegi biten (End-of-Life) yazilimlardan hizla gecis yap — bu sistemler artik hic yama almaz.",
+                  "Otomatik güncellemeleri açık tut (özellikle işletim sistemi ve tarayıcı).",
+                  "Güvenlik sınıflandırmalı yamaları önce, diğerlerini test ettikten sonra uygula.",
+                  "Üretimde önce test/staging ortamında dene, sonra canlıya al.",
+                  "Desteği biten (End-of-Life) yazılımlardan hızla geçiş yap; bu sistemler artık hiç yama almaz.",
                 ]
               : [
                   "Keep automatic updates on (especially OS and browser).",

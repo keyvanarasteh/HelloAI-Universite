@@ -8,31 +8,31 @@ export function OsWindowsLinuxNote({ lang }) {
   const uses = {
     desktop: {
       icon: Monitor,
-      title: tr ? "Genel masaustu" : "General desktop",
+      title: tr ? "Genel masaüstü" : "General desktop",
       fit: "Windows",
-      why: tr ? "Donanim, oyun ve kurumsal yazilim destegi genistir." : "Broad hardware, gaming, and enterprise software support.",
-      tradeoff: tr ? "Kapali kaynak; sistemin icini degistirme ozgurlugu sinirlidir." : "Closed source; less freedom to change system internals.",
+      why: tr ? "Donanım, oyun ve kurumsal yazılım desteği geniştir." : "Broad hardware, gaming, and enterprise software support.",
+      tradeoff: tr ? "Kapalı kaynaktır; sistemin içini değiştirme özgürlüğü sınırlıdır." : "Closed source; less freedom to change system internals.",
     },
     server: {
       icon: Server,
       title: tr ? "Sunucu / Docker" : "Server / Docker",
       fit: "Ubuntu Server / Linux",
-      why: tr ? "Hafif, otomasyon dostu, paket yonetimi guclu ve sunucularda standarttir." : "Lightweight, automation-friendly, strong package management, standard on servers.",
-      tradeoff: tr ? "Terminal bilgisi ve sistem yonetimi disiplini ister." : "Requires terminal skill and system administration discipline.",
+      why: tr ? "Hafiftir, otomasyon dostudur, paket yönetimi güçlüdür ve sunucularda standarttır." : "Lightweight, automation-friendly, strong package management, standard on servers.",
+      tradeoff: tr ? "Terminal bilgisi ve sistem yönetimi disiplini ister." : "Requires terminal skill and system administration discipline.",
     },
     security: {
       icon: ShieldCheck,
-      title: tr ? "Guvenlik lab'i" : "Security lab",
+      title: tr ? "Güvenlik lab'i" : "Security lab",
       fit: "Kali Linux",
-      why: tr ? "Pentest araclari hazir gelir; egitim ve izinli test icin pratiktir." : "Pentest tools come ready; practical for training and authorized testing.",
-      tradeoff: tr ? "Gundelik ana isletim sistemi gibi kullanmak yerine lab amacli dusun." : "Think of it as a lab OS rather than a daily driver.",
+      why: tr ? "Pentest araçları hazır gelir; eğitim ve izinli test için pratiktir." : "Pentest tools come ready; practical for training and authorized testing.",
+      tradeoff: tr ? "Gündelik ana işletim sistemi gibi kullanmak yerine lab amaçlı düşün." : "Think of it as a lab OS rather than a daily driver.",
     },
     apple: {
       icon: Apple,
       title: tr ? "Apple ekosistemi" : "Apple ecosystem",
       fit: "macOS",
-      why: tr ? "GUI guclu, Unix tabanli terminal var, Apple donanim/yazilim akisi uyumludur." : "Strong GUI, Unix-based terminal, smooth Apple hardware/software workflow.",
-      tradeoff: tr ? "Kapali ekosistem ve donanim maliyeti yuksek olabilir." : "Closed ecosystem and hardware cost can be high.",
+      why: tr ? "GUI güçlüdür, Unix tabanlı terminal sunar ve Apple donanım/yazılım akışı uyumludur." : "Strong GUI, Unix-based terminal, smooth Apple hardware/software workflow.",
+      tradeoff: tr ? "Kapalı ekosistem ve donanım maliyeti yüksek olabilir." : "Closed ecosystem and hardware cost can be high.",
     },
   };
   const active = uses[activeUse];
@@ -40,7 +40,7 @@ export function OsWindowsLinuxNote({ lang }) {
 
   return (
     <>
-      <NoteSection title={tr ? "Isletim Sistemi Secim Paneli" : "Operating System Choice Panel"}>
+      <NoteSection title={tr ? "İşletim Sistemi Seçim Paneli" : "Operating System Choice Panel"}>
         <div className="grid gap-4 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] p-4 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(uses).map(([id, item]) => {
@@ -91,63 +91,63 @@ export function OsWindowsLinuxNote({ lang }) {
           rows={[
             [
               "Windows",
-              tr ? "Kapali kaynak" : "Closed source",
-              tr ? "Genis donanim/oyun/kurumsal yazilim destegi." : "Broad hardware/gaming/enterprise software support.",
+              tr ? "Kapalı kaynak" : "Closed source",
+              tr ? "Geniş donanım, oyun ve kurumsal yazılım desteği." : "Broad hardware/gaming/enterprise software support.",
             ],
             [
               "Linux",
-              tr ? "Acik kaynak (cekirdek)" : "Open source (kernel)",
-              tr ? "Sunucular, gelistirici ortamlari, yuzlerce dagitim." : "Servers, dev environments, hundreds of distros.",
+              tr ? "Açık kaynak (çekirdek)" : "Open source (kernel)",
+              tr ? "Sunucular, geliştirici ortamları ve yüzlerce dağıtım." : "Servers, dev environments, hundreds of distros.",
             ],
             [
               "macOS",
-              tr ? "Kapali kaynak (Unix tabanli)" : "Closed source (Unix-based)",
-              tr ? "Apple donanimi, guclu GUI + terminal." : "Apple hardware, strong GUI + terminal.",
+              tr ? "Kapalı kaynak (Unix tabanlı)" : "Closed source (Unix-based)",
+              tr ? "Apple donanımı, güçlü GUI + terminal." : "Apple hardware, strong GUI + terminal.",
             ],
           ]}
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Dagitimlar (Distro)" : "Distros"}>
+      <NoteSection title={tr ? "Dağıtımlar (Distro)" : "Distros"}>
         <NoteTable
-          headers={tr ? ["Dagitim", "Kullanim alani"] : ["Distro", "Use case"]}
+          headers={tr ? ["Dağıtım", "Kullanım alanı"] : ["Distro", "Use case"]}
           rows={[
             [
               "Kali Linux",
               tr
-                ? "Pentest/siber guvenlik arastirmasi icin guvenlik araclariyla gelir; sadece yasal, izinli testlerde."
+                ? "Pentest ve siber güvenlik araştırmaları için güvenlik araçlarıyla gelir; yalnızca yasal, izinli testlerde kullanılır."
                 : "Comes preloaded with security tools for pentesting/research; only for legal, authorized testing.",
             ],
             [
               "Ubuntu Server",
               tr
-                ? "Arayuzsuz sunucu OS'u; web/veritabani/Docker host'lari, apt ile yonetilir."
+                ? "Arayüzsüz sunucu OS'udur; web, veritabanı ve Docker host'ları için kullanılır, apt ile yönetilir."
                 : "Headless server OS; web/database/Docker hosts, managed with apt.",
             ],
             [
               "CentOS",
               tr
-                ? "RHEL uyumlu kurumsal dagitim, yum/dnf kullanir; klasik surum bitti, yerini CentOS Stream aldi."
+                ? "RHEL uyumlu kurumsal dağıtımdır, yum/dnf kullanır; klasik sürüm sona ermiş, yerini CentOS Stream almıştır."
                 : "RHEL-compatible enterprise distro using yum/dnf; the classic release ended, replaced by CentOS Stream.",
             ],
           ]}
         />
         <TerminalBlock
-          caption={tr ? "Paket yonetimi ornekleri" : "Package manager examples"}
+          caption={tr ? "Paket yönetimi örnekleri" : "Package manager examples"}
           lines={["sudo apt update && sudo apt install nginx", "sudo dnf install nginx"]}
         />
       </NoteSection>
 
-      <NoteSection title={tr ? "Acik Kaynak Neden Hizli Buyuyor?" : "Why Open Source Grows Fast"}>
+      <NoteSection title={tr ? "Açık Kaynak Neden Hızlı Büyüyor?" : "Why Open Source Grows Fast"}>
         <div className="grid gap-3 sm:grid-cols-2">
           <NoteCallout tone="ok">
             {tr
-              ? "Artilari: ucretsiz/dusuk maliyet, yuksek ozellestirilebilirlik, genis topluluk destegi, seffaflikla hizli hata duzeltme."
+              ? "Artıları: ücretsiz veya düşük maliyetli olması, yüksek özelleştirilebilirlik, geniş topluluk desteği ve şeffaflık sayesinde hızlı hata düzeltme."
               : "Pros: free/low-cost, highly customizable, large community support, transparency speeds up bug fixes."}
           </NoteCallout>
           <NoteCallout tone="warning">
             {tr
-              ? "Eksileri: garanti resmi destek yok, dokumantasyon kalitesi degisken, dagitim fazlaligi, bilinen aciklar yama oncesi herkese gorunur."
+              ? "Eksileri: garanti edilmiş resmi destek yoktur; dokümantasyon kalitesi değişebilir, dağıtım fazlalığı karmaşa yaratabilir ve bilinen açıklar yama öncesi herkes tarafından görülebilir."
               : "Cons: no guaranteed official support, inconsistent documentation, too many variants, known flaws are visible before a patch ships."}
           </NoteCallout>
         </div>
