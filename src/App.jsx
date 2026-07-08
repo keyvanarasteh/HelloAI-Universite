@@ -376,8 +376,9 @@ const navGroups = [
 ];
 
 const instructorNavItem = { id: "instructor", icon: UserRound };
-const isuLogoSrc = "/images/isu-logo.svg";
-const instructorPhotoSrc = "/images/keyvan-arasteh.jpeg";
+const assetBase = import.meta.env.BASE_URL;
+const isuLogoSrc = `${assetBase}images/isu-logo.svg`;
+const instructorPhotoSrc = `${assetBase}images/keyvan-arasteh.jpeg`;
 
 const fieldIcons = {
   software: Code2,
